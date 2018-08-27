@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/move_tool.svg</file>
+        <file>images/rect_tool.svg</file>
+        <file>images/image.svg</file>
+        <file>images/text_tool.svg</file>
+        <file>images/select_tool.svg</file>
+        <file>images/color_selector.svg</file>
+        <file>images/mask_button.svg</file>
+        <file>images/add_button.svg</file>
+        <file>images/garbage.svg</file>
+    </qresource>
+</RCC>
