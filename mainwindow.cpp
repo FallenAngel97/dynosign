@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QColorDialog>
 #include "colorpickerbutton.h"
-#include <QtDebug>
 #include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :

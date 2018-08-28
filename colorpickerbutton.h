@@ -18,6 +18,10 @@ private:
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
 
+    QColor borderColor;
+    QColor fillColor;
+    int margin;
+    int height;
 };
 
 #endif // COLORPICKERBUTTON_H

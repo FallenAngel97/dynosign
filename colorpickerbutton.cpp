@@ -3,6 +3,8 @@
 #include <QColorDialog>
 #include <QPainter>
 #include <QVBoxLayout>
+#include <QDebug>
+#include <QMouseEvent>
 
 ColorPickerButton::ColorPickerButton(QWidget *parent):QFrame(parent)
 {
@@ -13,12 +15,14 @@ ColorPickerButton::ColorPickerButton(QWidget *parent):QFrame(parent)
 //    QVBoxLayout *base_layout = new QVBoxLayout(this);
 //    base_layout->addWidget(backgroundButton);
 //    setLayout(base_layout);
+    borderColor.setNamedColor("#ccc");
+    fillColor.setNamedColor("#ccc");
 }
 
 void ColorPickerButton::paintEvent(QPaintEvent *event)
 {
-    int margin = 3;
-    int height = 30;
+    margin = 3;
+    height = 30;
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::NoPen);
@@ -26,9 +30,9 @@ void ColorPickerButton::paintEvent(QPaintEvent *event)
     path.addRoundedRect(QRectF(margin + height/4,margin + height/4, 15, 15), 10, 10);
     QPainterPath borderPath;
     borderPath.addRoundRect(QRectF(margin,margin,height, height), 10,10);
-    painter.fillPath(path, Qt::red);
+    painter.fillPath(path,fillColor);
     painter.drawPath(path);
-    QPen pen(Qt::red, 6, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen pen(borderColor, 6, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter.setPen(pen);
     painter.drawPath(borderPath);
 }
@@ -36,7 +40,15 @@ void ColorPickerButton::paintEvent(QPaintEvent *event)
 void ColorPickerButton::mouseReleaseEvent(QMouseEvent *event)
 {
     QColorDialog dialog(this);
-    dialog.getColor();
+    int x_pressed = event->pos().x();
+    int y_pressed = event->pos().y();
+    qDebug() << event->pos();
+    if( x_pressed<6 || y_pressed<6 || x_pressed>height || y_pressed>height ) {
+        borderColor = dialog.getColor();
+    } else if (x_pressed>11 && x_pressed < 25 && y_pressed>11 && y_pressed < 25) {
+        fillColor = dialog.getColor();
+    }
+    update();
 }
 
 QSize ColorPickerButton::sizeHint() const
