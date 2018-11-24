@@ -9,10 +9,11 @@
 class ColorPickerButton : public QFrame
 {
     Q_OBJECT
+
 public:
     ColorPickerButton(QWidget *parent = 0);
 private:
-    QPushButton *backgroundButton;
+
     void paintEvent(QPaintEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     QSize sizeHint() const override;

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 279.67084 235.94576"
+   height="235.94576mm"
+   width="279.67084mm">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient988">
+      <stop
+         id="stop984"
+         offset="0"
+         style="stop-color:#e6e6e6;stop-opacity:1;" />
+      <stop
+         style="stop-color:#e6e6e6;stop-opacity:1"
+         offset="0.6205982"
+         id="stop992" />
+      <stop
+         id="stop986"
+         offset="1"
+         style="stop-color:#b3b3b3;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-3.9966873,-0.11847155,0.09337536,-3.1500548,-7446.121,15906.838)"
+       r="270.77246"
+       fy="3876.0056"
+       fx="-1527.8579"
+       cy="3876.0056"
+       cx="-1527.8579"
+       id="radialGradient990"
+       xlink:href="#linearGradient988" />
+    <filter
+       id="filter1048"
+       style="color-interpolation-filters:sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur1046"
+         result="blur"
+         stdDeviation="1.59714 2.13" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(510.80554,-904.23626)"
+     id="layer1">
+    <g
+       id="g1052">
+      <ellipse
+         cy="1135.6919"
+         cx="-370.97012"
+         id="circle1008"
+         style="opacity:1;fill:#333333;fill-opacity:0.51131227;stroke:none;stroke-width:0.35838562;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1048)"
+         rx="116.52951"
+         ry="3.74177" />
+      <circle
+         style="opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path925"
+         cx="-373.10828"
+         cy="1020.7659"
+         r="116.52951" />
+    </g>
+    <path
+       id="circle969"
+       transform="scale(0.26458333)"
+       d="m -1410.1738,3417.5859 a 440.4265,440.4265 0 0 0 -440.4258,440.4278 440.4265,440.4265 0 0 0 440.4258,440.4258 440.4265,440.4265 0 0 0 100.914,-12.2579 440.4265,440.4265 0 0 1 -339.3086,-428.1679 440.4265,440.4265 0 0 1 339.5137,-428.1699 440.4265,440.4265 0 0 0 -101.1191,-12.2579 z"
+       style="opacity:1;fill:url(#radialGradient990);fill-opacity:1;stroke:none;stroke-width:7.55905533;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       id="text1002"
+       y="1075.2889"
+       x="-440.69427"
+       style="font-style:normal;font-weight:normal;font-size:142.34646606px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:3.55866146"
+       xml:space="preserve"><tspan
+         style="fill:#666666;stroke-width:3.55866146"
+         y="1075.2889"
+         x="-440.69427"
+         id="tspan1000">F</tspan></text>
+    <text
+       id="text1006"
+       y="1074.2197"
+       x="-369.49042"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:138.23445129px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:3.45586109"
+       xml:space="preserve"><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';fill:#666666;fill-opacity:1;stroke-width:3.45586109"
+         y="1074.2197"
+         x="-369.49042"
+         id="tspan1004">x</tspan></text>
+  </g>
+</svg>

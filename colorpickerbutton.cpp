@@ -8,24 +8,16 @@
 
 ColorPickerButton::ColorPickerButton(QWidget *parent):QFrame(parent)
 {
-//    backgroundButton = new QPushButton(this);
-//    QPixmap pixmap(":/images/color_selector.svg");
-//    QIcon backgroundButtonIcon(pixmap);
-//    backgroundButton->setIcon(backgroundButtonIcon);
-//    QVBoxLayout *base_layout = new QVBoxLayout(this);
-//    base_layout->addWidget(backgroundButton);
-//    setLayout(base_layout);
     borderColor.setNamedColor("#ccc");
     fillColor.setNamedColor("#ccc");
 }
 
 void ColorPickerButton::paintEvent(QPaintEvent *event)
 {
-    margin = 3;
+    margin = 6;
     height = 30;
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.setPen(Qt::NoPen);
     QPainterPath path;
     path.addRoundedRect(QRectF(margin + height/4,margin + height/4, 15, 15), 10, 10);
     QPainterPath borderPath;
@@ -35,6 +27,13 @@ void ColorPickerButton::paintEvent(QPaintEvent *event)
     QPen pen(borderColor, 6, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter.setPen(pen);
     painter.drawPath(borderPath);
+
+    // Outer black border
+    QPen outerBorder_border(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPainterPath outerBorder_path;
+    outerBorder_path.addRoundRect(QRectF(margin-4, margin-4, height+8, height+8), 40, 40);
+    painter.setPen(outerBorder_border);
+    painter.drawPath(outerBorder_path);
 }
 
 void ColorPickerButton::mouseReleaseEvent(QMouseEvent *event)
@@ -53,10 +52,10 @@ void ColorPickerButton::mouseReleaseEvent(QMouseEvent *event)
 
 QSize ColorPickerButton::sizeHint() const
 {
-    return QSize(36,36);
+    return QSize(42,42);
 }
 
 QSize ColorPickerButton::minimumSizeHint() const
 {
-    return QSize(36,36);
+    return QSize(42,42);
 }
