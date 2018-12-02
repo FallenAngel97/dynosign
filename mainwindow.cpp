@@ -8,6 +8,8 @@
 #include <QString>
 #include <QMessageBox>
 #include "layer.h"
+#include <QApplication>
+#include "rightboxlayer.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->image_button, SIGNAL(released()), this, SLOT(image_button_pressed()));
     connect(ui->delete_layer_button, SIGNAL(released()), this, SLOT(delete_layer_button()));
     connect(ui->add_layer_button, SIGNAL(released()), this, SLOT(add_layer_pressed()));
-    connect(ui->layers_list, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(layer_clicked(QListWidgetItem *)));
-    connect(ui->actionAbout, SIGNAL(released()), this, SLOT(about_clicked()));
+    connect(ui->layers_list, SIGNAL(clicked(const QModelIndex &)), this, SLOT(layer_clicked()));
+    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about_clicked()));
 }
 
 MainWindow::~MainWindow()
@@ -88,14 +90,9 @@ void MainWindow::delete_layer_button()
 {
     int index = ui->layers_list->currentIndex().row();
     model->removeLayer(index);
-//    qDebug() << item;
-//    if(item.count()<1)
-//        return;
-//    delete ui->layers_list->takeItem(ui->layers_list->row(item.first()));
-//    ui->layers_list->update();
 }
 
-void MainWindow::layer_clicked(QListWidgetItem  *item)
+void MainWindow::layer_clicked()
 {
     ui->opacity_slider->setEnabled(true);
 }
@@ -130,4 +127,5 @@ void MainWindow::setupUI()
     model = new LayersListModel(layers, this);
     ui->layers_list->setModel(model);
     ui->layers_list->show();
+    ui->layers_list->setItemDelegate(new RightBoxLayer(this));
 }

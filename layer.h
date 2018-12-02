@@ -24,6 +24,9 @@ public:
     QString getName() {
         return layerName;
     }
+    void setName(QString _layerName) {
+        layerName = _layerName;
+    }
     bool isHidden () {
         return hidden;
     }

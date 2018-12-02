@@ -14,6 +14,8 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     void addLayer(Layer* layer);
     void removeLayer(int layerIndex);
+    Qt::ItemFlags flags(const QModelIndex &index) const;
+    bool setData(const QModelIndex &index, const QVariant &value, int role);
 
 private:
     std::vector<Layer*> layers_;

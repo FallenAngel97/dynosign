@@ -27,14 +27,16 @@ SOURCES += \
         mainwindow.cpp \
     renderarea.cpp \
     colorpickerbutton.cpp \
-    layerslistmodel.cpp
+    layerslistmodel.cpp \
+    rightboxlayer.cpp
 
 HEADERS += \
         mainwindow.h \
     renderarea.h \
     colorpickerbutton.h \
     layerslistmodel.h \
-    layer.h
+    layer.h \
+    rightboxlayer.h
 
 FORMS += \
         mainwindow.ui

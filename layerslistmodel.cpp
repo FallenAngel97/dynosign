@@ -12,7 +12,7 @@ QVariant LayersListModel::data(const QModelIndex &index, int role) const
 {
     if(!index.isValid()) return QVariant();
     if(index.row() >= layers_.size()) return QVariant();
-    if (role == Qt::DisplayRole) return QVariant(layers_.at(index.row())->getName());
+    if (role == Qt::DisplayRole || role == Qt::EditRole) return QVariant(layers_.at(index.row())->getName());
 
         return QVariant();
 }
@@ -36,3 +36,22 @@ void LayersListModel::removeLayer(int layerIndex)
     endRemoveRows();
 }
 
+Qt::ItemFlags LayersListModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return Qt::ItemIsEnabled;
+
+    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+}
+
+bool LayersListModel::setData(const QModelIndex &index,
+                           const QVariant &value, int role)
+{
+    if (index.isValid() && role == Qt::EditRole) {
+        layers_.at(index.row())->setName(value.toString());
+
+        emit dataChanged(index, index);
+        return true;
+    }
+    return false;
+}

@@ -38,7 +38,7 @@ private slots:
     void add_layer_pressed();
     void brushChanged();
     void delete_layer_button();
-    void layer_clicked(QListWidgetItem  *item);
+    void layer_clicked();
     void about_clicked();
 
 private:
