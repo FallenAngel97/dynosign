@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'FranklinGothicDemiC';
+    src: url("./FranklinGothicDemiC.otf");
+}
+header {
+    font-family: 'FranklinGothicDemiC';
+    -webkit-app-region: drag;
+    height: var(--height-of-top-bar);
+    width:100%;
+    position:absolute;
+    background: rgba(#000,.05);
+    box-shadow: 0 1px 2px 1px rgba(0,0,0,.1);
+}
+nav {
+    display:inline-block;
+    margin-left: 10px;
+    margin-top: 2px;
+    user-select: none;
+    span {
+        cursor: pointer;
+        padding: 0 6px; 
+        -webkit-app-region: no-drag;
+        transition: .2s ease-in-out color;
+        &:hover {
+            color: brown;
+        }
+    }
+}
+#title {
+    display: inline-block;
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    margin-top: 4px;
+}
+#controlButtons { 
+    display:inline-block;
+    float:right;
+    -webkit-app-region: no-drag;
+    user-select:none;
+    img {
+        margin:2px 5px;
+        height:20px;
+        width: 20px;
+    }
+}

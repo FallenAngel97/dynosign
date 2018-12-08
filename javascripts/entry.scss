@@ -1,0 +1,15 @@
+:root {
+    --height-of-top-bar: 30px;
+}
+
+#content {
+    display: flex;
+    flex-flow: row wrap;
+    height: 100%;
+}
+body, html {
+    height: 100%;
+    margin:0;
+    padding: 0;
+    background: #fff5eb;
+}

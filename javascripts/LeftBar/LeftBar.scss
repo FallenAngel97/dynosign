@@ -1,0 +1,20 @@
+.toolsLeftPanel {
+    height: 20px;
+    display: block;
+    margin:10px;
+    padding: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+    &:hover {
+        background: rgba(blue,.2);
+    }
+}
+#leftBar {
+    background: #f3cfaf;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 1px 1px 2px 1px rgba(darken(#f3cfaf, 50%),.3);
+    height: calc(100% - (var(--height-of-top-bar) + 5px) * 2);
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
