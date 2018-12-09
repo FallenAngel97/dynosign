@@ -1,4 +1,4 @@
 # dynosign
-npm i
-npm run watch
-npm start
+- npm i
+- npm run watch
+- npm start
