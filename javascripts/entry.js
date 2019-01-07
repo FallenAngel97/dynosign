@@ -2,7 +2,8 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
+import {Provider} from "react-redux";
 import LeftBar from "./LeftBar/LeftBar.jsx";
 import MainArea from "./MainArea/MainArea.jsx";
 import RightPanel from "./RightPanel/RightPanel.jsx";
@@ -16,17 +17,24 @@ function addLayer(state={type: 'ADD_LAYER', layerId: -1}, action) {
     return state
 }
 
-const store = createStore(addLayer);
+function changeMouseType(state={type: 'CHANGE_MOUSE_TYPE', mouseIcon: 'move_tool.svg'}, action) {
+    if(action.type == 'CHANGE_MOUSE_TYPE') {
+        return Object.assign({}, state, {mouseIcon: action.mouseIcon})
+    }
+    return state;
+}
+
+const store = createStore(combineReducers({addLayer, changeMouseType}));
 
 class DynoSign extends React.Component {
     render() {
         return(
-        <>
+        <Provider store={store}>
             <TopBar />
             <LeftBar />
             <MainArea />
             <RightPanel />
-        </>)
+        </Provider>)
     }
 }
 
