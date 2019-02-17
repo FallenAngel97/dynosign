@@ -14,7 +14,7 @@
     border-radius: 0 5px 5px 0;
     box-shadow: 1px 1px 2px 1px rgba(darken(#f3cfaf, 50%),.3);
     height: calc(100% - (var(--height-of-top-bar) + 5px) * 2);
-    position: absolute;
-    top:50%;
-    transform: translateY(-50%);
+    margin-top: 50%;
+    grid-column: 1;
+    width: 43px;
 }

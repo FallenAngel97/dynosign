@@ -17,9 +17,9 @@ function addLayer(state={type: 'ADD_LAYER', layerId: -1}, action) {
     return state
 }
 
-function changeMouseType(state={type: 'CHANGE_MOUSE_TYPE', mouseIcon: 'move_tool.svg'}, action) {
+function changeMouseType(state={type: 'CHANGE_MOUSE_TYPE', mouseType: 'default'}, action) {
     if(action.type == 'CHANGE_MOUSE_TYPE') {
-        return Object.assign({}, state, {mouseIcon: action.mouseIcon})
+        return Object.assign({}, state, {mouseType: action.mouseType})
     }
     return state;
 }
@@ -31,9 +31,11 @@ class DynoSign extends React.Component {
         return(
         <Provider store={store}>
             <TopBar />
-            <LeftBar />
-            <MainArea />
-            <RightPanel />
+            <div id='programContainer'>
+                <LeftBar />
+                <MainArea />
+                <RightPanel />
+            </div>
         </Provider>)
     }
 }

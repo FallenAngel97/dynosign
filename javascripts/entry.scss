@@ -4,7 +4,7 @@
 
 #content {
     display: flex;
-    flex-flow: row wrap;
+    user-select:none;
     height: 100%;
 }
 body, html {
@@ -12,4 +12,11 @@ body, html {
     margin:0;
     padding: 0;
     background: #fff5eb;
+}
+#programContainer {
+    display: grid;
+    grid-template-columns: 43px auto 200px;
+    grid-gap: 10px;
+    width: 100%;
+    padding-top: 40px;
 }

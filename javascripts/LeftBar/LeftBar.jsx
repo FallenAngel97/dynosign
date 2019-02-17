@@ -2,14 +2,33 @@ import React from "react";
 import move_tool from "./move_tool.svg"
 import select_tool from "./select_tool.svg"
 import "./LeftBar.scss";
+import { connect } from 'react-redux'
+import {changeMouseType} from "../actions";
 
-export default class LeftBar extends React.Component {
+class LeftBar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.changeCursor = this.changeCursor.bind(this);
+    }
+    changeCursor(type) {
+        this.props.changeMouseType(type);
+    }
     render() {
         return(
             <div id='leftBar'>
-                <img src={move_tool} className='toolsLeftPanel' />  
-                <img src={select_tool} className='toolsLeftPanel' />              
+                <img onClick={() => this.changeCursor('default')} src={move_tool} className='toolsLeftPanel' />  
+                <img onClick={() => this.changeCursor('select')} src={select_tool} className='toolsLeftPanel' />              
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeMouseType: mouseType => dispatch(changeMouseType(mouseType))
+    }
+} 
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeftBar);
