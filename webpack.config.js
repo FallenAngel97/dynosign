@@ -3,7 +3,7 @@ var webpack = require('webpack');
 module.exports = {
     mode: 'development',
     entry: {
-        app: ['webpack/hot/dev-server', './javascripts/entry.js'],
+        app: ['webpack/hot/dev-server', './javascripts/entry.jsx'],
     },
     output: {
         path: __dirname + 'dist',
@@ -15,6 +15,9 @@ module.exports = {
         publicPath: 'http://localhost:8080/dist',
         port:8080,
         hot:true
+    },
+    resolve: {
+        extensions: ['*', '.js', '.jsx']
     },
     module: {
         rules: [
