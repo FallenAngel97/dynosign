@@ -6,9 +6,10 @@ const defaultLayer = {
     hidden: false
 }
 
-function changeActiveLayer(state={type: 'CHANGE_ACTIVE_LAYER', layerNumber: 0}, action) {
+function changeActiveLayer(
+    state={type: 'CHANGE_ACTIVE_LAYER', layer: defaultLayer, layerNumber: 0}, action) {
     if(action.type == 'CHANGE_ACTIVE_LAYER') {
-        return Object.assign({}, state, {layerNumber: action.layerNumber})
+        return Object.assign({}, state, {layer: action.layer, layerNumber: action.layerNumber})
     }
     return state;
 }
@@ -16,6 +17,17 @@ function changeActiveLayer(state={type: 'CHANGE_ACTIVE_LAYER', layerNumber: 0}, 
 function layersCRUD(state=[defaultLayer], action) {
     if(action.type=='ADD_LAYER') {
         return [...state, action.layer]
+    }
+    if(action.type == 'CHANGE_LAYER') {
+        return state.map((item, index)=>{
+            if(index!=action.layerId) {
+                return item;
+            }
+            return {
+                ...item,
+                ...action.layer
+            }
+        })
     }
     return state;
 }
