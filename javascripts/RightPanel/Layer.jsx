@@ -1,7 +1,7 @@
 import React from "react";
 import "./Layer.scss";
 import {connect} from "react-redux";
-import {changeActiveLayer} from "../actions"
+import {changeActiveLayer, changeLayer} from "../actions"
 
 class Layer extends React.Component {
     constructor(props) {
@@ -30,7 +30,9 @@ class Layer extends React.Component {
         this.setState({editLayer: true});
     }
     layerNameChange(ev) {
-        console.log(ev.target.value)
+        let layer = this.props.changeActiveLayer.layer;
+        layer.name = ev.target.value;
+        this.props.changeLayer(layer, this.props.changeActiveLayer.layerId)
     }
     render() {
         return (
@@ -46,7 +48,8 @@ const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => {
     return {
-        _changeActiveLayer: (layer,layerNumber) => dispatch(changeActiveLayer(layer,layerNumber))
+        _changeActiveLayer: (layer,layerNumber) => dispatch(changeActiveLayer(layer,layerNumber)),
+        changeLayer: (layer, layerId) => dispatch(changeLayer(layer, layerId))
     }
 }
 

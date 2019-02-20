@@ -21,3 +21,7 @@ export function addLayer() {
 export function changeLayer(layer, layerId) {
     return {type: 'CHANGE_LAYER', layer, layerId}
 }
+
+export function toggleMenuBar(menuBarVisible) {
+    return {type: 'TOGGLE_MENU_BAR', menuBarVisible}
+}

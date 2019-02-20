@@ -3,16 +3,30 @@ import "./TopBar.scss";
 import collapse from "./collapse.svg";
 import expand from "./expand.svg";
 import close from "./close.svg";
+import { toggleMenuBar } from "../actions";
+import { connect } from "react-redux";
 
 const remote = require('electron').remote;
 
-export default class TopBar extends React.Component {
+class TopBar extends React.Component {
     constructor(props) {
         super(props);
         this.window = remote.getCurrentWindow();
         this.minimizeWindow = this.minimizeWindow.bind(this);
         this.maximizeWindow = this.maximizeWindow.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.closeWindow = this.closeWindow.bind(this);
+    }
+    componentWillMount() {
+        document.addEventListener('mousedown', this.handleClick, false);
+    }
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClick, false);
+    }
+    handleClick(ev) {
+        if(!document.getElementsByClassName('menuActionPanel')[0].contains(ev.target) ){
+           this.props._toggleMenuBar(false) 
+        } 
     }
     minimizeWindow() {
         this.window.minimize();
@@ -27,8 +41,8 @@ export default class TopBar extends React.Component {
         return (
             <header>
                 <nav>
-                    <span>File</span>
-                    <span>Edit</span> 
+                    <span onClick={() => this.props._toggleMenuBar(true)}>File</span>
+                    <span onClick={() => this.props._toggleMenuBar(true)}>Edit</span> 
                     <span>Help</span>
                 </nav>
                 <div id='title'>DynoSign</div>
@@ -41,3 +55,13 @@ export default class TopBar extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => state;
+
+const mapDispatchToProps = dispatch => {
+    return {
+        _toggleMenuBar: (visible) => dispatch(toggleMenuBar(visible))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopBar); 

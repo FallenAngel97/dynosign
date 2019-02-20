@@ -10,6 +10,7 @@ import RightPanel from "./RightPanel/RightPanel.jsx";
 import TopBar from "./TopBar/TopBar.jsx"
 import "./entry.scss";
 import reducers from "./reducers";
+import MenuActionPanel from "./MenuActionPanel/MenuActionPanel.jsx";
 
 const store = createStore(reducers);
 
@@ -18,6 +19,7 @@ class DynoSign extends React.Component {
         return(
         <Provider store={store}>
             <TopBar />
+            <MenuActionPanel />
             <div id='programContainer'>
                 <LeftBar />
                 <MainArea />

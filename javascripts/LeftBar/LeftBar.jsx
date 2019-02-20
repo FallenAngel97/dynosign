@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import move_tool from "./move_tool.svg"
 import select_tool from "./select_tool.svg"
 import "./LeftBar.scss";
 import { connect } from 'react-redux'
 import {changeMouseType} from "../actions";
 
-class LeftBar extends React.Component {
+class LeftBar extends Component {
     constructor(props) {
         super(props);
         this.changeCursor = this.changeCursor.bind(this);

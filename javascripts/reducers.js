@@ -39,9 +39,16 @@ function changeMouseType(state={type: 'CHANGE_MOUSE_TYPE', mouseType: 'default'}
     return state;
 }
 
+function toggleMenuBar(state={type: 'TOGGLE_MENU_BAR', menuBarVisible: false}, action) {
+    if(action.type == 'TOGGLE_MENU_BAR') {
+        return Object.assign({}, state, { menuBarVisible: action.menuBarVisible })
+    }
+    return state;
+}
 
 export default combineReducers({
     changeActiveLayer, 
     layersCRUD,
-    changeMouseType
+    changeMouseType,
+    toggleMenuBar
 })
