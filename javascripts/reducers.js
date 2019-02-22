@@ -6,7 +6,7 @@ const defaultLayer = {
     hidden: false
 }
 
-function changeActiveLayer(state={
+export function changeActiveLayer(state={
                             type: 'CHANGE_ACTIVE_LAYER',
                             layer: defaultLayer,
                             layerNumber: 0}, action) 
