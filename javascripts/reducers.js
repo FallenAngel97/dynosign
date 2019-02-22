@@ -42,6 +42,16 @@ function layersCRUD(state=[defaultLayer], action) {
                 ...state.slice(0, action.layerId),
                 ...state.slice(action.layerId + 1)
             ]
+        case 'CHANGE_LAYER_VISIBILITY':
+            return state.map((item, index)=>{
+                if(index!=action.layerNumber) {
+                    return item;
+                }
+                return {
+                    ...item,
+                    hidden: action.hidden
+                }
+            })
     }
     return state;
 }
