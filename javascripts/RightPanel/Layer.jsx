@@ -3,7 +3,7 @@ import "./Layer.scss";
 import {connect} from "react-redux";
 import {changeActiveLayer, changeLayer} from "../actions"
 
-class Layer extends React.Component {
+export class Layer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

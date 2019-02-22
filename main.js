@@ -27,4 +27,4 @@ app.on('window-all-closed', () => {
     if (win === null) {
       createWindow()
     }
-  })
+})

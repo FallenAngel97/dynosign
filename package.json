@@ -6,7 +6,14 @@
   "scripts": {
     "start": "electron .",
     "watch": "webpack-dev-server --hot --inline",
-    "test": ""
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "repository": {
     "type": "git",
@@ -27,7 +34,10 @@
     "electron": "^3.1.4",
     "electron-packager": "13.0.0",
     "electron-rebuild": "1.8.2",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.9.1",
     "file-loader": "^2.0.0",
+    "jest": "^24.1.0",
     "node-libs-browser": "2.1.0",
     "node-sass": "^4.11.0",
     "react-hot-loader": "^4.6.5",
