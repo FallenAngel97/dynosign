@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 class MenuActionPanel extends React.Component {
     render() {
-        console.log(this.props.toggleMenuBar.menuBarVisible)
         return (
             <div style={{visibility: this.props.toggleMenuBar.menuBarVisible?'visible':'hidden'}} className='menuActionPanel'>
                 <span className="menuBarActionButton">Save</span>

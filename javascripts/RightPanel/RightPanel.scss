@@ -1,4 +1,14 @@
 #rightPanel {
     width: 200px;
     grid-column: 3;
+    display: flex;
+    flex-direction: column;
+}
+#stackingLayers {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 1;
+}
+#layersButtonsBottom {
+    margin-bottom: 40px;
 }

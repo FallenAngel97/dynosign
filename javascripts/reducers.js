@@ -6,28 +6,42 @@ const defaultLayer = {
     hidden: false
 }
 
-function changeActiveLayer(
-    state={type: 'CHANGE_ACTIVE_LAYER', layer: defaultLayer, layerNumber: 0}, action) {
-    if(action.type == 'CHANGE_ACTIVE_LAYER') {
-        return Object.assign({}, state, {layer: action.layer, layerNumber: action.layerNumber})
+function changeActiveLayer(state={
+                            type: 'CHANGE_ACTIVE_LAYER',
+                            layer: defaultLayer,
+                            layerNumber: 0}, action) 
+{
+    switch(action.type) {
+        case 'CHANGE_ACTIVE_LAYER':
+            return Object.assign({}, state, {layer: action.layer, layerNumber: action.layerNumber})
+        case 'ADD_LAYER':
+            return Object.assign({}, state, {layer: action.layer, layerNumber: action.layerNumber})
+        case 'DELETE_LAYER':
+            let layerNumber = (action.layerId - 1 < 0) ? 0 : action.layerId - 1;
+            return Object.assign({}, state, {layerNumber})
     }
     return state;
 }
 
 function layersCRUD(state=[defaultLayer], action) {
-    if(action.type=='ADD_LAYER') {
-        return [...state, action.layer]
-    }
-    if(action.type == 'CHANGE_LAYER') {
-        return state.map((item, index)=>{
-            if(index!=action.layerId) {
-                return item;
-            }
-            return {
-                ...item,
-                ...action.layer
-            }
-        })
+    switch(action.type) {
+        case 'ADD_LAYER':
+            return [...state, action.layer]
+        case 'CHANGE_LAYER':
+            return state.map((item, index)=>{
+                if(index!=action.layerId) {
+                    return item;
+                }
+                return {
+                    ...item,
+                    ...action.layer
+                }
+            })
+        case 'DELETE_LAYER':
+            return [
+                ...state.slice(0, action.layerId),
+                ...state.slice(action.layerId + 1)
+            ]
     }
     return state;
 }

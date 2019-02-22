@@ -2,19 +2,20 @@ export function changeMouseType(mouseType) {
     return { type: 'CHANGE_MOUSE_TYPE', mouseType }
 }
 
-export function deleteLayer() {
-    return { type: 'DELETE_LAYER' }
+export function deleteLayer(layerId) {
+    return { type: 'DELETE_LAYER', layerId }
 }
 
 export function changeActiveLayer(layer, layerNumber) {
     return { type: 'CHANGE_ACTIVE_LAYER', layer, layerNumber }
 }
 
-export function addLayer() {
+export function addLayer(layersCount) {
     return { type: 'ADD_LAYER', layer: {  
         opacity: 100,
-        name: 'New layer',
-        hidden: false}
+        name: 'New layer '+ layersCount,
+        hidden: false},
+        layerNumber: layersCount
     }
 }
 
