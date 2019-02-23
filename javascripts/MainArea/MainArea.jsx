@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 class MainArea extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             prevX: 0,
             currX:0,
@@ -19,16 +20,20 @@ class MainArea extends React.Component {
     }
     componentDidMount() {
         this.renderingLayer.addEventListener("mousemove",  (e) => {
-            this.findxy('move', e)
+            if(this.props.changeMouseType.mouseType == 'select')
+                this.findxy('move', e)
         }, false);
         this.renderingLayer.addEventListener("mousedown", (e) => {
-            this.findxy('down', e)
+            if(this.props.changeMouseType.mouseType == 'select')
+                this.findxy('down', e)
         }, false);
         this.renderingLayer.addEventListener("mouseup", (e) => {
-            this.findxy('up', e)
+            if(this.props.changeMouseType.mouseType == 'select')
+                this.findxy('up', e)
         }, false);
         this.renderingLayer.addEventListener("mouseout", (e) => {
-            this.findxy('out', e)
+            if(this.props.changeMouseType.mouseType == 'select')
+                this.findxy('out', e)
         }, false);
         this.renderingLayer.style.width = this.layerContainer.offsetWidth;
         this.renderingLayer.style.height = this.layerContainer.offsetHeight;
@@ -105,9 +110,7 @@ class MainArea extends React.Component {
                 <button className="drawAnimateSelector">Draw</button>
                 <button className="drawAnimateSelector">Animate</button>
                 <div ref={layerContainer => this.layerContainer = layerContainer} style={{cursor: iconType}} id='drawingArea' >
-                    <canvas ref={layer => this.renderingLayer = layer} id='renderingLayer'>
-
-                    </canvas>
+                    <canvas ref={layer => this.renderingLayer = layer} id='renderingLayer' />
                 </div>
             </div>
         )

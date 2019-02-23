@@ -32,7 +32,7 @@ class TopBar extends React.Component {
         this.window.minimize();
     }
     maximizeWindow() {
-        this.window.maximize();
+        this.window.isMaximized() ? this.window.unmaximize() : this.window.maximize()
     }
     closeWindow() {
         this.window.close();

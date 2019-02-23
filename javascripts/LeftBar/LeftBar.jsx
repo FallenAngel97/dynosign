@@ -12,14 +12,29 @@ class LeftBar extends Component {
         this.changeCursor = this.changeCursor.bind(this);
     }
     changeCursor(type) {
-        this.props.changeMouseType(type);
+        this.props._changeMouseType(type);
     }
     render() {
+        let index = 0;
+        switch(this.props.changeMouseType.mouseType) {
+            case "select":
+                index = 1;
+                break;
+            case "text":
+                index = 2;
+                break;
+        }
         return(
             <div id='leftBar'>
-                <img onClick={() => this.changeCursor('default')} src={move_tool} className='toolsLeftPanel' />  
-                <img onClick={() => this.changeCursor('select')} src={select_tool} className='toolsLeftPanel' />              
-                <img onClick={() => this.changeCursor('text')} src={text_tool} className='toolsLeftPanel' />              
+                <div title="Selection tool" className={"buttonWrapper" + ((index==0) ?' activeLeftButton':'')}>
+                    <img onClick={() => this.changeCursor('default')} src={move_tool} className='toolsLeftPanel' />  
+                </div>
+                <div title="Selection tool" className={"buttonWrapper" + ((index==1) ?' activeLeftButton':'')}>
+                    <img onClick={() => this.changeCursor('select')} src={select_tool} className='toolsLeftPanel' />  
+                </div>
+                <div title="Text tool" className={"buttonWrapper" + ((index==2) ?' activeLeftButton':'')}>
+                    <img onClick={() => this.changeCursor('text')} src={text_tool} className='toolsLeftPanel' />              
+                </div>
             </div>
         )
     }
@@ -29,7 +44,7 @@ const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeMouseType: mouseType => dispatch(changeMouseType(mouseType))
+        _changeMouseType: mouseType => dispatch(changeMouseType(mouseType))
     }
 } 
 
