@@ -23,7 +23,7 @@ export function changeActiveLayer(state={
     return state;
 }
 
-function layersCRUD(state=[defaultLayer], action) {
+export function layersCRUD(state=[defaultLayer], action) {
     switch(action.type) {
         case 'ADD_LAYER':
             return [...state, action.layer]
@@ -56,14 +56,14 @@ function layersCRUD(state=[defaultLayer], action) {
     return state;
 }
 
-function changeMouseType(state={type: 'CHANGE_MOUSE_TYPE', mouseType: 'default'}, action) {
+export function changeMouseType(state={type: 'CHANGE_MOUSE_TYPE', mouseType: 'default'}, action) {
     if(action.type == 'CHANGE_MOUSE_TYPE') {
         return Object.assign({}, state, {mouseType: action.mouseType})
     }
     return state;
 }
 
-function toggleMenuBar(state={type: 'TOGGLE_MENU_BAR', menuBarVisible: false}, action) {
+export function toggleMenuBar(state={type: 'TOGGLE_MENU_BAR', menuBarVisible: false}, action) {
     if(action.type == 'TOGGLE_MENU_BAR') {
         return Object.assign({}, state, { menuBarVisible: action.menuBarVisible })
     }

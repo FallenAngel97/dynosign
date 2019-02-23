@@ -29,4 +29,31 @@ describe("Redux actions testing", () => {
         const expectedAction = { type: 'CHANGE_ACTIVE_LAYER', layer, layerNumber }
         expect(actions.changeActiveLayer(layer,layerNumber)).toEqual(expectedAction);
     });
+    it("should change Layer", () => {
+        const layerId = 2;
+        const layer = defaultLayer;
+        const expectedAction = { type: 'CHANGE_LAYER', layer, layerId }
+        expect(actions.changeLayer(layer,layerId)).toEqual(expectedAction);
+    });
+    it("should toggle Menu Bar", () => {
+        const menuBarVisible = false;
+        const expectedAction = {type: 'TOGGLE_MENU_BAR', menuBarVisible};
+        expect(actions.toggleMenuBar(menuBarVisible)).toEqual(expectedAction);
+    });
+    it("should change Layer Visibility", () => {
+        const hidden = true;
+        const layerNumber = 3;
+        const expectedAction = {type: 'CHANGE_LAYER_VISIBILITY', hidden, layerNumber};
+        expect(actions.changeLayerVisibility(hidden, layerNumber)).toEqual(expectedAction);
+    });
+    it("should add layer", () => {
+        const layersCount = 3;
+        const expectedAction = { type: 'ADD_LAYER', layer: {  
+            opacity: 100,
+            name: 'New layer '+ layersCount,
+            hidden: false},
+            layerNumber: layersCount
+        };
+        expect(actions.addLayer(layersCount)).toEqual(expectedAction);
+    })
 });

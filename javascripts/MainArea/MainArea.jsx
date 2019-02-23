@@ -14,7 +14,11 @@ class MainArea extends React.Component {
             <div id='mainArea'>
                 <button className="drawAnimateSelector">Draw</button>
                 <button className="drawAnimateSelector">Animate</button>
-                <div style={{cursor: iconType}} id='drawingArea' />
+                <div style={{cursor: iconType}} id='drawingArea' >
+                    <canvas id='renderingLayer'>
+
+                    </canvas>
+                </div>
             </div>
         )
     }
