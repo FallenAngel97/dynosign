@@ -96,6 +96,9 @@ class MainArea extends React.Component {
             case "select":
                 iconType = 'crosshair';
                 break;
+            case "text":
+                iconType = 'text';
+                break;
         }
         return (
             <div id='mainArea'>
