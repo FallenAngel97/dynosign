@@ -30,3 +30,7 @@ export function toggleMenuBar(menuBarVisible) {
 export function changeLayerVisibility(hidden, layerNumber) {
     return {type: 'CHANGE_LAYER_VISIBILITY', hidden, layerNumber}
 }
+
+export function addLine(element) {
+    return {type: 'ADD_LINE', lineData: element.toDataUrl()}
+}

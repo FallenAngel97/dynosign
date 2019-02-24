@@ -3,7 +3,8 @@ import { combineReducers } from 'redux'
 const defaultLayer = {
     opacity: 100,
     name: 'New layer',
-    hidden: false
+    hidden: false,
+    linesArray: []
 }
 
 export function changeActiveLayer(state={

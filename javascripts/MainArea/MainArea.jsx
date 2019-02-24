@@ -1,6 +1,7 @@
 import React from "react";
 import "./MainArea.scss";
 import {connect} from "react-redux";
+import {addLine} from "../actions";
 
 class MainArea extends React.Component {
     constructor(props) {
@@ -20,21 +21,26 @@ class MainArea extends React.Component {
     }
     componentDidMount() {
         this.renderingLayer.addEventListener("mousemove",  (e) => {
-            if(this.props.changeMouseType.mouseType == 'select')
+            if(this.props.changeMouseType.mouseType == 'draw')
                 this.findxy('move', e)
         }, false);
         this.renderingLayer.addEventListener("mousedown", (e) => {
-            if(this.props.changeMouseType.mouseType == 'select')
+            if(this.props.changeMouseType.mouseType == 'draw')
                 this.findxy('down', e)
         }, false);
         this.renderingLayer.addEventListener("mouseup", (e) => {
-            if(this.props.changeMouseType.mouseType == 'select')
+            if(this.props.changeMouseType.mouseType == 'draw')
                 this.findxy('up', e)
         }, false);
         this.renderingLayer.addEventListener("mouseout", (e) => {
-            if(this.props.changeMouseType.mouseType == 'select')
+            if(this.props.changeMouseType.mouseType == 'draw')
                 this.findxy('out', e)
         }, false);
+        window.addEventListener('keydown', (e) => {
+            if(e.keyCode == 90 && e.ctrlKey) {
+                console.log("redo draw");
+            }
+        }, false)
         this.renderingLayer.style.width = this.layerContainer.offsetWidth;
         this.renderingLayer.style.height = this.layerContainer.offsetHeight;
         this.renderingLayer.height = this.layerContainer.offsetHeight;
@@ -104,6 +110,9 @@ class MainArea extends React.Component {
             case "text":
                 iconType = 'text';
                 break;
+            case "draw":
+                iconType = 'crosshair';
+                break;
         }
         return (
             <div id='mainArea'>
@@ -119,4 +128,10 @@ class MainArea extends React.Component {
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps)(MainArea);
+const mapDispatchToProps = dispatch => {
+    return {
+        addLine: (elem) => dispatch(addLine(elem))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainArea);

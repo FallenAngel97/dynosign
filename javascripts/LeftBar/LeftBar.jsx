@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import move_tool from "./move_tool.svg"
 import select_tool from "./select_tool.svg"
 import text_tool from "./text_tool.svg";
+import draw_tool from "./draw_tool.svg";
 import "./LeftBar.scss";
 import { connect } from 'react-redux'
 import {changeMouseType} from "../actions";
@@ -23,6 +24,9 @@ class LeftBar extends Component {
             case "text":
                 index = 2;
                 break;
+            case "draw":
+                index = 3;
+                break;
         }
         return(
             <div id='leftBar'>
@@ -34,6 +38,9 @@ class LeftBar extends Component {
                 </div>
                 <div title="Text tool" className={"buttonWrapper" + ((index==2) ?' activeLeftButton':'')}>
                     <img onClick={() => this.changeCursor('text')} src={text_tool} className='toolsLeftPanel' />              
+                </div>
+                <div title="Draw tool" className={"buttonWrapper" + ((index==3) ?' activeLeftButton':'')}>
+                    <img onClick={() => this.changeCursor('draw')} src={draw_tool} className='toolsLeftPanel' />              
                 </div>
             </div>
         )

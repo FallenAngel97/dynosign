@@ -3,7 +3,8 @@ import {changeActiveLayer, layersCRUD, changeMouseType, toggleMenuBar} from "./r
 const defaultLayer = {
     opacity: 100,
     name: 'New layer',
-    hidden: false
+    hidden: false,
+    linesArray: []
 }
 
 describe("Redux reducers tests", () => {
