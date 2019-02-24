@@ -23,3 +23,5 @@ First of all, you will need a Node.JS and NPM. I'm using Arch Linux distro, but 
 - In first terminal window type `npm run watch` to launch webpack server
 - In second terminal type `npm start` to launch an Electron application
 - (Optional) type `npm test` or `npm run test:watch` to run unit tests (Jest)
+ # Join the team 
+ Do you want to collaborate? Join the project at https://crowdforge.io/projects/552
