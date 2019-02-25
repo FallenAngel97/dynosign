@@ -6,6 +6,10 @@ const defaultLayer = {
     hidden: false
 }
 
+HTMLCanvasElement.prototype.toDataURL = () => {
+    return 'canvas-data-url';
+}
+
 describe("Redux actions testing", () => {
     it('should change mouse type', () => {
         const mouseType = 'select';
@@ -56,5 +60,23 @@ describe("Redux actions testing", () => {
             layerNumber: layersCount
         };
         expect(actions.addLayer(layersCount)).toEqual(expectedAction);
+    });
+    it("should add line to layer", () => {
+        const canvas = document.createElement('canvas');
+        const layerNumber = 2;
+        const expectedAction = {
+            type: 'ADD_LINE', lineData: canvas.toDataURL(), layerNumber
+        }
+        expect(actions.addLine(canvas, layerNumber)).toEqual(expectedAction);
+    });
+    it("should redo last line", () => {
+        const layerNumber = 2;
+        const expectedAction = {type: 'REDO_LINE', layerNumber};
+        expect(actions.redoLine(layerNumber)).toEqual(expectedAction);
+    });
+    it("should undo last line", () => {
+        const layerNumber = 2;
+        const expectedAction = {type: 'UNDO_LINE', layerNumber};
+        expect(actions.undoLine(layerNumber)).toEqual(expectedAction);
     });
 });
