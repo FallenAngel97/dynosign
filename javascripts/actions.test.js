@@ -50,10 +50,11 @@ describe("Redux actions testing", () => {
         const layersCount = 3;
         const expectedAction = { type: 'ADD_LAYER', layer: {  
             opacity: 100,
+            linesArray: [],
             name: 'New layer '+ layersCount,
             hidden: false},
             layerNumber: layersCount
         };
         expect(actions.addLayer(layersCount)).toEqual(expectedAction);
-    })
+    });
 });

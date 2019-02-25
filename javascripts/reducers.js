@@ -53,6 +53,26 @@ export function layersCRUD(state=[defaultLayer], action) {
                     hidden: action.hidden
                 }
             })
+        case 'ADD_LINE':
+            return state.map((item, index)=>{
+                if(index!=action.layerNumber) {
+                    return item;
+                }
+                return {
+                    ...item,
+                    linesArray: [...item.linesArray, action.lineData]
+                }
+            });
+        case "REDO_LINE":
+            return state.map((item, index)=>{
+                if(index!=action.layerNumber) {
+                    return item;
+                }
+                return {
+                    ...item,
+                    linesArray: [...item.linesArray.slice(0, item.linesArray.length - 1)]
+                }
+            });
     }
     return state;
 }

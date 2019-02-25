@@ -29,7 +29,7 @@ export class Layer extends React.Component {
     handleClick(ev) {
         if(!this.node.contains(ev.target) ){
             this.setState({editLayer: false})
-        } else {
+        } else if(ev.target.className.indexOf("singleLayer")>-1) {
             this.props._changeActiveLayer(this.props.layer, this.props.layerId);
         }
     }
