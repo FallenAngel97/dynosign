@@ -54,7 +54,7 @@ export class Layer extends React.Component {
 
 const mapStateToProps = state => state;
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
     return {
         _changeActiveLayer: (layer,layerNumber) => dispatch(changeActiveLayer(layer,layerNumber)),
         changeLayer: (layer, layerId) => dispatch(changeLayer(layer, layerId)),

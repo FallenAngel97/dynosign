@@ -3,7 +3,8 @@ import * as actions from "./actions";
 const defaultLayer = {
     opacity: 100,
     name: 'New layer',
-    hidden: false
+    hidden: false,
+    linesArray: []
 }
 
 HTMLCanvasElement.prototype.toDataURL = () => {
