@@ -15,9 +15,18 @@ export class Layer extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.layerNameChange = this.layerNameChange.bind(this);
         this.changeVisibility = this.changeVisibility.bind(this);
+        this.ondragStart = this.ondragStart.bind(this);
+        this.dragEnd = this.dragEnd.bind(this);
     }
     componentWillMount() {
         document.addEventListener('mousedown', this.handleClick, false);
+    }
+    ondragStart() {
+
+    }
+    dragEnd(e) {
+        console.log(e.target);
+
     }
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleClick, false);
@@ -43,7 +52,9 @@ export class Layer extends React.Component {
     }
     render() {
         return (
-            <div ref={node=>this.node=node} onDoubleClick={this.renameLayer}
+            <div onDragStart={this.ondragStart} draggable={true} ref={node=>this.node=node}
+                 onDoubleClick={this.renameLayer}
+                 onDragEnd={this.dragEnd}
                 className={"singleLayer"+((this.props.changeActiveLayer.layerNumber === this.props.layerId) ? ' activeLayer':'')}>
                 <img onClick={this.changeVisibility} src={this.props.layer.hidden ? hidden_eye : visible_eye}/>
                 {this.state.editLayer ? <input onChange={this.layerNameChange} type='text' className='singleLayerEdit' value={this.props.layer.name} /> : this.props.layer.name}

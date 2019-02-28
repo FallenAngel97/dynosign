@@ -1,4 +1,5 @@
-const { app, BrowserWindow} = require('electron');
+const { ipcMain, app, BrowserWindow} = require('electron');
+const fs = require('fs');
 
 let win;
 
@@ -27,4 +28,10 @@ app.on('window-all-closed', () => {
     if (win === null) {
       createWindow()
     }
+})
+
+ipcMain.on('save-message', (event, payload) => {
+  fs.writeFile(payload.fileName, JSON.stringify(payload.layers) , (err) => {
+    console.log(err);
+  })
 })
