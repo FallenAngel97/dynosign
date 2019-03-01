@@ -17,7 +17,8 @@ class MenuActionPanel extends React.Component {
             fileName,
             layers: this.props.layersCRUD
         };
-        ipcRenderer.send('save-message', fileContents);
+        if(fileName!=undefined)
+            ipcRenderer.send('save-message', fileContents);
     }
     render() {
         return (
