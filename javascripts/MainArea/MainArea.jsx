@@ -66,7 +66,9 @@ class MainArea extends React.Component {
         }
         else {
             ctx.clearRect(0, 0, this.layers[layerIndex].width, this.layers[layerIndex].height);
-            ctx.fillRect(this.currX, this.currY, this.prevX, this.prevY);
+            const diffX = this.currX - this.prevX;
+            const diffY = this.currY - this.prevY;
+            ctx.strokeRect(this.currX - diffX, this.currY - diffY, diffX,diffY);
         }
     }
     findxy(res, e) {
@@ -75,8 +77,13 @@ class MainArea extends React.Component {
         if (res == 'down') {
             this.prevX = this.currX;
             this.prevY = this.currY;
+
             this.currX = e.clientX - this.layers[layerIndex].offsetLeft;
             this.currY = e.clientY - this.layers[layerIndex].offsetTop;
+            if(this.props.changeMouseType.mouseType == 'select') {
+                this.prevX = this.currX;
+                this.prevY = this.currY;
+            }
             this.flag = true;
             this.dot_flag = true;
             if (this.dot_flag) {
@@ -102,8 +109,11 @@ class MainArea extends React.Component {
         
         if (res == 'move') {
             if (this.flag) {
-                this.prevX = this.currX;
-                this.prevY = this.currY;
+
+                if(this.props.changeMouseType.mouseType == 'draw') {
+                    this.prevX = this.currX;
+                    this.prevY = this.currY;
+                }
                 this.currX = e.clientX - this.layers[layerIndex].offsetLeft;
                 this.currY = e.clientY - this.layers[layerIndex].offsetTop;
                 this.draw();
