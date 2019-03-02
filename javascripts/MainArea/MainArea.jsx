@@ -27,26 +27,26 @@ class MainArea extends React.Component {
         }, false)
 
         this.layers.map((ref)=>{
-            ref.addEventListener("mousemove",  (e) => {
-                if(this.props.changeMouseType.mouseType == 'draw')
-                    this.findxy('move', e)
-            }, false);
-            ref.addEventListener("mousedown", (e) => {
-                if(this.props.changeMouseType.mouseType == 'draw')
-                    this.findxy('down', e)
-            }, false);
-            ref.addEventListener("mouseup", (e) => {
-                if(this.props.changeMouseType.mouseType == 'draw')
-                    this.findxy('up', e)
-            }, false);
-            ref.addEventListener("mouseout", (e) => {
-                if(this.props.changeMouseType.mouseType == 'draw')
-                    this.findxy('out', e)
-            }, false);
             ref.style.width = this.layerContainer.offsetWidth;
             ref.style.height = this.layerContainer.offsetHeight;
             ref.height = this.layerContainer.offsetHeight;
             ref.width = this.layerContainer.offsetWidth;
+            ref.addEventListener("mousemove",  (e) => {
+                if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
+                    this.findxy('move', e)
+            }, false);
+            ref.addEventListener("mousedown", (e) => {
+                if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
+                    this.findxy('down', e)
+            }, false);
+            ref.addEventListener("mouseup", (e) => {
+                if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
+                    this.findxy('up', e)
+            }, false);
+            ref.addEventListener("mouseout", (e) => {
+                if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
+                    this.findxy('out', e)
+            }, false);
         });
     }
     draw() {
@@ -54,14 +54,20 @@ class MainArea extends React.Component {
 
         var ctx = this.layers[layerIndex].getContext('2d');
         ctx.beginPath();
-        ctx.moveTo(this.prevX, this.prevY);
-        ctx.lineTo(this.currX, this.currY);
-        var x = "black",
-        y = 2;
-        ctx.strokeStyle = x;
-        ctx.lineWidth = y;
-        ctx.stroke();
-        ctx.closePath();
+        if(this.props.changeMouseType.mouseType == 'draw') {
+            ctx.moveTo(this.prevX, this.prevY);
+            ctx.lineTo(this.currX, this.currY);
+            var x = "black",
+            y = 2;
+            ctx.strokeStyle = x;
+            ctx.lineWidth = y;
+            ctx.stroke();
+            ctx.closePath();
+        }
+        else {
+            ctx.clearRect(0, 0, this.layers[layerIndex].width, this.layers[layerIndex].height);
+            ctx.fillRect(this.currX, this.currY, this.prevX, this.prevY);
+        }
     }
     findxy(res, e) {
         const layerIndex = this.props.changeActiveLayer.layerNumber;
@@ -86,7 +92,13 @@ class MainArea extends React.Component {
             this.flag = false;
         }
         
-        if(res=="up") this.props.addLine(this.layers[layerIndex], this.props.changeActiveLayer.layerNumber);
+        if(res=="up"){
+            if(this.props.changeMouseType.mouseType == 'draw')
+                this.props.addLine(this.layers[layerIndex], this.props.changeActiveLayer.layerNumber);
+            else {
+
+            }
+        }
         
         if (res == 'move') {
             if (this.flag) {
@@ -100,25 +112,25 @@ class MainArea extends React.Component {
     }
     componentDidUpdate(prevProps) {
         this.layers.map((ref)=>{
-            if(ref.getAttribute("height") == undefined) {
+            if(ref && ref.getAttribute("height") == undefined) {
                 ref.style.width = this.layerContainer.offsetWidth;
                 ref.style.height = this.layerContainer.offsetHeight;
                 ref.height = this.layerContainer.offsetHeight;
                 ref.width = this.layerContainer.offsetWidth;
                 ref.addEventListener("mousemove",  (e) => {
-                    if(this.props.changeMouseType.mouseType == 'draw')
+                    if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
                         this.findxy('move', e)
                 }, false);
                 ref.addEventListener("mousedown", (e) => {
-                    if(this.props.changeMouseType.mouseType == 'draw')
+                    if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
                         this.findxy('down', e)
                 }, false);
                 ref.addEventListener("mouseup", (e) => {
-                    if(this.props.changeMouseType.mouseType == 'draw')
+                    if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
                         this.findxy('up', e)
                 }, false);
                 ref.addEventListener("mouseout", (e) => {
-                    if(this.props.changeMouseType.mouseType == 'draw')
+                    if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
                         this.findxy('out', e)
                 }, false);
             }
@@ -127,10 +139,12 @@ class MainArea extends React.Component {
             const layerIndex = this.props.changeActiveLayer.layerNumber;
             let layerImg = new Image();
             const linesArray = this.props.layersCRUD[layerIndex].linesArray;
+
             if(linesArray.length == 0) {
                 let ctx = this.layers[layerIndex].getContext('2d');
                 ctx.clearRect(0, 0, this.layers[layerIndex].width, this.layers[layerIndex].height);
             } else {
+                if(this.props.layersCRUD[layerIndex].hidden == true) return;
                 layerImg.src = linesArray[linesArray.length-1];
                 layerImg.onload = () =>{ 
                     let ctx = this.layers[layerIndex].getContext('2d');
@@ -138,6 +152,14 @@ class MainArea extends React.Component {
                     ctx.drawImage(layerImg, 0, 0); 
                 }
             }
+
+            this.props.layersCRUD.map((layer, index)=> {
+                if(layer.hidden == true) {
+                    let ctx = this.layers[index].getContext('2d');
+                    ctx.clearRect(0, 0, this.layers[index].width, this.layers[index].height);
+                }
+            });
+
         }
     }
     render() {

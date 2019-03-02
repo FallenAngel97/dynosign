@@ -48,4 +48,9 @@ describe("Layer component", () => {
         wrapper.instance().renameLayer();
         expect(wrapper.state().editLayer).toEqual(true);
     });
+    test("Layer should handle click", () => {
+        const wrapper = shallow(<Layer changeActiveLayer={{layerNumber: 0}} layer={{name: 'Layer 0'}}  />);
+        wrapper.simulate('click');
+        expect(wrapper.state().editLayer).toEqual(false);
+    });
 });
