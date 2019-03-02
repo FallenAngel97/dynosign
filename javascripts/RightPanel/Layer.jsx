@@ -42,7 +42,7 @@ export class Layer extends React.Component {
         }
     }
     renameLayer() {
-        this.setState({editLayer: true});
+        this.setState({ editLayer: true });
     }
     layerNameChange(ev) {
         let layer = this.props.changeActiveLayer.layer;

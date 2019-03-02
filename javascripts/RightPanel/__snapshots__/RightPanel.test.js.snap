@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RightPanel test RightPanel properly renders 1`] = `ShallowWrapper {}`;
+
+exports[`RightPanel test RightPanel properly renders 2`] = `ShallowWrapper {}`;

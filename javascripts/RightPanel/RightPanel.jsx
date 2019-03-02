@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { addLayer, deleteLayer, changeLayer } from "../actions";
 import Layer from "./Layer";
 
-class RightPanel extends React.Component {
+export class RightPanel extends React.Component {
     constructor(props) {
         super(props);
         this.changeLayerOpacity = this.changeLayerOpacity.bind(this);
@@ -38,7 +38,7 @@ class RightPanel extends React.Component {
 
 const mapStateToProps = state => state;
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
     return {
         deleteLayer: (layerId) => dispatch(deleteLayer(layerId)),
         addLayer: (layersCount) => dispatch(addLayer(layersCount)),

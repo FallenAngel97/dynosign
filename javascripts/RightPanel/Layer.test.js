@@ -1,6 +1,6 @@
 import React from "react";
 import { Layer, mapDispatchToProps } from "./Layer";
-import { configure, shallow, render} from "enzyme"
+import { configure, shallow, mount} from "enzyme"
 import Adapter from 'enzyme-adapter-react-16';
 
 const defaultLayer = {
@@ -16,11 +16,22 @@ describe("Layer component", () => {
     test("Layer should render properly", () => {
         const layer = shallow(<Layer changeActiveLayer={{layerNumber: 0}} layer={{name: 'Layer 0'}}  />);
         expect(layer).toMatchSnapshot();
+        const layerMounted = mount(<Layer changeActiveLayer={{layerNumber: 0}} layer={{name: 'Layer 0'}}  />);
+        expect(layerMounted.instance().node).toBeTruthy();
     });
     test("Layer should allow editing", () => {
-        const wrapper = shallow(<Layer changeActiveLayer={{layerNumber: 0}} layer={{name: 'Layer 0'}} />);
+        const changeLayer = jest.fn();
+        const layer = {name: 'Layer 0'};
+        const wrapper = shallow(<Layer changeLayer={changeLayer} changeActiveLayer={{layerId: 0, layer}} layer={layer} />);
         wrapper.simulate('dblclick');
-        expect(wrapper.state().editLayer).toEqual(true);
+        expect(wrapper.state().editLayer).toBeTruthy();
+        const ev = {
+            target: {
+                value: 'Layer 1'
+            }
+        };
+        wrapper.instance().layerNameChange(ev);
+        expect(changeLayer).toBeCalledWith(layer, 0)
     });
     test("Layer component can trigger 'change active layer'", () => {
         const dispatch = jest.fn();
@@ -42,15 +53,20 @@ describe("Layer component", () => {
         expect(dispatch.mock.calls[0][0]).toEqual(
             {type: 'CHANGE_LAYER_VISIBILITY', hidden: true, layerNumber: 1}
         );
+        const changeLayerVisibility = jest.fn();
+        const wrapper = shallow(<Layer layerId={0} changeLayerVisibility={changeLayerVisibility} changeActiveLayer={{layerId: 0, defaultLayer}} layer={defaultLayer} />);
+        wrapper.instance().changeVisibility();
+        expect(changeLayerVisibility).toBeCalledWith(!defaultLayer.hidden, 0)
     });
     test("Layer should allow renaming", () => {
         const wrapper = shallow(<Layer changeActiveLayer={{layerNumber: 0}} layer={{name: 'Layer 0'}}  />);
         wrapper.instance().renameLayer();
-        expect(wrapper.state().editLayer).toEqual(true);
+        expect(wrapper.state().editLayer).toBeTruthy();
     });
-    test("Layer should handle click", () => {
+    test("checks for mouse click on document", () => {
+        global.document.removeEventListener = jest.fn();
         const wrapper = shallow(<Layer changeActiveLayer={{layerNumber: 0}} layer={{name: 'Layer 0'}}  />);
-        wrapper.simulate('click');
-        expect(wrapper.state().editLayer).toEqual(false);
+        wrapper.unmount()
+        expect(global.document.removeEventListener).toHaveBeenCalled();
     });
 });
