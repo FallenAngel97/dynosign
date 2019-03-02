@@ -55,6 +55,7 @@ class MainArea extends React.Component {
         var ctx = this.layers[layerIndex].getContext('2d');
         ctx.beginPath();
         if(this.props.changeMouseType.mouseType == 'draw') {
+            ctx.restore();
             ctx.moveTo(this.prevX, this.prevY);
             ctx.lineTo(this.currX, this.currY);
             var x = "black",
@@ -66,6 +67,7 @@ class MainArea extends React.Component {
         }
         else {
             ctx.clearRect(0, 0, this.layers[layerIndex].width, this.layers[layerIndex].height);
+            ctx.setLineDash([6])
             const diffX = this.currX - this.prevX;
             const diffY = this.currY - this.prevY;
             ctx.strokeRect(this.currX - diffX, this.currY - diffY, diffX,diffY);
@@ -109,7 +111,6 @@ class MainArea extends React.Component {
         
         if (res == 'move') {
             if (this.flag) {
-
                 if(this.props.changeMouseType.mouseType == 'draw') {
                     this.prevX = this.currX;
                     this.prevY = this.currY;

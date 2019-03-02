@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LeftBar tests LeftBar should render properly 1`] = `ShallowWrapper {}`;
+
+exports[`LeftBar tests LeftBar should render properly 2`] = `ShallowWrapper {}`;
+
+exports[`LeftBar tests LeftBar should render properly 3`] = `ShallowWrapper {}`;
+
+exports[`LeftBar tests LeftBar should render properly 4`] = `ShallowWrapper {}`;
+
+exports[`LeftBar tests LeftBar should render properly 5`] = `ShallowWrapper {}`;

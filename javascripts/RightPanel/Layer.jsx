@@ -25,7 +25,6 @@ export class Layer extends React.Component {
 
     }
     dragEnd(e) {
-        console.log(e.target);
 
     }
     componentWillUnmount() {

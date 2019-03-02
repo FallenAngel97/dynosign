@@ -8,7 +8,7 @@ import "./LeftBar.scss";
 import { connect } from 'react-redux'
 import {changeMouseType} from "../actions";
 
-class LeftBar extends Component {
+export class LeftBar extends Component {
     constructor(props) {
         super(props);
         this.changeCursor = this.changeCursor.bind(this);
@@ -56,7 +56,7 @@ class LeftBar extends Component {
 
 const mapStateToProps = (state) => state;
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
     return {
         _changeMouseType: mouseType => dispatch(changeMouseType(mouseType))
     }
