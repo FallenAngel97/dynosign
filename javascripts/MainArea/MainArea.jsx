@@ -3,7 +3,7 @@ import "./MainArea.scss";
 import {connect} from "react-redux";
 import {addLine, redoLine} from "../actions";
 
-class MainArea extends React.Component {
+export class MainArea extends React.Component {
     constructor(props) {
         super(props);
 
@@ -31,22 +31,6 @@ class MainArea extends React.Component {
             ref.style.height = this.layerContainer.offsetHeight;
             ref.height = this.layerContainer.offsetHeight;
             ref.width = this.layerContainer.offsetWidth;
-            ref.addEventListener("mousemove",  (e) => {
-                if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
-                    this.findxy('move', e)
-            }, false);
-            ref.addEventListener("mousedown", (e) => {
-                if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
-                    this.findxy('down', e)
-            }, false);
-            ref.addEventListener("mouseup", (e) => {
-                if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
-                    this.findxy('up', e)
-            }, false);
-            ref.addEventListener("mouseout", (e) => {
-                if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
-                    this.findxy('out', e)
-            }, false);
         });
     }
     draw() {
@@ -122,35 +106,36 @@ class MainArea extends React.Component {
         }
     }
     componentDidUpdate(prevProps) {
-        this.layers.map((ref)=>{
+        this.layers.map((ref, index)=>{
             if(ref && ref.getAttribute("height") == undefined) {
                 ref.style.width = this.layerContainer.offsetWidth;
                 ref.style.height = this.layerContainer.offsetHeight;
                 ref.height = this.layerContainer.offsetHeight;
                 ref.width = this.layerContainer.offsetWidth;
-                ref.addEventListener("mousemove",  (e) => {
-                    if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
-                        this.findxy('move', e)
-                }, false);
-                ref.addEventListener("mousedown", (e) => {
-                    if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
-                        this.findxy('down', e)
-                }, false);
-                ref.addEventListener("mouseup", (e) => {
-                    if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
-                        this.findxy('up', e)
-                }, false);
-                ref.addEventListener("mouseout", (e) => {
-                    if(this.props.changeMouseType.mouseType == 'draw' || this.props.changeMouseType.mouseType == 'select')
-                        this.findxy('out', e)
-                }, false);
             }
+            //This should somehow handle the opacity
+
+
+            // else {
+            //     const linesArray = this.props.layersCRUD[index].linesArray;
+            //     if(ref == null || linesArray.length == 0) return;
+            //     const tmpImageURL = ref.toDataURL()
+            //     const tmpImg = new Image();
+            //     let ctx = ref.getContext('2d');
+            //     tmpImg.onload = () => {
+            //         ctx.save();
+            //         ctx.globalAlpha = this.props.layersCRUD[index].opacity/100;
+            //         ctx.drawImage(tmpImg, 0, 0);
+            //         ctx.restore();
+            //         this.props.addLine(ref, this.props.changeActiveLayer.layerNumber);
+            //     }
+            //     tmpImg.src = tmpImageURL;
+            // }
         });
         if(this.props.layersCRUD!=prevProps.layersCRUD) {
             const layerIndex = this.props.changeActiveLayer.layerNumber;
             let layerImg = new Image();
             const linesArray = this.props.layersCRUD[layerIndex].linesArray;
-
             if(linesArray.length == 0) {
                 let ctx = this.layers[layerIndex].getContext('2d');
                 ctx.clearRect(0, 0, this.layers[layerIndex].width, this.layers[layerIndex].height);
@@ -195,7 +180,12 @@ class MainArea extends React.Component {
                 <button className="drawAnimateSelector">Animate</button>
                 <div ref={layerContainer => this.layerContainer = layerContainer} style={{cursor: iconType}} id='drawingArea' >
                     {this.props.layersCRUD.map((layer, index)=> {
-                        return <canvas className='canvaslayer' key={index} ref={(_ref)=>this.layers[index] = _ref} />
+                        return <canvas className='canvaslayer'
+                                onMouseMove={(e)=> this.findxy('move', e)}
+                                onMouseDown={(e)=> this.findxy('down', e)}
+                                onMouseUp={(e)=> this.findxy('up', e)}
+                                onMouseOut={(e)=> this.findxy('out', e)}
+                                 key={index} ref={(_ref)=>this.layers[index] = _ref} />
                     })}
                 </div>
             </div>
@@ -205,7 +195,7 @@ class MainArea extends React.Component {
 
 const mapStateToProps = state => state;
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
     return {
         addLine: (elem, layerNumber) => dispatch(addLine(elem, layerNumber)),
         redoLine: (layerNumber) => dispatch(redoLine(layerNumber))

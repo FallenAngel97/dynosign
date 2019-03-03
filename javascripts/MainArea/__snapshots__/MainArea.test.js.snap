@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainArea tests MainArea should render properly 1`] = `ShallowWrapper {}`;
