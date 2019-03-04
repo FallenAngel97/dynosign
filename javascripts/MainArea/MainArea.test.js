@@ -6,7 +6,8 @@ configure({ adapter: new Adapter() })
 
 describe("MainArea tests", () => {
     test("MainArea should render properly", () => {
-        let mainArea = shallow(<MainArea layersCRUD={[]} changeMouseType={{mouseType: 'default'}} />);
+        let mainArea = mount(<MainArea layersCRUD={[]} changeMouseType={{mouseType: 'default'}} />);
         expect(mainArea).toMatchSnapshot();
+        expect(mainArea.instance().layers).toBeTruthy();
     })
 })

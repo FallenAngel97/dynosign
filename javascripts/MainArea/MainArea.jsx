@@ -2,20 +2,18 @@ import React from "react";
 import "./MainArea.scss";
 import {connect} from "react-redux";
 import {addLine, redoLine} from "../actions";
+import DrawingLayer from "./DrawingLayer";
 
 export class MainArea extends React.Component {
     constructor(props) {
         super(props);
 
-        this.prevX = 0;
-        this.currX = 0;
-        this.prevX = 0;
-        this.prevY = 0;
-        this.dot_flag = false;
-        this.flag = false;
+        this.state = {
+            width: 0,
+            height: 0
+        };
 
-        this.findxy = this.findxy.bind(this);
-        this.draw = this.draw.bind(this);
+        this.layerContainer = React.createRef();
 
         this.layers = [];
     }
@@ -25,136 +23,57 @@ export class MainArea extends React.Component {
                 this.props.redoLine(this.props.changeActiveLayer.layerNumber);
             }
         }, false)
-
-        this.layers.map((ref)=>{
-            ref.style.width = this.layerContainer.offsetWidth;
-            ref.style.height = this.layerContainer.offsetHeight;
-            ref.height = this.layerContainer.offsetHeight;
-            ref.width = this.layerContainer.offsetWidth;
-        });
     }
-    draw() {
-        const layerIndex = this.props.changeActiveLayer.layerNumber;
-
-        var ctx = this.layers[layerIndex].getContext('2d');
-        ctx.beginPath();
-        if(this.props.changeMouseType.mouseType == 'draw') {
-            ctx.restore();
-            ctx.moveTo(this.prevX, this.prevY);
-            ctx.lineTo(this.currX, this.currY);
-            var x = "black",
-            y = 2;
-            ctx.strokeStyle = x;
-            ctx.lineWidth = y;
-            ctx.stroke();
-            ctx.closePath();
-        }
-        else {
-            ctx.clearRect(0, 0, this.layers[layerIndex].width, this.layers[layerIndex].height);
-            ctx.setLineDash([6])
-            const diffX = this.currX - this.prevX;
-            const diffY = this.currY - this.prevY;
-            ctx.strokeRect(this.currX - diffX, this.currY - diffY, diffX,diffY);
-        }
+    getParentSize() {
+        return {
+            width: (this.layerContainer.current && this.layerContainer.current.offsetWidth) || 0,
+            height: (this.layerContainer.current && this.layerContainer.current.offsetHeight) || 0
+        };
     }
-    findxy(res, e) {
-        const layerIndex = this.props.changeActiveLayer.layerNumber;
 
-        if (res == 'down') {
-            this.prevX = this.currX;
-            this.prevY = this.currY;
-
-            this.currX = e.clientX - this.layers[layerIndex].offsetLeft;
-            this.currY = e.clientY - this.layers[layerIndex].offsetTop;
-            if(this.props.changeMouseType.mouseType == 'select') {
-                this.prevX = this.currX;
-                this.prevY = this.currY;
-            }
-            this.flag = true;
-            this.dot_flag = true;
-            if (this.dot_flag) {
-                var ctx = this.layers[layerIndex].getContext('2d');
-                ctx.beginPath();
-                ctx.fillStyle = 'black';
-                ctx.fillRect(this.currX, this.currY, 2, 2);
-                ctx.closePath();
-                this.dot_flag = false;
-            }
-        }
-        if (res == 'up' || res == "out") {
-            this.flag = false;
-        }
-        
-        if(res=="up"){
-            if(this.props.changeMouseType.mouseType == 'draw')
-                this.props.addLine(this.layers[layerIndex], this.props.changeActiveLayer.layerNumber);
-            else {
-
-            }
-        }
-        
-        if (res == 'move') {
-            if (this.flag) {
-                if(this.props.changeMouseType.mouseType == 'draw') {
-                    this.prevX = this.currX;
-                    this.prevY = this.currY;
-                }
-                this.currX = e.clientX - this.layers[layerIndex].offsetLeft;
-                this.currY = e.clientY - this.layers[layerIndex].offsetTop;
-                this.draw();
-            }
-        }
-    }
     componentDidUpdate(prevProps) {
-        this.layers.map((ref, index)=>{
-            if(ref && ref.getAttribute("height") == undefined) {
-                ref.style.width = this.layerContainer.offsetWidth;
-                ref.style.height = this.layerContainer.offsetHeight;
-                ref.height = this.layerContainer.offsetHeight;
-                ref.width = this.layerContainer.offsetWidth;
-            }
-            //This should somehow handle the opacity
-
-
-            // else {
-            //     const linesArray = this.props.layersCRUD[index].linesArray;
-            //     if(ref == null || linesArray.length == 0) return;
-            //     const tmpImageURL = ref.toDataURL()
-            //     const tmpImg = new Image();
-            //     let ctx = ref.getContext('2d');
-            //     tmpImg.onload = () => {
-            //         ctx.save();
-            //         ctx.globalAlpha = this.props.layersCRUD[index].opacity/100;
-            //         ctx.drawImage(tmpImg, 0, 0);
-            //         ctx.restore();
-            //         this.props.addLine(ref, this.props.changeActiveLayer.layerNumber);
-            //     }
-            //     tmpImg.src = tmpImageURL;
-            // }
-        });
         if(this.props.layersCRUD!=prevProps.layersCRUD) {
             const layerIndex = this.props.changeActiveLayer.layerNumber;
             let layerImg = new Image();
             const linesArray = this.props.layersCRUD[layerIndex].linesArray;
             if(linesArray.length == 0) {
-                let ctx = this.layers[layerIndex].getContext('2d');
-                ctx.clearRect(0, 0, this.layers[layerIndex].width, this.layers[layerIndex].height);
+                let ctx = this.layers[layerIndex].canvas.getContext('2d');
+                ctx.clearRect(0, 0, this.layers[layerIndex].canvas.width, this.layers[layerIndex].canvas.height);
             } else {
                 if(this.props.layersCRUD[layerIndex].hidden == true) return;
                 layerImg.src = linesArray[linesArray.length-1];
                 layerImg.onload = () =>{ 
-                    let ctx = this.layers[layerIndex].getContext('2d');
-                    ctx.clearRect(0, 0, this.layers[layerIndex].width, this.layers[layerIndex].height);
+                    let ctx = this.layers[layerIndex].canvas.getContext('2d');
+                    ctx.clearRect(0, 0, this.layers[layerIndex].canvas.width, this.layers[layerIndex].canvas.height);
                     ctx.drawImage(layerImg, 0, 0); 
                 }
             }
 
             this.props.layersCRUD.map((layer, index)=> {
                 if(layer.hidden == true) {
-                    let ctx = this.layers[index].getContext('2d');
-                    ctx.clearRect(0, 0, this.layers[index].width, this.layers[index].height);
+                    let ctx = this.layers[index].canvas.getContext('2d');
+                    ctx.clearRect(0, 0, this.layers[index].canvas.width, this.layers[index].canvas.height);
                 }
             });
+
+            // this.layers.map((ref, index)=>{
+            //     //This should somehow handle the opacity
+            //     if(ref) {
+            //         const linesArray = this.props.layersCRUD[index].linesArray;
+            //         if(linesArray.length == 0) return;
+            //         const tmpImageURL = ref.toDataURL()
+            //         const tmpImg = new Image();
+            //         let ctx = ref.getContext('2d');
+            //         tmpImg.onload = () => {
+            //             ctx.save();
+            //             ctx.globalAlpha = this.props.layersCRUD[index].opacity/100;
+            //             ctx.drawImage(tmpImg, 0, 0);
+            //             ctx.restore();
+            //             this.props.addLine(ref, this.props.changeActiveLayer.layerNumber);
+            //         }
+            //         tmpImg.src = tmpImageURL;
+            //     }
+            // });
 
         }
     }
@@ -178,14 +97,12 @@ export class MainArea extends React.Component {
             <div id='mainArea'>
                 <button className="drawAnimateSelector">Draw</button>
                 <button className="drawAnimateSelector">Animate</button>
-                <div ref={layerContainer => this.layerContainer = layerContainer} style={{cursor: iconType}} id='drawingArea' >
+                <div ref={this.layerContainer} style={{cursor: iconType}} id='drawingArea' >
                     {this.props.layersCRUD.map((layer, index)=> {
-                        return <canvas className='canvaslayer'
-                                onMouseMove={(e)=> this.findxy('move', e)}
-                                onMouseDown={(e)=> this.findxy('down', e)}
-                                onMouseUp={(e)=> this.findxy('up', e)}
-                                onMouseOut={(e)=> this.findxy('out', e)}
-                                 key={index} ref={(_ref)=>this.layers[index] = _ref} />
+                        return <DrawingLayer key={index}
+                                    ref={_layer=>this.layers[index] = _layer}
+                                    width={this.getParentSize().width}
+                                    height={this.getParentSize().height} />
                     })}
                 </div>
             </div>
@@ -197,7 +114,6 @@ const mapStateToProps = state => state;
 
 export const mapDispatchToProps = dispatch => {
     return {
-        addLine: (elem, layerNumber) => dispatch(addLine(elem, layerNumber)),
         redoLine: (layerNumber) => dispatch(redoLine(layerNumber))
     }
 }
