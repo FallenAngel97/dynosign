@@ -11,15 +11,22 @@ class SelectTool extends React.Component {
         this.flag = false;
         this.findxy = this.findxy.bind(this);
         this.draw = this.draw.bind(this);
+        this.timerMarchingAnts = undefined;
     }
-    draw() {
+    draw(offsetDash) {
         var ctx = this.canvas.getContext('2d');
         ctx.beginPath();
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        ctx.setLineDash([6])
+        ctx.setLineDash([6]);
+        ctx.lineDashOffset = offsetDash;
         const diffX = this.currX - this.prevX;
         const diffY = this.currY - this.prevY;
         ctx.strokeRect(this.currX - diffX, this.currY - diffY, diffX,diffY);
+        clearTimeout(this.timerMarchingAnts)
+        this.timerMarchingAnts = setTimeout(()=> {
+            offsetDash++;
+            this.draw(offsetDash);
+        }, 100);
     }
     findxy(res, e) {
         if(this.props.changeMouseType.mouseType != "select") return;
@@ -38,7 +45,7 @@ class SelectTool extends React.Component {
             if (this.flag) {
                 this.currX = e.clientX - this.canvas.offsetLeft;
                 this.currY = e.clientY - this.canvas.offsetTop;
-                this.draw();
+                this.draw(0);
             }
         }
     }
