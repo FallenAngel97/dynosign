@@ -3,6 +3,7 @@ import "./MainArea.scss";
 import {connect} from "react-redux";
 import {addLine, redoLine} from "../actions";
 import DrawingLayer from "./DrawingLayer";
+import SelectTool from "./SelectTool";
 
 export class MainArea extends React.Component {
     constructor(props) {
@@ -104,6 +105,10 @@ export class MainArea extends React.Component {
                                     width={this.getParentSize().width}
                                     height={this.getParentSize().height} />
                     })}
+                    {this.props.changeMouseType.mouseType == 'select' &&
+                     <SelectTool
+                        width={this.getParentSize().width}
+                        height={this.getParentSize().height} />}
                 </div>
             </div>
         )

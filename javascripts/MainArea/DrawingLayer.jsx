@@ -17,36 +17,25 @@ export class DrawingLayer extends React.Component {
     draw() {
         var ctx = this.canvas.getContext('2d');
         ctx.beginPath();
-        if(this.props.changeMouseType.mouseType == 'draw') {
-            ctx.restore();
-            ctx.moveTo(this.prevX, this.prevY);
-            ctx.lineTo(this.currX, this.currY);
-            var x = "black",
-            y = 2;
-            ctx.strokeStyle = x;
-            ctx.lineWidth = y;
-            ctx.stroke();
-            ctx.closePath();
-        }
-        else {
-            ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            ctx.setLineDash([6])
-            const diffX = this.currX - this.prevX;
-            const diffY = this.currY - this.prevY;
-            ctx.strokeRect(this.currX - diffX, this.currY - diffY, diffX,diffY);
-        }
+        ctx.restore();
+        ctx.moveTo(this.prevX, this.prevY);
+        ctx.lineTo(this.currX, this.currY);
+        var x = "black",
+        y = 2;
+        ctx.strokeStyle = x;
+        ctx.lineWidth = y;
+        ctx.stroke();
+        ctx.closePath();
     }
     findxy(res, e) {
+        if(!/draw|circle/.test(this.props.changeMouseType.mouseType)) return;
         if (res == 'down') {
             this.prevX = this.currX;
             this.prevY = this.currY;
 
             this.currX = e.clientX - this.canvas.offsetLeft;
             this.currY = e.clientY - this.canvas.offsetTop;
-            if(this.props.changeMouseType.mouseType == 'select') {
-                this.prevX = this.currX;
-                this.prevY = this.currY;
-            }
+
             this.flag = true;
             this.dot_flag = true;
             if (this.dot_flag) {
@@ -63,20 +52,13 @@ export class DrawingLayer extends React.Component {
         }
         
         if(res=="up"){
-            console.log()
-            if(this.props.changeMouseType.mouseType == 'draw')
-                this.props.addLine(this.canvas, this.props.changeActiveLayer.layerNumber);
-            else {
-
-            }
+            this.props.addLine(this.canvas, this.props.changeActiveLayer.layerNumber);
         }
         
         if (res == 'move') {
             if (this.flag) {
-                if(this.props.changeMouseType.mouseType == 'draw') {
-                    this.prevX = this.currX;
-                    this.prevY = this.currY;
-                }
+                this.prevX = this.currX;
+                this.prevY = this.currY;
                 this.currX = e.clientX - this.canvas.offsetLeft;
                 this.currY = e.clientY - this.canvas.offsetTop;
                 this.draw();
