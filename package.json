@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "react": "^16.8.2",
+    "react-color": "^2.17.0",
     "react-dom": "^16.8.2",
     "redux": "^4.0.1"
   }

@@ -7,12 +7,44 @@ import circle_tool from "./circle_tool.svg"
 import "./LeftBar.scss";
 import { connect } from 'react-redux'
 import {changeMouseType} from "../actions";
+import {SketchPicker} from "react-color"
+import ReactDOM from "react-dom";
 
 export class LeftBar extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            displayColorPicker: false,
+            color: {
+              r: '241',
+              g: '112',
+              b: '19',
+              a: '1',
+            }
+        }
         this.changeCursor = this.changeCursor.bind(this);
+        this.showColor = this.showColor.bind(this);
+        this.colorChange = this.colorChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
+    componentWillMount() {
+        document.addEventListener('mousedown', this.handleClick, false);
+    }
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClick, false);
+    }
+    handleClick(ev) {
+        const elem = ReactDOM.findDOMNode(this.colorPicker);
+        if(elem && !elem.contains(ev.target) ){
+            this.setState({displayColorPicker: false})
+        }
+    }
+    showColor() {
+        this.setState({displayColorPicker: true});
+    }
+    colorChange(color) {
+        this.setState({ color: color.rgb })
+    };
     changeCursor(type) {
         this.props._changeMouseType(type);
     }
@@ -49,6 +81,10 @@ export class LeftBar extends Component {
                 <div title="Circle tool" className={"buttonWrapper" + ((index==4) ?' activeLeftButton':'')}>
                     <img onClick={() => this.changeCursor('circle')} src={circle_tool} className='toolsLeftPanel' />   
                 </div>
+                <div onClick={this.showColor} className='color_small_indicator'>
+                    <div style={{background: `rgba(${this.state.color.r},${this.state.color.g},${this.state.color.b},${this.state.color.a})`}}  />
+                </div>
+                {this.state.displayColorPicker && <SketchPicker ref={node=>this.colorPicker=node} onChange={this.colorChange} color={this.state.color} className="color_picker_dynosign" />}
             </div>
         )
     }
