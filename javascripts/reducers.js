@@ -91,9 +91,24 @@ export function toggleMenuBar(state={type: 'TOGGLE_MENU_BAR', menuBarVisible: fa
     return state;
 }
 
+const color = {
+    r: '241',
+    g: '112',
+    b: '19',
+    a: '1',
+}
+
+export function changeColor(state={type: 'CHANGE_COLOR', color}, action){
+    if(action.type == 'CHANGE_COLOR') {
+        return Object.assign({}, state, { color: action.color })
+    }
+    return state;
+}
+
 export default combineReducers({
     changeActiveLayer, 
     layersCRUD,
     changeMouseType,
-    toggleMenuBar
+    toggleMenuBar,
+    changeColor
 })

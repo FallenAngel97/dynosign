@@ -6,7 +6,7 @@ import draw_tool from "./draw_tool.svg";
 import circle_tool from "./circle_tool.svg"
 import "./LeftBar.scss";
 import { connect } from 'react-redux'
-import {changeMouseType} from "../actions";
+import {changeMouseType, change_color} from "../actions";
 import {SketchPicker} from "react-color"
 import ReactDOM from "react-dom";
 
@@ -14,13 +14,7 @@ export class LeftBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayColorPicker: false,
-            color: {
-              r: '241',
-              g: '112',
-              b: '19',
-              a: '1',
-            }
+            displayColorPicker: false
         }
         this.changeCursor = this.changeCursor.bind(this);
         this.showColor = this.showColor.bind(this);
@@ -43,7 +37,7 @@ export class LeftBar extends Component {
         this.setState({displayColorPicker: true});
     }
     colorChange(color) {
-        this.setState({ color: color.rgb })
+        this.props.change_color(color.rgb)
     };
     changeCursor(type) {
         this.props._changeMouseType(type);
@@ -64,6 +58,7 @@ export class LeftBar extends Component {
                 index = 4;
                 break;
         }
+        const color = this.props.changeColor.color;
         return(
             <div id='leftBar'>
                 <div title="Selection tool" className={"buttonWrapper" + ((index==0) ?' activeLeftButton':'')}>
@@ -82,9 +77,9 @@ export class LeftBar extends Component {
                     <img onClick={() => this.changeCursor('circle')} src={circle_tool} className='toolsLeftPanel' />   
                 </div>
                 <div onClick={this.showColor} className='color_small_indicator'>
-                    <div style={{background: `rgba(${this.state.color.r},${this.state.color.g},${this.state.color.b},${this.state.color.a})`}}  />
+                    <div style={{background: `rgba(${color.r},${color.g},${color.b},${color.a})`}}  />
                 </div>
-                {this.state.displayColorPicker && <SketchPicker ref={node=>this.colorPicker=node} onChange={this.colorChange} color={this.state.color} className="color_picker_dynosign" />}
+                {this.state.displayColorPicker && <SketchPicker ref={node=>this.colorPicker=node} onChange={this.colorChange} color={color} className="color_picker_dynosign" />}
             </div>
         )
     }
@@ -94,7 +89,8 @@ const mapStateToProps = (state) => state;
 
 export const mapDispatchToProps = (dispatch) => {
     return {
-        _changeMouseType: mouseType => dispatch(changeMouseType(mouseType))
+        _changeMouseType: mouseType => dispatch(changeMouseType(mouseType)),
+        change_color: color => dispatch(change_color(color))
     }
 } 
 

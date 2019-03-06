@@ -33,15 +33,16 @@ export class MainArea extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.layersCRUD!=prevProps.layersCRUD) {
+        const { layersCRUD } = this.props;
+        if(layersCRUD!=prevProps.layersCRUD) {
             const layerIndex = this.props.changeActiveLayer.layerNumber;
             let layerImg = new Image();
-            const linesArray = this.props.layersCRUD[layerIndex].linesArray;
+            const linesArray = layersCRUD[layerIndex].linesArray;
             if(linesArray.length == 0) {
                 let ctx = this.layers[layerIndex].canvas.getContext('2d');
                 ctx.clearRect(0, 0, this.layers[layerIndex].canvas.width, this.layers[layerIndex].canvas.height);
             } else {
-                if(this.props.layersCRUD[layerIndex].hidden == true) return;
+                if(layersCRUD[layerIndex].hidden == true) return;
                 layerImg.src = linesArray[linesArray.length-1];
                 layerImg.onload = () =>{ 
                     let ctx = this.layers[layerIndex].canvas.getContext('2d');
@@ -50,7 +51,7 @@ export class MainArea extends React.Component {
                 }
             }
 
-            this.props.layersCRUD.map((layer, index)=> {
+            layersCRUD.map((layer, index)=> {
                 if(layer.hidden == true) {
                     let ctx = this.layers[index].canvas.getContext('2d');
                     ctx.clearRect(0, 0, this.layers[index].canvas.width, this.layers[index].canvas.height);
@@ -80,7 +81,8 @@ export class MainArea extends React.Component {
     }
     render() {
         let iconType = 'default';
-        switch(this.props.changeMouseType.mouseType) {
+        const { mouseType } = this.props.changeMouseType;
+        switch(mouseType) {
             case "select":
                 iconType = 'crosshair';
                 break;
@@ -105,8 +107,7 @@ export class MainArea extends React.Component {
                                     width={this.getParentSize().width}
                                     height={this.getParentSize().height} />
                     })}
-                    {this.props.changeMouseType.mouseType == 'select' &&
-                     <SelectTool
+                    {mouseType == 'select' && <SelectTool
                         width={this.getParentSize().width}
                         height={this.getParentSize().height} />}
                 </div>

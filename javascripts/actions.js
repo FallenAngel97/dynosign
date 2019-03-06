@@ -43,3 +43,7 @@ export function redoLine(layerNumber) {
 export function undoLine(layerNumber) {
     return {type: 'UNDO_LINE', layerNumber};
 }
+
+export function change_color(color) {
+    return {type: 'CHANGE_COLOR', color};
+}

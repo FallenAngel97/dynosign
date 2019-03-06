@@ -20,9 +20,9 @@ export class DrawingLayer extends React.Component {
         ctx.restore();
         ctx.moveTo(this.prevX, this.prevY);
         ctx.lineTo(this.currX, this.currY);
-        var x = "black",
-        y = 2;
-        ctx.strokeStyle = x;
+        var y = 2;
+        const color = this.props.changeColor.color;
+        ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
         ctx.lineWidth = y;
         ctx.stroke();
         ctx.closePath();
@@ -41,7 +41,8 @@ export class DrawingLayer extends React.Component {
             if (this.dot_flag) {
                 var ctx = this.canvas.getContext('2d');
                 ctx.beginPath();
-                ctx.fillStyle = 'black';
+                const color = this.props.changeColor.color;
+                ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
                 ctx.fillRect(this.currX, this.currY, 2, 2);
                 ctx.closePath();
                 this.dot_flag = false;
