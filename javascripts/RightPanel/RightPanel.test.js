@@ -1,16 +1,5 @@
 import React from "react";
 import {RightPanel, mapDispatchToProps} from "./RightPanel";
-import { configure, shallow, mount} from "enzyme"
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() })
-
-const defaultLayer = {
-    opacity: 100,
-    name: 'New layer',
-    hidden: false,
-    linesArray: []
-}
 
 describe("RightPanel test", () => {
     test("RightPanel can delete layer", () => {

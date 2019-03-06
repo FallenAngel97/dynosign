@@ -1,9 +1,5 @@
 import React from "react";
 import { LeftBar, mapDispatchToProps } from "./LeftBar";
-import { configure, mount, shallow} from "enzyme"
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() })
 
 describe("LeftBar tests", () => {
     test("LeftBar can trigger 'switch mouse type'", () => {

@@ -1,12 +1,5 @@
 import React from "react";
 import {mapDispatchToProps, DrawingLayer} from "./DrawingLayer";
-import { configure, shallow, mount} from "enzyme"
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() })
-HTMLCanvasElement.prototype.toDataURL = () => {
-    return 'canvas-data-url';
-}
 
 describe("DrawingLayer test set", () => {
     test("DrawingLayer can add line", () => {
@@ -23,5 +16,37 @@ describe("DrawingLayer test set", () => {
         const layer = mount(<DrawingLayer />);
         expect(layer).toMatchSnapshot();
         expect(layer.instance().canvas).toBeTruthy();
+    });
+    test("Mouse events working correctly", () => {
+        const spy = jest.spyOn(DrawingLayer.prototype, "findxy");
+        const addLine = jest.fn();
+        const drawingLayer = mount(<DrawingLayer addLine={addLine} changeActiveLayer={{layerNumber: 0}} changeMouseType={{mouseType: 'draw'}} />);
+        drawingLayer.simulate('mousemove', { preventDefault: () => true })
+        expect(spy).toBeCalled();
+        drawingLayer.simulate('mousedown', { preventDefault: () => true })
+        expect(spy).toBeCalled();
+        drawingLayer.simulate('mouseup', { preventDefault: () => true })
+        expect(spy).toBeCalled();
+        drawingLayer.simulate('mouseout', { preventDefault: () => true })
+        expect(spy).toBeCalled();
+    });
+    test("findxy can handle move", () => {
+        const drawingLayer = mount(<DrawingLayer changeActiveLayer={{layerNumber: 0}} changeMouseType={{mouseType: 'draw'}} />);
+        const ev = {
+            clientX: 200,
+            clientY: 200
+        };
+        drawingLayer.instance().flag = true;
+        drawingLayer.instance().findxy('move', ev);
+        expect(drawingLayer.instance().currY).toEqual(200);
+    });
+    test("Do nothing, if not drawing", () => {
+        const drawingLayer = mount(<DrawingLayer changeActiveLayer={{layerNumber: 0}} changeMouseType={{mouseType: 'default'}} />);
+        const ev = {
+            clientX: 200,
+            clientY: 200
+        };
+        drawingLayer.instance().findxy('move', ev);
+        expect(drawingLayer.instance().currY).toEqual(undefined);
     });
 });

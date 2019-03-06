@@ -1,16 +1,5 @@
 import * as actions from "./actions";
 
-const defaultLayer = {
-    opacity: 100,
-    name: 'New layer',
-    hidden: false,
-    linesArray: []
-}
-
-HTMLCanvasElement.prototype.toDataURL = () => {
-    return 'canvas-data-url';
-}
-
 describe("Redux actions testing", () => {
     it('should change mouse type', () => {
         const mouseType = 'select';

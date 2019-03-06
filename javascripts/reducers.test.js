@@ -1,16 +1,5 @@
 import {changeActiveLayer, layersCRUD, changeMouseType, toggleMenuBar} from "./reducers"
 
-const defaultLayer = {
-    opacity: 100,
-    name: 'New layer',
-    hidden: false,
-    linesArray: []
-}
-
-HTMLCanvasElement.prototype.toDataURL = () => {
-    return 'canvas-data-url';
-}
-
 describe("Redux reducers tests. Change Active Layer", () => {
     it("should return default state of active layers", () => {
         expect(changeActiveLayer(undefined, {})).toEqual({

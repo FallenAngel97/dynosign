@@ -1,16 +1,5 @@
 import React from "react";
 import { Layer, mapDispatchToProps } from "./Layer";
-import { configure, shallow, mount} from "enzyme"
-import Adapter from 'enzyme-adapter-react-16';
-
-const defaultLayer = {
-    opacity: 100,
-    name: 'New layer',
-    hidden: false,
-    linesArray: []
-}
-
-configure({ adapter: new Adapter() })
 
 describe("Layer component", () => {
     test("Layer should render properly", () => {

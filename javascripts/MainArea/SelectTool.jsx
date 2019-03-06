@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 
-class SelectTool extends React.Component {
+export class SelectTool extends React.Component {
     constructor(props) {
         super(props);
         this.prevX = 0;
@@ -14,6 +14,7 @@ class SelectTool extends React.Component {
         this.timerMarchingAnts = undefined;
     }
     draw(offsetDash) {
+        if(!this.canvas) return;
         var ctx = this.canvas.getContext('2d');
         ctx.beginPath();
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

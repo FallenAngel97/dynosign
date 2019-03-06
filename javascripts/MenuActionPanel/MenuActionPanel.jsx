@@ -10,7 +10,17 @@ class MenuActionPanel extends React.Component {
     }
     saveFile() {
         const options = {
-            defaultPath: 'file.dsign'
+            defaultPath: 'file.dsign',
+            filters: [{
+                name: 'DynoSign files',
+                extensions: ['dsign']
+            }, {
+                name: 'PNG image',
+                extensions: ['png']
+            }, {
+                name: 'JPEG image',
+                extensions: ['jpeg', 'jpg']
+            }]
         };
         const fileName = dialog.showSaveDialog(null, options);
         const fileContents = {
