@@ -19,21 +19,30 @@ export class DrawingLayer extends React.Component {
         ctx.beginPath();
         ctx.restore();
         const color = this.props.changeColor.color;
-
-        if(this.props.changeMouseType.mouseType == 'draw') {
-            ctx.moveTo(this.prevX, this.prevY);
-            ctx.lineTo(this.currX, this.currY);
-            var y = 2;
-            ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-            ctx.lineWidth = y;
-            ctx.stroke();
-        }
-        else {
-            ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-            const diffX = this.currX - this.prevX;
-            const diffY = this.currY - this.prevY;
-            ctx.fillRect(this.currX - diffX, this.currY - diffY, diffX,diffY)
+        switch(this.props.changeMouseType.mouseType) {
+            case "draw":
+                ctx.moveTo(this.prevX, this.prevY);
+                ctx.lineTo(this.currX, this.currY);
+                var y = 2;
+                ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+                ctx.lineWidth = y;
+                ctx.stroke();
+                break;
+            case "rectangle":
+                ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+                let diffX = this.currX - this.prevX;
+                let diffY = this.currY - this.prevY;
+                ctx.fillRect(this.currX - diffX, this.currY - diffY, diffX,diffY)
+                break;
+            case "circle":
+                ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+                diffX = this.currX - this.prevX;
+                diffY = this.currY - this.prevY;
+                ctx.arc(this.currX - diffX, this.currY - diffY, Math.abs(diffX),0, 2*Math.PI)
+                ctx.fill()
+                break;
         }
         ctx.closePath();
     }
@@ -46,7 +55,7 @@ export class DrawingLayer extends React.Component {
             this.currX = e.clientX - this.canvas.offsetLeft;
             this.currY = e.clientY - this.canvas.offsetTop;
             
-            if(this.props.changeMouseType.mouseType == 'rectangle') {
+            if(this.props.changeMouseType.mouseType == 'rectangle' || this.props.changeMouseType.mouseType == 'circle') {
                 this.prevX = this.currX;
                 this.prevY = this.currY;
             }

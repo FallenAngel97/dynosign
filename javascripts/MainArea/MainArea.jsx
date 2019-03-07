@@ -95,6 +95,9 @@ export class MainArea extends React.Component {
             case "circle":
                 iconType = 'crosshair';
                 break;
+            case "rectangle":
+                iconType = 'crosshair';
+                break;
         }
         return (
             <div id='mainArea'>
