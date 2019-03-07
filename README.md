@@ -1,7 +1,7 @@
 # Dynosign
 [![Build Status](https://travis-ci.org/FallenAngel97/dynosign.svg?branch=master)](https://travis-ci.org/FallenAngel97/dynosign)
 
-One of multiple attempts to create Linux UI editors. Written with React and Redux
+Linux UI graphical editor. Written with React and Redux. Currently in development, you need to download source code and build by yourself.
 
 !["Screenshot"](screen.png)
 
