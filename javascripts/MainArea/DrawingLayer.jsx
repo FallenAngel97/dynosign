@@ -18,26 +18,43 @@ export class DrawingLayer extends React.Component {
         var ctx = this.canvas.getContext('2d');
         ctx.beginPath();
         ctx.restore();
-        ctx.moveTo(this.prevX, this.prevY);
-        ctx.lineTo(this.currX, this.currY);
-        var y = 2;
         const color = this.props.changeColor.color;
-        ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-        ctx.lineWidth = y;
-        ctx.stroke();
+
+        if(this.props.changeMouseType.mouseType == 'draw') {
+            ctx.moveTo(this.prevX, this.prevY);
+            ctx.lineTo(this.currX, this.currY);
+            var y = 2;
+            ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+            ctx.lineWidth = y;
+            ctx.stroke();
+        }
+        else {
+            ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+            const diffX = this.currX - this.prevX;
+            const diffY = this.currY - this.prevY;
+            ctx.fillRect(this.currX - diffX, this.currY - diffY, diffX,diffY)
+        }
         ctx.closePath();
     }
     findxy(res, e) {
-        if(!/draw|circle/.test(this.props.changeMouseType.mouseType)) return;
+        if(!/draw|circle|rectangle/.test(this.props.changeMouseType.mouseType)) return;
         if (res == 'down') {
             this.prevX = this.currX;
             this.prevY = this.currY;
 
             this.currX = e.clientX - this.canvas.offsetLeft;
             this.currY = e.clientY - this.canvas.offsetTop;
+            
+            if(this.props.changeMouseType.mouseType == 'rectangle') {
+                this.prevX = this.currX;
+                this.prevY = this.currY;
+            }
 
             this.flag = true;
-            this.dot_flag = true;
+            if (this.props.changeMouseType.mouseType == 'default') {
+                this.dot_flag = true;
+            }
             if (this.dot_flag) {
                 var ctx = this.canvas.getContext('2d');
                 ctx.beginPath();
@@ -58,8 +75,10 @@ export class DrawingLayer extends React.Component {
         
         if (res == 'move') {
             if (this.flag) {
-                this.prevX = this.currX;
-                this.prevY = this.currY;
+                if(this.props.changeMouseType.mouseType == 'draw') {
+                    this.prevX = this.currX;
+                    this.prevY = this.currY;
+                }
                 this.currX = e.clientX - this.canvas.offsetLeft;
                 this.currY = e.clientY - this.canvas.offsetTop;
                 this.draw();

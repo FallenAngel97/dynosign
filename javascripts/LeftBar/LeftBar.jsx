@@ -4,6 +4,7 @@ import select_tool from "./select_tool.svg"
 import text_tool from "./text_tool.svg";
 import draw_tool from "./draw_tool.svg";
 import circle_tool from "./circle_tool.svg"
+import rect_tool from "./rect_tool.svg"
 import "./LeftBar.scss";
 import { connect } from 'react-redux'
 import {changeMouseType, change_color} from "../actions";
@@ -57,6 +58,9 @@ export class LeftBar extends Component {
             case "circle":
                 index = 4;
                 break;
+            case "rectangle":
+                index = 5;
+                break;
         }
         const color = this.props.changeColor.color;
         return(
@@ -76,7 +80,10 @@ export class LeftBar extends Component {
                 <div title="Circle tool" className={"buttonWrapper" + ((index==4) ?' activeLeftButton':'')}>
                     <img onClick={() => this.changeCursor('circle')} src={circle_tool} className='toolsLeftPanel' />   
                 </div>
-                <div onClick={this.showColor} className='color_small_indicator'>
+                 <div title="Rectangle tool" className={"buttonWrapper" + ((index==5) ?' activeLeftButton':'')}>
+                    <img onClick={() => this.changeCursor('rectangle')} src={rect_tool} className='toolsLeftPanel' />   
+                </div>
+               <div onClick={this.showColor} className='color_small_indicator'>
                     <div style={{background: `rgba(${color.r},${color.g},${color.b},${color.a})`}}  />
                 </div>
                 {this.state.displayColorPicker && <SketchPicker ref={node=>this.colorPicker=node} onChange={this.colorChange} color={color} className="color_picker_dynosign" />}
