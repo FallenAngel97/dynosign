@@ -13,6 +13,7 @@ export class DrawingLayer extends React.Component {
         this.flag = false;
         this.findxy = this.findxy.bind(this);
         this.draw = this.draw.bind(this);
+        this.ctrlPressed = false;
     }
     draw() {
         var ctx = this.canvas.getContext('2d');
@@ -21,8 +22,13 @@ export class DrawingLayer extends React.Component {
         const color = this.props.changeColor.color;
         switch(this.props.changeMouseType.mouseType) {
             case "draw":
-                ctx.moveTo(this.prevX, this.prevY);
-                ctx.lineTo(this.currX, this.currY);
+                if(this.ctrlPressed) {
+                    ctx.moveTo(this.prevX, this.prevY);
+                    ctx.lineTo(this.prevX, this.currY);
+                } else {
+                    ctx.moveTo(this.prevX, this.prevY);
+                    ctx.lineTo(this.currX, this.currY);
+                }
                 var y = 2;
                 ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
                 ctx.lineWidth = y;
@@ -48,14 +54,19 @@ export class DrawingLayer extends React.Component {
     }
     findxy(res, e) {
         if(!/draw|circle|rectangle/.test(this.props.changeMouseType.mouseType)) return;
+        this.ctrlPressed = false;
+        if(e.ctrlKey) {
+            this.ctrlPressed = true;
+        }
         if (res == 'down') {
             this.prevX = this.currX;
+            console.log(true)
             this.prevY = this.currY;
 
             this.currX = e.clientX - this.canvas.offsetLeft;
             this.currY = e.clientY - this.canvas.offsetTop;
             
-            if(this.props.changeMouseType.mouseType == 'rectangle' || this.props.changeMouseType.mouseType == 'circle') {
+            if(this.props.changeMouseType.mouseType == 'rectangle' || this.props.changeMouseType.mouseType == 'circle' || this.ctrlPressed) {
                 this.prevX = this.currX;
                 this.prevY = this.currY;
             }
@@ -85,7 +96,8 @@ export class DrawingLayer extends React.Component {
         if (res == 'move') {
             if (this.flag) {
                 if(this.props.changeMouseType.mouseType == 'draw') {
-                    this.prevX = this.currX;
+                    if(!this.ctrlPressed)
+                        this.prevX = this.currX;
                     this.prevY = this.currY;
                 }
                 this.currX = e.clientX - this.canvas.offsetLeft;

@@ -26,7 +26,6 @@ export class SelectTool extends React.Component {
         if(this.flag){
             ctx.fillText(Math.abs(diffX) + "px", this.prevX + diffX/2, this.prevY - 10)
             ctx.fillText(Math.abs(diffY) + "px", this.prevX - 40, this.prevY + diffY / 2)
-
         }
         clearTimeout(this.timerMarchingAnts)
         this.timerMarchingAnts = setTimeout(()=> {
