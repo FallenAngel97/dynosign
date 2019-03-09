@@ -14,6 +14,7 @@ export class DrawingLayer extends React.Component {
         this.findxy = this.findxy.bind(this);
         this.draw = this.draw.bind(this);
         this.ctrlPressed = false;
+        this.dot_was_drawn = false;
     }
     draw() {
         var ctx = this.canvas.getContext('2d');
@@ -60,7 +61,6 @@ export class DrawingLayer extends React.Component {
         }
         if (res == 'down') {
             this.prevX = this.currX;
-            console.log(true)
             this.prevY = this.currY;
 
             this.currX = e.clientX - this.canvas.offsetLeft;
@@ -72,16 +72,24 @@ export class DrawingLayer extends React.Component {
             }
 
             this.flag = true;
-            if (this.props.changeMouseType.mouseType == 'default') {
+            if (this.props.changeMouseType.mouseType == 'draw') {
+                this.dot_was_drawn = true;
                 this.dot_flag = true;
             }
             if (this.dot_flag) {
                 var ctx = this.canvas.getContext('2d');
                 ctx.beginPath();
                 const color = this.props.changeColor.color;
-                ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-                ctx.fillRect(this.currX, this.currY, 2, 2);
-                ctx.closePath();
+                if(e.shiftKey) {
+                    ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+                    ctx.moveTo(this.prevX, this.prevY);    
+                    ctx.lineTo(this.currX, this.currY);    
+                    ctx.stroke();
+                } else {
+                    ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+                    ctx.fillRect(this.currX, this.currY, 2, 2);
+                    ctx.closePath();
+                }
                 this.dot_flag = false;
             }
         }
@@ -95,6 +103,7 @@ export class DrawingLayer extends React.Component {
         
         if (res == 'move') {
             if (this.flag) {
+                this.dot_was_drawn = false;
                 if(this.props.changeMouseType.mouseType == 'draw') {
                     if(!this.ctrlPressed)
                         this.prevX = this.currX;

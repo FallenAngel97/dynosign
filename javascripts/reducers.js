@@ -91,7 +91,7 @@ export function toggleMenuBar(state={type: 'TOGGLE_MENU_BAR', menuBarVisible: fa
     return state;
 }
 
-const color = {
+export const color = {
     r: '241',
     g: '112',
     b: '19',

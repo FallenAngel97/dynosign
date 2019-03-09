@@ -69,4 +69,10 @@ describe("Redux actions testing", () => {
         const expectedAction = {type: 'UNDO_LINE', layerNumber};
         expect(actions.undoLine(layerNumber)).toEqual(expectedAction);
     });
+    it("should change color", () => {
+        const color = '#f00';
+        const expectedAction = {type: 'CHANGE_COLOR', color};
+        expect(actions.change_color(color)).toEqual(expectedAction);
+    });
+
 });

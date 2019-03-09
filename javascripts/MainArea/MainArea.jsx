@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {addLine, redoLine} from "../actions";
 import DrawingLayer from "./DrawingLayer";
 import SelectTool from "./SelectTool";
+import TextTool from "./TextTool";
 
 export class MainArea extends React.Component {
     constructor(props) {
@@ -113,6 +114,7 @@ export class MainArea extends React.Component {
                     {mouseType == 'select' && <SelectTool
                         width={this.getParentSize().width}
                         height={this.getParentSize().height} />}
+                    {mouseType == 'text' && <TextTool />}
                 </div>
             </div>
         )

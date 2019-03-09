@@ -1,4 +1,7 @@
-import {changeActiveLayer, layersCRUD, changeMouseType, toggleMenuBar} from "./reducers"
+import {
+    changeActiveLayer, layersCRUD, changeMouseType,
+    toggleMenuBar, changeColor, color
+} from "./reducers"
 
 describe("Redux reducers tests. Change Active Layer", () => {
     it("should return default state of active layers", () => {
@@ -120,3 +123,19 @@ describe("Redux reducers test. Changing of action menu's", () => {
         });
     });
 })
+
+describe("Redux reducers test. Changinf of colors", () => {
+    it("should handle CHANGE_COLOR", () => {
+        const custColor = {
+            r: '200',
+            g: '200',
+            b: '200',
+            a: 1
+        }
+        const state={type: 'CHANGE_COLOR', color};
+        const action = {
+            type: 'CHANGE_COLOR', color: custColor
+        };
+        expect(changeColor(state, action)).toEqual(action)    
+    })
+});
