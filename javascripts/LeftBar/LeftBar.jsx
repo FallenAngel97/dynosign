@@ -7,7 +7,7 @@ import circle_tool from "./circle_tool.svg"
 import rect_tool from "./rect_tool.svg"
 import "./LeftBar.scss";
 import { connect } from 'react-redux'
-import {changeMouseType, change_color} from "../actions";
+import {changeMouseType, changeColor} from "../actions";
 import {SketchPicker} from "react-color"
 import ReactDOM from "react-dom";
 
@@ -97,7 +97,7 @@ const mapStateToProps = (state) => state;
 export const mapDispatchToProps = (dispatch) => {
     return {
         _changeMouseType: mouseType => dispatch(changeMouseType(mouseType)),
-        change_color: color => dispatch(change_color(color))
+        change_color: color => dispatch(changeColor(color))
     }
 } 
 

@@ -2,6 +2,20 @@ import React from "react";
 import {connect} from "react-redux";
 import {addLine} from "../actions";
 
+class Shape {
+  constructor(x,y,w,h,fill) {
+    this.x = x || 0;
+    this.y = y || 0;
+    this.w = w || 0;
+    this.h = h || 0;
+    this.fill = fill || '#000';
+  }
+  contains(clientX, clientY, canvas) {
+    return (this.x <= clientX && this.x + this.w >= clientX) &&
+      (this.y <= clientY && this.y + this.h >= clientY);
+  }
+}
+
 export class DrawingLayer extends React.Component {
     constructor(props) {
         super(props);
@@ -15,6 +29,8 @@ export class DrawingLayer extends React.Component {
         this.draw = this.draw.bind(this);
         this.ctrlPressed = false;
         this.dot_was_drawn = false;
+        this.moveShape = this.moveShape.bind(this);
+        this.shapes = [];
     }
     draw() {
         var ctx = this.canvas.getContext('2d');
@@ -50,13 +66,53 @@ export class DrawingLayer extends React.Component {
                 ctx.arc(this.currX - diffX, this.currY - diffY, Math.abs(diffX),0, 2*Math.PI)
                 ctx.fill()
                 break;
+            case "default":
+              ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+              this.shapes.map((shape) => {
+                ctx.fillStyle = shape.fill;
+                ctx.fillRect(shape.x, shape.y, shape.w, shape.h);
+              });
+              break;
         }
         ctx.closePath();
     }
+    moveShape(res, e) {
+      if(res == 'down') {
+        this.prevX = this.currX;
+        this.prevY = this.currY;
+
+        this.currX = e.clientX - this.canvas.offsetLeft;
+        this.currY = e.clientY - this.canvas.offsetTop;
+        this.flag = true;
+      }
+      if(res == 'up') {
+        this.flag = false;
+      }
+      if(res == 'move') {
+        if(this.flag) {
+          this.prevX = this.currX;
+          this.prevY = this.currY;
+          this.currX = e.clientX - this.canvas.offsetLeft;
+          this.currY = e.clientY - this.canvas.offsetTop;
+          const k = this.shapes.length;
+          for(let i = k - 1; i >= 0; i--) {
+            if(this.shapes[i].contains(this.currX, this.currY)) {
+              this.shapes[i].x = this.shapes[i].x + (this.currX - this.prevX);
+              this.shapes[i].y = this.shapes[i].y + (this.currY - this.prevY);
+            }
+          }
+          this.draw();
+        }
+      }
+    }
     findxy(res, e) {
-        if(!/draw|circle|rectangle/.test(this.props.changeMouseType.mouseType)) return;
+        if (this.props.changeMouseType.mouseType === 'default') {
+          this.moveShape(res, e);
+          return;
+        }
+        if (!/draw|circle|rectangle/.test(this.props.changeMouseType.mouseType)) return;
         this.ctrlPressed = false;
-        if(e.ctrlKey) {
+        if (e.ctrlKey) {
             this.ctrlPressed = true;
         }
         if (res == 'down') {
@@ -99,6 +155,12 @@ export class DrawingLayer extends React.Component {
         
         if(res=="up"){
             this.props.addLine(this.canvas, this.props.changeActiveLayer.layerNumber);
+            if(this.props.changeMouseType.mouseType === 'rectangle') {
+                const diffX = this.currX - this.prevX;
+                const diffY = this.currY - this.prevY;
+                var ctx = this.canvas.getContext('2d');
+                this.shapes.push(new Shape(this.currX - diffX, this.currY - diffY, diffX, diffY, ctx.fillStyle));
+            }
         }
         
         if (res == 'move') {

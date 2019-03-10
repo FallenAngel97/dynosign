@@ -1,3 +1,5 @@
+<img height=60 align=left src='templogo.png'>
+
 # Dynosign
 [![Build Status](https://travis-ci.org/FallenAngel97/dynosign.svg?branch=master)](https://travis-ci.org/FallenAngel97/dynosign)
 
