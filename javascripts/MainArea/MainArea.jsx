@@ -1,11 +1,12 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import './MainArea.scss';
 import { connect } from 'react-redux';
-import { redoLine } from '../actions';
+import { redoLine, addLine } from '../actions';
 import DrawingLayer from './DrawingLayer';
 import SelectTool from './SelectTool';
 import TextTool from './TextTool';
+import PropTypes from 'prop-types';
+// import ReactDOM from 'react-dom';
 
 export class MainArea extends React.Component {
   constructor (props) {
@@ -61,22 +62,19 @@ export class MainArea extends React.Component {
       });
 
       // this.layers.map((ref, index)=>{
-      //     //This should somehow handle the opacity
-      //     if(ref) {
-      //         const linesArray = this.props.layersCRUD[index].linesArray;
-      //         if(linesArray.length == 0) return;
-      //         const tmpImageURL = ref.toDataURL()
-      //         const tmpImg = new Image();
-      //         let ctx = ref.getContext('2d');
-      //         tmpImg.onload = () => {
-      //             ctx.save();
-      //             ctx.globalAlpha = this.props.layersCRUD[index].opacity/100;
-      //             ctx.drawImage(tmpImg, 0, 0);
-      //             ctx.restore();
-      //             this.props.addLine(ref, this.props.changeActiveLayer.layerNumber);
-      //         }
-      //         tmpImg.src = tmpImageURL;
-      //     }
+      //    This should somehow handle the opacity
+      //    if(ref) {
+      //      let canvas = ReactDOM.findDOMNode(ref)
+      //      const tmpdata = canvas.toDataURL()
+      //      canvas.style.opacity = this.props.layersCRUD[index].opacity/100
+      //      const tmpImg = new Image();
+      //      let ctx = canvas.getContext('2d');
+      //      tmpImg.onload = () => {
+      //          ctx.drawImage(tmpImg, 0, 0);
+      //          this.props.addLine(canvas, this.props.changeActiveLayer.layerNumber);
+      //      }
+      //      tmpImg.src = tmpdata;
+      //    }
       // });
     }
   }
@@ -121,11 +119,19 @@ export class MainArea extends React.Component {
   }
 }
 
+MainArea.propTypes = {
+  changeMouseType: PropTypes.object,
+  layersCRUD: PropTypes.array,
+  changeActiveLayer: PropTypes.object,
+  redoLine: PropTypes.func
+}
+
 const mapStateToProps = state => state;
 
 export const mapDispatchToProps = dispatch => {
   return {
-    redoLine: (layerNumber) => dispatch(redoLine(layerNumber))
+    redoLine: (layerNumber) => dispatch(redoLine(layerNumber)),
+    addLine: (elem, layerNumber) => dispatch(addLine(elem, layerNumber))
   }
 }
 

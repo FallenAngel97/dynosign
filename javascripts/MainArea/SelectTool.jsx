@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 export class SelectTool extends React.Component {
   constructor (props) {
@@ -64,6 +65,12 @@ export class SelectTool extends React.Component {
       onMouseOut={(e) => this.findxy('out', e)}
       ref={(canvas) => { this.canvas = canvas }} />
   }
+}
+
+SelectTool.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number,
+  changeMouseType: PropTypes.object
 }
 
 const mapStateToProps = state => state;

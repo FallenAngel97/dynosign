@@ -1,5 +1,5 @@
-import React from "react";
-import { LeftBar, mapDispatchToProps } from "./LeftBar";
+import React from 'react';
+import { LeftBar, mapDispatchToProps } from './LeftBar';
 
 describe("LeftBar tests", () => {
     beforeAll(()=> {

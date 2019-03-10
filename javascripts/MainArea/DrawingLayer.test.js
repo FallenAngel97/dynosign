@@ -36,13 +36,13 @@ describe('DrawingLayer test set', () => {
       changeActiveLayer={{ layerNumber: 0 }}
       changeMouseType={{ mouseType: 'draw' }} />);
     drawingLayer.simulate('mousemove', { preventDefault: () => true })
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
     drawingLayer.simulate('mousedown', { preventDefault: () => true })
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
     drawingLayer.simulate('mouseup', { preventDefault: () => true })
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
     drawingLayer.simulate('mouseout', { preventDefault: () => true })
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
   test('findxy can handle move', () => {
     const drawingLayer = mount(<DrawingLayer
