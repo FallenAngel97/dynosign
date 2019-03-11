@@ -8,16 +8,20 @@ export class TextTool extends React.Component {
     this.addText = this.addText.bind(this);
   }
   addText (ev) {
+    const input = document.getElementById('text_tool_input');
+    if (input.contains(ev.target)) return;
     const x = ev.clientX - this.textWrapper.offsetLeft;
     const y = ev.clientY - this.textWrapper.offsetTop;
-    let input = document.createElement('input');
-    input.style.cssText = `position: absolute; left: ${x}px; top: ${y}px`;
-    document.getElementById('text_tool_drawing_area').appendChild(input);
+    input.style.cssText = `display: block; left: ${x}px; top: ${y}px`;
     input.focus()
+  }
+  componentWillUnmount () {
+    // Save text logic
   }
   render () {
     return (
       <div ref={textWrapper => { this.textWrapper = textWrapper }} onClick={this.addText} id='text_tool_drawing_area'>
+        <input id='text_tool_input' type='text' />
       </div>
     )
   };

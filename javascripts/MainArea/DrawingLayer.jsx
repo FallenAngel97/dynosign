@@ -3,20 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addLine } from '../actions';
 import PropTypes from 'prop-types';
-
-class Shape {
-  constructor (x, y, w, h, fill) {
-    this.x = x || 0;
-    this.y = y || 0;
-    this.w = w || 0;
-    this.h = h || 0;
-    this.fill = fill || '#000';
-  }
-  contains (clientX, clientY) {
-    return (this.x <= clientX && this.x + this.w >= clientX) &&
-      (this.y <= clientY && this.y + this.h >= clientY);
-  }
-}
+import { Shape } from './Shape';
 
 export class DrawingLayer extends React.Component {
   constructor (props) {
@@ -29,6 +16,7 @@ export class DrawingLayer extends React.Component {
     this.flag = false;
     this.findxy = this.findxy.bind(this);
     this.draw = this.draw.bind(this);
+    this.pasteToCanvas = this.pasteToCanvas.bind(this);
     this.ctrlPressed = false;
     this.dotWasDrawn = false;
     this.moveShape = this.moveShape.bind(this);
@@ -55,6 +43,10 @@ export class DrawingLayer extends React.Component {
         break;
       case 'rectangle':
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.shapes.map((shape) => {
+          ctx.fillStyle = shape.fill;
+          ctx.fillRect(shape.x, shape.y, shape.w, shape.h);
+        });
         ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
         let diffX = this.currX - this.prevX;
         let diffY = this.currY - this.prevY;
@@ -106,6 +98,10 @@ export class DrawingLayer extends React.Component {
         this.draw();
       }
     }
+  }
+  pasteToCanvas (e) {
+    var items = e.clipboardData.items;
+    console.log(items)
   }
   findxy (res, e) {
     if (this.props.changeMouseType.mouseType === 'default') {
@@ -189,6 +185,7 @@ export class DrawingLayer extends React.Component {
         onMouseDown={(e) => this.findxy('down', e)}
         onMouseUp={(e) => this.findxy('up', e)}
         onMouseOut={(e) => this.findxy('out', e)}
+        onPaste={(e) => this.pasteToCanvas(e)}
         ref={(canvas) => { this.canvas = canvas }} />
     )
   }
