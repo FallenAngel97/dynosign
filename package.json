@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "NODE_ENV=development electron .",
     "watch": "webpack-dev-server --hot --inline --config webpack.dev.js",
     "test": "jest",
     "test:watch": "jest --watch",

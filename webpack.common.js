@@ -1,5 +1,5 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   output: {
@@ -37,11 +37,9 @@ module.exports = {
         ]
       }]
   },
-  target: 'electron-renderer'
+  target: 'electron-renderer',
   // Need to implement this somehow :(
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     filename: './dist/index.html'
-  //   })
-  // ]
+  plugins: [
+    new HtmlWebpackPlugin()
+  ]
 }

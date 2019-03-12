@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 const { ipcMain, app, BrowserWindow } = require('electron');
 const fs = require('fs');
 
@@ -5,7 +6,10 @@ let win;
 
 function createWindow () {
   win = new BrowserWindow({ width: 800, height: 600, frame: false });
-  win.loadFile('index.html');
+  if (process.env.NODE_ENV === 'development')
+    win.loadURL('http://localhost:8080/dist/index.html');
+  else
+    win.loadFile('index.html');
   win.webContents.openDevTools();
   win.on('closed', () => {
     win = null

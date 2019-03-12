@@ -2,17 +2,16 @@
     --height-of-top-bar: 30px;
 }
 
-#content {
+body, html {
+    width: 100%;
+    margin:0;
+    padding: 0;
     display: flex;
     user-select:none;
     height: 100%;
-}
-body, html {
-    height: 100%;
-    margin:0;
-    padding: 0;
     background: #fff5eb;
 }
+
 #programContainer {
     display: grid;
     grid-template-columns: 43px auto 200px;
