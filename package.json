@@ -1,14 +1,19 @@
 {
   "name": "dynosign",
   "version": "1.0.0",
-  "description": "",
+  "author": {
+    "name": "F97A"
+  },
+  "description": "Crossplatform UI/UX tool",
   "main": "main.js",
   "scripts": {
     "start": "NODE_ENV=development electron .",
     "watch": "webpack-dev-server --hot --inline --config webpack.dev.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "jest": {
     "setupFiles": [
@@ -40,6 +45,7 @@
     "babel-loader": "8.0.4",
     "css-loader": "1.0.1",
     "electron": "^3.1.6",
+    "electron-builder": "^20.39.0",
     "electron-packager": "13.0.0",
     "electron-rebuild": "1.8.2",
     "enzyme": "^3.9.0",
@@ -55,6 +61,7 @@
     "file-loader": "^2.0.0",
     "jest": "^24.3.1",
     "jest-canvas-mock": "^2.0.0-beta.1",
+    "mini-css-extract-plugin": "^0.5.0",
     "node-libs-browser": "2.1.0",
     "node-sass": "^4.11.0",
     "react-hot-loader": "^4.8.0",
@@ -74,5 +81,24 @@
     "react-color": "^2.17.0",
     "react-dom": "^16.8.4",
     "redux": "^4.0.1"
+  },
+  "build": {
+    "appId": "dynosign",
+    "mac": {
+      "category": "public.app-category.photography"
+    },
+    "linux": {
+      "category": "Graphics"
+    },
+    "files": [
+      "index.html",
+      "main.js",
+      "package.json",
+      "package-lock.json",
+      "dist/*.svg",
+      "dist/*.png",
+      "dist/bundle.js",
+      "dist/*.otf"
+    ]
   }
 }

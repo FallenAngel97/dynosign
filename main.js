@@ -6,11 +6,11 @@ let win;
 
 function createWindow () {
   win = new BrowserWindow({ width: 800, height: 600, frame: false });
-  if (process.env.NODE_ENV === 'development')
+  if (process.env.NODE_ENV === 'development') {
     win.loadURL('http://localhost:8080/dist/index.html');
-  else
+    win.webContents.openDevTools();
+  } else
     win.loadFile('index.html');
-  win.webContents.openDevTools();
   win.on('closed', () => {
     win = null
   })
