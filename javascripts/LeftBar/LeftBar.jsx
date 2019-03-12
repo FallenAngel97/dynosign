@@ -39,7 +39,7 @@ export class LeftBar extends Component {
     this.setState({ displayColorPicker: true });
   }
   colorChange (color) {
-    this.props.change_color(color.rgb)
+    this.props._changeColor(color.rgb)
   };
   changeCursor (type) {
     this.props._changeMouseType(type);
@@ -96,7 +96,7 @@ export class LeftBar extends Component {
 LeftBar.propTypes = {
   changeColor: PropTypes.object,
   changeMouseType: PropTypes.object,
-  change_color: PropTypes.func,
+  _changeColor: PropTypes.func,
   _changeMouseType: PropTypes.func
 }
 
@@ -105,7 +105,7 @@ const mapStateToProps = (state) => state;
 export const mapDispatchToProps = (dispatch) => {
   return {
     _changeMouseType: mouseType => dispatch(changeMouseType(mouseType)),
-    change_color: color => dispatch(changeColor(color))
+    _changeColor: color => dispatch(changeColor(color))
   }
 }
 
