@@ -3,16 +3,35 @@ node_js:
   - 11.6.0
 cache: npm
 
+before_install:
+  #install rvm 2.2
+  - rvm install 2.2
+  #use rvm 2.2
+  - rvm use 2.2
+  #install gems through bundler
+  - gem install bundler 
+  #if gems are missing this script will get the missing gems.
+  - cd gh-pages && bundle check || bundle install 
+
 script: 
   - npm test
   - npm run build
   - npm run dist
+  - cd gh-pages && jekyll build 
 
 deploy:
-  provider: releases
-  skip-cleanup: true
-  file: dist/dynosign*.AppImage
-  github-token: $GITHUB_TOKEN
-  api_key: $GITHUB_TOKEN
-  on:
-    tags: true
+  - provider: releases
+    skip-cleanup: true
+    file: dist/dynosign*.AppImage
+    github-token: $GITHUB_TOKEN
+    api_key: $GITHUB_TOKEN
+    on:
+      tags: true
+
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    api_key: $GITHUB_TOKEN
+    local_dir: _site
+    on:
+      branch: master
