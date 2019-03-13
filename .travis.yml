@@ -15,6 +15,7 @@ script:
   - npm run build
   - npm run dist
   - cd gh-pages && jekyll build 
+  - npm ci
 
 deploy:
   - provider: releases
