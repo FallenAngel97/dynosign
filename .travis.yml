@@ -4,11 +4,8 @@ node_js:
 cache: npm
 
 before_install:
-  #install rvm 2.2
-  - rvm install 2.2
-  #use rvm 2.2
-  - rvm use 2.2
-  #install gems through bundler
+  - rvm install 2.6
+  - rvm use 2.6
   - gem install bundler 
   #if gems are missing this script will get the missing gems.
   - cd gh-pages && bundle check || bundle install 
