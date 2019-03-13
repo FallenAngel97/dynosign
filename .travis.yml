@@ -9,13 +9,13 @@ before_install:
   - gem install bundler 
   #if gems are missing this script will get the missing gems.
   - cd gh-pages && bundle check || bundle install 
+  - npm ci
 
 script: 
   - npm test
   - npm run build
   - npm run dist
   - cd gh-pages && jekyll build 
-  - npm ci
 
 deploy:
   - provider: releases
