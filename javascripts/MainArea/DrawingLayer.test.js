@@ -2,7 +2,7 @@
 /* global beforeAll describe test expect mount jest color */
 import React from 'react';
 import { mapDispatchToProps, DrawingLayer } from './DrawingLayer';
-
+window.devicePixelRatio = 1;
 describe('DrawingLayer test set', () => {
   beforeAll(() => {
     global.color = {
@@ -23,7 +23,7 @@ describe('DrawingLayer test set', () => {
     expect(dispatch.mock.calls[0][0]).toEqual(expectedAction);
   });
   test('DrawingLayer renders properly', () => {
-    const layer = mount(<DrawingLayer changeColor={{ color }} />);
+    const layer = mount(<DrawingLayer width={1} height={1} changeColor={{ color }} />);
     expect(layer).toMatchSnapshot();
     expect(layer.instance().canvas).toBeTruthy();
   });
@@ -31,6 +31,7 @@ describe('DrawingLayer test set', () => {
     const spy = jest.spyOn(DrawingLayer.prototype, 'findxy');
     const addLine = jest.fn();
     const drawingLayer = mount(<DrawingLayer
+      width={1} height={1}
       changeColor={{ color }}
       addLine={ addLine }
       changeActiveLayer={{ layerNumber: 0 }}
@@ -46,6 +47,7 @@ describe('DrawingLayer test set', () => {
   });
   test('findxy can handle move', () => {
     const drawingLayer = mount(<DrawingLayer
+      width={1} height={1}
       changeColor={{ color }}
       changeActiveLayer={{ layerNumber: 0 }}
       changeMouseType={{ mouseType: 'draw' }} />);
@@ -59,6 +61,7 @@ describe('DrawingLayer test set', () => {
   });
   test('Do nothing, if not drawing', () => {
     const drawingLayer = mount(<DrawingLayer
+      width={1} height={1}
       changeColor={{ color }}
       changeActiveLayer={{ layerNumber: 0 }}
       changeMouseType={{ mouseType: 'default' }} />);

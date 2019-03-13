@@ -178,8 +178,8 @@ export class DrawingLayer extends React.Component {
   render () {
     return (
       <canvas className='canvaslayer'
-        width={this.props.width}
-        height={this.props.height}
+        width={this.props.width * window.devicePixelRatio}
+        height={this.props.height * window.devicePixelRatio}
         style={{ width: this.props.width, height: this.props.height }}
         onMouseMove={(e) => this.findxy('move', e)}
         onMouseDown={(e) => this.findxy('down', e)}

@@ -21,10 +21,11 @@ This project is meant to be dead simple both to end users and developers. A lot 
 
 First of all, you will need a Node.JS and NPM. I'm using Arch Linux distro, but you can try on any supported by Node. 
 
-- Run `npm i` to install dependencies from package.json
-- In first terminal window type `npm run watch` to launch webpack server
-- In second terminal type `npm start` to launch an Electron application
-- (Optional) type `npm test` or `npm run test:watch` to run unit tests (Jest)
+| Build          | Develop       |
+|----------------|---------------|
+|`npm i`         |`npm i`        |
+|`npm run build` |`npm run watch`|
+|`npx electron .`|`npm start`    |
 
 ## Light demo
 

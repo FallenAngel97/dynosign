@@ -1,0 +1,85 @@
+---
+---
+
+@import "fonts";
+
+body {
+    background: #fff7e9;
+}
+#logo_left {
+    height: 50px;
+}
+aside {
+    float:left;
+}
+#logo_name {
+    font-family: 'PT Sans';
+    font-weight: 100;
+    font-size: 38px;
+    display: inline-block;
+    color: #4a4a4a;
+    position: relative;
+    vertical-align: top;
+    &:after {
+        content: '';
+        position: absolute;
+        left: -5px;
+        width: calc(100% + 10px);
+        height: 1px;
+        background: #4a4a4a;
+        bottom: 0px;
+    }
+}
+#tooltip_main {
+    font-style: italic;
+    font-size: 12px;
+    margin-left: 42px;
+    margin-bottom: 10px;
+}
+#gh-stars-block {
+    background: rgba(0,0,0,.07);
+    padding-left: 38px;
+    height: 38px;
+    padding-top: 7px;
+}
+.navigation_menu {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    font-size: 26px;
+}
+.navigation_link {
+    font-family: 'Franklin Gothic Demi';
+    padding: 2px 0px 2px 0px;
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+}
+.active_link {
+    background: #ffc768;
+    a {
+        color: #fff;
+    }
+}
+
+main {
+    text-align: center;
+}
+
+#project_screen {
+    box-shadow: 0px 0px 20px -7px #000;
+}
+
+#description {
+    font-size: 25px;
+    font-family: 'PT Sans';
+    width: 998px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: 4px solid orange;
+    padding-left: 23px;
+    margin-top: 56px;
+    margin-bottom: 42px;
+}

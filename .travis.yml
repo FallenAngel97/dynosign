@@ -14,4 +14,5 @@ deploy:
   file: dist/dynosign*.AppImage
   github-token: $GITHUB_TOKEN
   api_key: $GITHUB_TOKEN
-  draft: true
+  on:
+    tags: true

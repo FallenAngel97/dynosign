@@ -79,6 +79,8 @@ describe('LeftBar tests', () => {
     expect(leftbar).toMatchSnapshot();
     leftbar = shallow(<LeftBar changeColor={{ color }} changeMouseType={{ mouseType: 'select' }} />);
     expect(leftbar).toMatchSnapshot();
+    leftbar = shallow(<LeftBar changeColor={{ color }} changeMouseType={{ mouseType: 'rectangle' }} />);
+    expect(leftbar).toMatchSnapshot();
     leftbar = mount(<LeftBar changeColor={{ color }} changeMouseType={{ mouseType: 'select' }} />);
     leftbar.setState({ displayColorPicker: true });
     expect(leftbar.instance().colorPicker).toBeTruthy();
