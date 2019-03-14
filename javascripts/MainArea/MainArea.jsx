@@ -16,7 +16,8 @@ export class MainArea extends React.Component {
 
     this.state = {
       width: 0,
-      height: 0
+      height: 0,
+      defaultFont: null
     };
 
     this.layerContainer = React.createRef();
@@ -40,6 +41,7 @@ export class MainArea extends React.Component {
   }
   getFontsNames () {
     const fonts = ipcRenderer.sendSync('getfonts', 'ping');
+    // this.setState({ defaultFont: { value: fonts[0], label: fonts[0].family } });
     return fonts.map((font) => {
       return { value: font, label: font.family };
     });
@@ -115,7 +117,7 @@ export class MainArea extends React.Component {
         <button className="drawAnimateSelector">Draw</button>
         <button className="drawAnimateSelector">Animate</button>
         {mouseType === 'text' && <div id='fontSelector'>
-          <Select options={options} value={null}/>
+          <Select options={options} value={this.state.defaultFont}/>
         </div>}
         <div ref={this.layerContainer} style={{ cursor: iconType }} id='drawingArea' >
           {this.props.layersCRUD.map((layer, index) => {
