@@ -6,7 +6,7 @@ cache: npm
 before_install:
   - rvm install 2.6.0
   - rvm use 2.6.0
-  - gem update --system && gem install bundler -v 2.0.1
+  - gem update --system && gem install bundler -v 2.0.1 --no-rdoc --no-ri
   #if gems are missing this script will get the missing gems.
   - cd gh-pages && bundle check || bundle install && jekyll build 
   - npm ci
@@ -29,6 +29,6 @@ deploy:
     skip-cleanup: true
     github-token: $GITHUB_TOKEN
     api_key: $GITHUB_TOKEN
-    local_dir: _site
+    local_dir: gh-pages/_site
     on:
       branch: master
