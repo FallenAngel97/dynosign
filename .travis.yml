@@ -6,7 +6,7 @@ cache: npm
 before_install:
   - rvm install 2.6.0
   - rvm use 2.6.0
-  - gem install bundler 
+  - gem install bundler -v 2.0.1
   #if gems are missing this script will get the missing gems.
   - cd gh-pages && bundle check || bundle install && jekyll build 
   - npm ci
