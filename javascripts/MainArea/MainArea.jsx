@@ -6,8 +6,7 @@ import DrawingLayer from './DrawingLayer';
 import SelectTool from './SelectTool';
 import TextTool from './TextTool';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
-import { ipcRenderer } from 'electron'
+import FontSettings from './FontSettings';
 // import ReactDOM from 'react-dom';
 
 export class MainArea extends React.Component {
@@ -23,8 +22,6 @@ export class MainArea extends React.Component {
     this.layerContainer = React.createRef();
 
     this.layers = [];
-
-    this.getFontsNames = this.getFontsNames.bind(this);
   }
   componentDidMount () {
     window.addEventListener('keydown', (e) => {
@@ -38,13 +35,6 @@ export class MainArea extends React.Component {
       width: (this.layerContainer.current && this.layerContainer.current.offsetWidth) || 0,
       height: (this.layerContainer.current && this.layerContainer.current.offsetHeight) || 0
     };
-  }
-  getFontsNames () {
-    const fonts = ipcRenderer.sendSync('getfonts', 'ping');
-    // this.setState({ defaultFont: { value: fonts[0], label: fonts[0].family } });
-    return fonts.map((font) => {
-      return { value: font, label: font.family };
-    });
   }
   componentDidUpdate (prevProps) {
     const { layersCRUD } = this.props;
@@ -110,15 +100,11 @@ export class MainArea extends React.Component {
         break;
     }
 
-    const options = this.getFontsNames();
-
     return (
       <div id='mainArea'>
         <button className="drawAnimateSelector">Draw</button>
         <button className="drawAnimateSelector">Animate</button>
-        {mouseType === 'text' && <div id='fontSelector'>
-          <Select options={options} value={this.state.defaultFont}/>
-        </div>}
+        {mouseType === 'text' && <FontSettings />}
         <div ref={this.layerContainer} style={{ cursor: iconType }} id='drawingArea' >
           {this.props.layersCRUD.map((layer, index) => {
             return <DrawingLayer key={index}
