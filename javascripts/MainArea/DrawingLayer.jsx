@@ -24,11 +24,10 @@ export class DrawingLayer extends React.Component {
   }
   draw () {
     var ctx = this.canvas.getContext('2d');
-    ctx.beginPath();
-    ctx.restore();
     const color = this.props.changeColor.color;
     switch (this.props.changeMouseType.mouseType) {
       case 'draw':
+        ctx.beginPath();
         if (this.ctrlPressed) {
           ctx.moveTo(this.prevX, this.prevY);
           ctx.lineTo(this.prevX, this.currY);
@@ -44,8 +43,7 @@ export class DrawingLayer extends React.Component {
       case 'rectangle':
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.shapes.map((shape) => {
-          ctx.fillStyle = shape.fill;
-          ctx.fillRect(shape.x, shape.y, shape.w, shape.h);
+          shape.draw(ctx);
         });
         ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
         let diffX = this.currX - this.prevX;
@@ -54,6 +52,10 @@ export class DrawingLayer extends React.Component {
         break;
       case 'circle':
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.shapes.map((shape) => {
+          shape.draw(ctx);
+        });
+        ctx.beginPath();
         ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
         diffX = this.currX - this.prevX;
         diffY = this.currY - this.prevY;
@@ -63,8 +65,7 @@ export class DrawingLayer extends React.Component {
       case 'default':
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.shapes.map((shape) => {
-          ctx.fillStyle = shape.fill;
-          ctx.fillRect(shape.x, shape.y, shape.w, shape.h);
+          shape.draw(ctx)
         });
         break;
     }
@@ -120,7 +121,7 @@ export class DrawingLayer extends React.Component {
       this.currX = e.clientX - this.canvas.offsetLeft;
       this.currY = e.clientY - this.canvas.offsetTop;
 
-      if (this.props.changeMouseType.mouseType === 'rectangle' || this.props.changeMouseType.mouseType === 'circle' || this.ctrlPressed) {
+      if (/rectangle|circle/.test(this.props.changeMouseType.mouseType) || this.ctrlPressed) {
         this.prevX = this.currX;
         this.prevY = this.currY;
       }
@@ -153,11 +154,15 @@ export class DrawingLayer extends React.Component {
 
     if (res === 'up') {
       this.props.addLine(this.canvas, this.props.changeActiveLayer.layerNumber);
+      const ctx = this.canvas.getContext('2d');
+      const diffX = this.currX - this.prevX;
+      const diffY = this.currY - this.prevY;
       if (this.props.changeMouseType.mouseType === 'rectangle') {
-        const diffX = this.currX - this.prevX;
-        const diffY = this.currY - this.prevY;
-        const ctx = this.canvas.getContext('2d');
         this.shapes.push(new Shape(this.currX - diffX, this.currY - diffY, diffX, diffY, ctx.fillStyle));
+      } else if (this.props.changeMouseType.mouseType === 'circle') {
+        var circle = new Shape(this.currX - diffX, this.currY - diffY, Math.abs(diffX), diffY, ctx.fillStyle);
+        circle.setShape('circle');
+        this.shapes.push(circle);
       }
     }
 

@@ -27,9 +27,17 @@ First of all, you will need a Node.JS and NPM. I'm using Arch Linux distro, but 
 |`npm run build` |`npm run watch`|
 |`npx electron .`|`npm start`    |
 
-## Light demo
+## Working now
 
-!["video"](output.gif)
+|Feature            |Demo                   |
+|-------------------|-----------------------|
+|Selection          |!["video"](output1.gif)|
+|Circle drawing     |!["video"](output2.gif)|
+|Rectangle drawing  |!["video"](output3.gif)|
+|Simple line drawing|!["video"](output4.gif)|
+|Moving objects     |!["video"](output5.gif)|
+|Fonts (text tool)  |!["video"](output6.gif)|
+|Layer manipulation |!["video"](output7.gif)|
 
  # Join the team 
  Do you want to collaborate? Join the project at https://crowdforge.io/projects/552
