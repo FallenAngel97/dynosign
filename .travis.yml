@@ -8,14 +8,13 @@ before_install:
   - rvm use 2.6.0
   - gem install bundler 
   #if gems are missing this script will get the missing gems.
-  - cd gh-pages && bundle check || bundle install 
+  - cd gh-pages && bundle check || bundle install && jekyll build 
   - npm ci
 
 script: 
   - npm test
   - npm run build
   - npm run dist
-  - cd gh-pages && jekyll build 
 
 deploy:
   - provider: releases

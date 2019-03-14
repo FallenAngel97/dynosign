@@ -6,6 +6,8 @@ import DrawingLayer from './DrawingLayer';
 import SelectTool from './SelectTool';
 import TextTool from './TextTool';
 import PropTypes from 'prop-types';
+import Select from 'react-select';
+import { ipcRenderer } from 'electron'
 // import ReactDOM from 'react-dom';
 
 export class MainArea extends React.Component {
@@ -20,6 +22,8 @@ export class MainArea extends React.Component {
     this.layerContainer = React.createRef();
 
     this.layers = [];
+
+    this.getFontsNames = this.getFontsNames.bind(this);
   }
   componentDidMount () {
     window.addEventListener('keydown', (e) => {
@@ -34,7 +38,12 @@ export class MainArea extends React.Component {
       height: (this.layerContainer.current && this.layerContainer.current.offsetHeight) || 0
     };
   }
-
+  getFontsNames () {
+    const fonts = ipcRenderer.sendSync('getfonts', 'ping');
+    return fonts.map((font) => {
+      return { value: font, label: font.family };
+    });
+  }
   componentDidUpdate (prevProps) {
     const { layersCRUD } = this.props;
     if (layersCRUD !== prevProps.layersCRUD) {
@@ -98,10 +107,16 @@ export class MainArea extends React.Component {
         iconType = 'crosshair';
         break;
     }
+
+    const options = this.getFontsNames();
+
     return (
       <div id='mainArea'>
         <button className="drawAnimateSelector">Draw</button>
         <button className="drawAnimateSelector">Animate</button>
+        {mouseType === 'text' && <div id='fontSelector'>
+          <Select options={options} value={null}/>
+        </div>}
         <div ref={this.layerContainer} style={{ cursor: iconType }} id='drawingArea' >
           {this.props.layersCRUD.map((layer, index) => {
             return <DrawingLayer key={index}

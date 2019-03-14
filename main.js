@@ -1,6 +1,7 @@
 /* eslint-disable curly */
 const { ipcMain, app, BrowserWindow } = require('electron');
 const fs = require('fs');
+var fontManager = require('font-manager');
 
 let win;
 
@@ -39,3 +40,8 @@ ipcMain.on('save-message', (event, payload) => {
     console.log(err);
   })
 })
+
+ipcMain.on('getfonts', (event, arg) => {
+  var fonts = fontManager.getAvailableFontsSync();
+  event.returnValue = fonts;
+});
