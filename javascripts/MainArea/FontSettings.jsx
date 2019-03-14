@@ -6,20 +6,23 @@ import { ipcRenderer } from 'electron'
 export default class FontSettings extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {
-      defaultFont: null
-    }
     const fonts = ipcRenderer.sendSync('getfonts', 'ping');
-    // this.setState({ defaultFont: { value: fonts[0], label: fonts[0].family } });
+    this.state = {
+      defaultFont: { defaultFont: { value: fonts[0], label: fonts[0].family } }
+    }
     this.options = fonts.map((font) => {
       return { value: font, label: font.family };
     });
+    this.fontChange = this.fontChange.bind(this)
+  }
+  fontChange (font) {
+    this.setState({ defaultFont: font })
   }
   render () {
     return (
       <>
         <div id='fontSelector'>
-          <Select options={this.options} value={this.state.defaultFont}/>
+          <Select onChange={this.fontChange} options={this.options} value={this.state.defaultFont}/>
         </div>
         <input id='fontSize_picker' defaultValue={10} />
       </>
