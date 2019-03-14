@@ -12,7 +12,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "webpack --config webpack.prod.js",
-    "pack": "electron-rebuild && electron-builder --dir",
+    "pack": "electron-rebuild && electron-builder --dir --publish=release",
     "dist": "electron-builder"
   },
   "jest": {
