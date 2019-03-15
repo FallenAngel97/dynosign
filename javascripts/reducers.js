@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 
-const defaultLayer = {
+export const defaultLayer = {
   opacity: 100,
   name: 'New layer',
   hidden: false,
-  linesArray: []
+  linesArray: [],
+  text: '',
+  shapes: []
 }
 
 export function changeActiveLayer (
@@ -74,6 +76,16 @@ export function layersCRUD (state = [defaultLayer], action) {
         return {
           ...item,
           linesArray: [...item.linesArray.slice(0, item.linesArray.length - 1)]
+        }
+      });
+    case 'ADD_SHAPE':
+      return state.map((item, index)=>{
+        if (index !== action.layerNumber) {
+          return item;
+        }
+        return {
+          ...item,
+          shapes: [...item.shapes, action.shape]
         }
       });
   }

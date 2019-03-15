@@ -15,6 +15,7 @@ script:
   - npm test
   - npm run build
   - npm run dist
+  - cp output*.gif gh-pages/assets/images && cp javascripts/LeftBar/*.svg gh-pages/assets/images
 
 deploy:
   - provider: releases

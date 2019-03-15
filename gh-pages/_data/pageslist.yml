@@ -1,8 +1,24 @@
-- title: Overview
-  url: /
+menu:
+  - title: Overview
+    url: index.html
 
-- title: Features
-  url: features.html
+  - title: Features
+    url: features.html
 
-- title: Documentation
-  url: documentation.html
+  - title: Documentation
+    url: documentation.html
+  
+descriptions:
+  - text: Selection
+    icon: select_tool
+  - text: Circle drawing
+    icon: circle_tool
+  - text: Rectangle drawing
+    icon: rect_tool
+  - text: Simple line drawing
+    icon: draw_tool
+  - text: Moving objects
+    icon: move_tool
+  - text: Fonts (text tool)
+    icon: text_tool
+  - text: Layer manipulation

@@ -108,6 +108,7 @@ export class MainArea extends React.Component {
         <div ref={this.layerContainer} style={{ cursor: iconType }} id='drawingArea' >
           {this.props.layersCRUD.map((layer, index) => {
             return <DrawingLayer key={index}
+              layer={layer}
               ref={_layer => { this.layers[index] = _layer }}
               width={this.getParentSize().width}
               height={this.getParentSize().height} />

@@ -20,7 +20,7 @@ export class DrawingLayer extends React.Component {
     this.ctrlPressed = false;
     this.dotWasDrawn = false;
     this.moveShape = this.moveShape.bind(this);
-    this.shapes = [];
+    this.shapes = this.props.layer.shapes;
   }
   draw () {
     var ctx = this.canvas.getContext('2d');
@@ -202,7 +202,8 @@ DrawingLayer.propTypes = {
   height: PropTypes.number,
   width: PropTypes.number,
   addLine: PropTypes.func,
-  changeActiveLayer: PropTypes.object
+  changeActiveLayer: PropTypes.object,
+  layer: PropTypes.object
 }
 
 const mapStateToProps = state => state;

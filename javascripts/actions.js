@@ -50,3 +50,7 @@ export function undoLine (layerNumber) {
 export function changeColor (color) {
   return { type: 'CHANGE_COLOR', color };
 }
+
+export function addShape (shape, layerNumber) {
+  return { type: 'ADD_SHAPE', shape, layerNumber }
+}
