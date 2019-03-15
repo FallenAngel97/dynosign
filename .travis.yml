@@ -16,6 +16,7 @@ script:
   - npm test
   - npm run build
   - npm run dist
+  - mkdir -p gh-pages/docs && npm run doc
 
 notifications:
   email: false

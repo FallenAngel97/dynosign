@@ -5,6 +5,10 @@ import { addLine } from '../actions';
 import PropTypes from 'prop-types';
 import { Shape } from './Shape';
 
+/**
+ * @module DrawingLayer
+ */
+
 export class DrawingLayer extends React.Component {
   constructor (props) {
     super(props);
@@ -22,6 +26,9 @@ export class DrawingLayer extends React.Component {
     this.moveShape = this.moveShape.bind(this);
     this.shapes = this.props.layer.shapes;
   }
+  /**
+   * Draws in mousemove process
+   */
   draw () {
     var ctx = this.canvas.getContext('2d');
     const color = this.props.changeColor.color;
@@ -71,6 +78,11 @@ export class DrawingLayer extends React.Component {
     }
     ctx.closePath();
   }
+  /**
+   * Moves shapes when moveTool is selected in LeftBar
+   * @param {string} res - Type of event
+   * @param {object} e - mouse object
+   */
   moveShape (res, e) {
     if (res === 'down') {
       this.prevX = this.currX;
@@ -104,6 +116,11 @@ export class DrawingLayer extends React.Component {
     var items = e.clipboardData.items;
     console.log(items)
   }
+  /**
+   * Obtains coordinates of mouse over canvas and type of interaction of mouse
+   * @param {string} res - Type of event
+   * @param {object} e - mouse object
+   */
   findxy (res, e) {
     if (this.props.changeMouseType.mouseType === 'default') {
       this.moveShape(res, e);

@@ -9,6 +9,10 @@ import PropTypes from 'prop-types';
 import FontSettings from './FontSettings';
 // import ReactDOM from 'react-dom';
 
+/**
+ * @module MainArea
+ */
+
 export class MainArea extends React.Component {
   constructor (props) {
     super(props);
@@ -30,6 +34,9 @@ export class MainArea extends React.Component {
       }
     }, false);
   }
+  /**
+   * Sets the canvas size to div size
+   */
   getParentSize () {
     return {
       width: (this.layerContainer.current && this.layerContainer.current.offsetWidth) || 0,

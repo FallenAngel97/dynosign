@@ -13,7 +13,8 @@
     "test:watch": "jest --watch",
     "build": "webpack --config webpack.prod.js",
     "pack": "electron-rebuild && electron-builder --dir --publish=release",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "doc": "documentation build javascripts/** -f md"
   },
   "jest": {
     "setupFiles": [
@@ -45,6 +46,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "8.0.4",
     "css-loader": "1.0.1",
+    "documentation": "^9.3.1",
     "electron": "^4.0.8",
     "electron-builder": "^20.39.0",
     "electron-packager": "13.0.0",

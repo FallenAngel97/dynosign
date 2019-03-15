@@ -4,7 +4,7 @@ title: Dynosign
 ---
 <h2>Demo of program</h2>
 <table id='features_table'>
-    {% for description in site.data.pageslist.descriptions cols:1 %}
+    {% for description in site.data.pageslist.descriptions %}
         <tr>
             <td>
                 {% if description.icon != '' %}

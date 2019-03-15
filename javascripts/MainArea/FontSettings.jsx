@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { ipcRenderer } from 'electron'
 
+/**
+ * @module FontSettings
+ */
 export default class FontSettings extends React.Component {
   constructor (props) {
     super(props);
@@ -15,6 +18,10 @@ export default class FontSettings extends React.Component {
     });
     this.fontChange = this.fontChange.bind(this)
   }
+  /**
+   * Change the font for text
+   * @param {object} font - Font object from OS
+   */
   fontChange (font) {
     this.setState({ defaultFont: font })
   }
