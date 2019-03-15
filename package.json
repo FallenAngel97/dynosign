@@ -87,7 +87,10 @@
   },
   "build": {
     "appId": "dynosign",
-    "releaseType": "release",
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    },
     "mac": {
       "category": "public.app-category.photography"
     },
