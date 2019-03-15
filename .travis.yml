@@ -15,8 +15,8 @@ script:
   - npm test
   - npm run build
   - npm run dist
-  - cd gh-pages && bundle check || bundle install && jekyll build 
   - mkdir -p gh-pages/docs && npm run doc
+  - cd gh-pages && bundle check || bundle install && jekyll build 
 
 notifications:
   email: false
