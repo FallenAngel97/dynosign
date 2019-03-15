@@ -17,6 +17,9 @@ script:
   - npm run build
   - npm run dist
 
+notifications:
+  email: false
+
 deploy:
   - provider: releases
     skip-cleanup: true
