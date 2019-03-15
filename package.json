@@ -14,7 +14,7 @@
     "build": "webpack --config webpack.prod.js",
     "pack": "electron-rebuild && electron-builder --dir --publish=release",
     "dist": "electron-builder",
-    "doc": "documentation build javascripts/** -f md"
+    "doc": "documentation build javascripts/** -f md -o gh-pages/docs/global.md"
   },
   "jest": {
     "setupFiles": [
