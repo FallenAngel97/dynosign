@@ -9,13 +9,13 @@ before_install:
   - gem update --system && gem install bundler -v 2.0.1 --no-document
   #if gems are missing this script will get the missing gems.
   - cp output*.gif gh-pages/assets/images && cp javascripts/LeftBar/*.svg gh-pages/assets/images
-  - cd gh-pages && bundle check || bundle install && jekyll build 
   - npm ci
 
 script: 
   - npm test
   - npm run build
   - npm run dist
+  - cd gh-pages && bundle check || bundle install && jekyll build 
   - mkdir -p gh-pages/docs && npm run doc
 
 notifications:
