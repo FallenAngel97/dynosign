@@ -18,15 +18,23 @@ export class Layer extends React.Component {
     this.changeVisibility = this.changeVisibility.bind(this);
     this.ondragStart = this.ondragStart.bind(this);
     this.dragEnd = this.dragEnd.bind(this);
+    this.ondrop = this.ondrop.bind(this);
+    this.DragOver = this.DragOver.bind(this);
   }
   UNSAFE_componentWillMount () {
     document.addEventListener('mousedown', this.handleClick, false);
   }
-  ondragStart () {
-
+  DragOver (e) {
+    this.props.layerDragOver(e);
+  }
+  ondragStart (e) {
+    this.props.layerDragStart(e);
   }
   dragEnd (e) {
-
+    this.props.layerDragEnd(e);
+  }
+  ondrop (e) {
+    this.props.layerDrop(e);
   }
   componentWillUnmount () {
     document.removeEventListener('mousedown', this.handleClick, false);
@@ -52,8 +60,10 @@ export class Layer extends React.Component {
   }
   render () {
     return (
-      <div onDragStart={this.ondragStart} draggable={true} ref={node => { this.node = node }}
+      <div onDragStart={this.ondragStart} draggable={!this.state.editLayer} ref={node => { this.node = node }}
         onDoubleClick={this.renameLayer}
+        onDrop={this.ondrop}
+        onDragOver={this.DragOver}
         onDragEnd={this.dragEnd}
         className={'singleLayer' + ((this.props.changeActiveLayer.layerNumber === this.props.layerId) ? ' activeLayer' : '')}>
         <img onClick={this.changeVisibility} src={this.props.layer.hidden ? hiddenEye : visibleEye}/>
@@ -69,7 +79,11 @@ Layer.propTypes = {
   layerId: PropTypes.number,
   _changeActiveLayer: PropTypes.func,
   changeActiveLayer: PropTypes.object,
-  changeLayer: PropTypes.func
+  changeLayer: PropTypes.func,
+  layerDragStart: PropTypes.func,
+  layerDragEnd: PropTypes.func,
+  layerDrop: PropTypes.func,
+  layerDragOver: PropTypes.func
 }
 
 const mapStateToProps = state => state;

@@ -78,4 +78,10 @@ describe('Redux actions testing', () => {
     const expectedAction = { type: 'CHANGE_COLOR', color };
     expect(actions.changeColor(color)).toEqual(expectedAction);
   });
+  it('should reorder layers', () => {
+    const oldIndex = 0;
+    const newIndex = 4;
+    const expectedAction = { type: 'REORDER_LAYERS', oldIndex, newIndex };
+    expect(actions.reorderLayers(oldIndex, newIndex)).toEqual(expectedAction);
+  })
 });

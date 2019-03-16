@@ -99,6 +99,10 @@
     "linux": {
       "category": "Graphics"
     },
+    "win": {
+      "title": "Dynosign",
+      "msi": true
+    },
     "files": [
       "index.html",
       "main.js",

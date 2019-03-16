@@ -54,3 +54,7 @@ export function changeColor (color) {
 export function addShape (shape, layerNumber) {
   return { type: 'ADD_SHAPE', shape, layerNumber }
 }
+
+export function reorderLayers (oldIndex, newIndex) {
+  return { type: 'REORDER_LAYERS', oldIndex, newIndex }
+}

@@ -79,7 +79,7 @@ export function layersCRUD (state = [defaultLayer], action) {
         }
       });
     case 'ADD_SHAPE':
-      return state.map((item, index)=>{
+      return state.map((item, index) => {
         if (index !== action.layerNumber) {
           return item;
         }
@@ -88,6 +88,18 @@ export function layersCRUD (state = [defaultLayer], action) {
           shapes: [...item.shapes, action.shape]
         }
       });
+    case 'REORDER_LAYERS':
+      const oIndex = Math.max(action.newIndex, action.oldIndex);
+      const nIndex = Math.min(action.oldIndex, action.newIndex);
+      const firstPart = state.slice(0, nIndex);
+      const secondPart = state.slice(nIndex + 1, oIndex + 1);
+      const thirdPart = state.slice(oIndex + 1, state.length)
+      return [
+        ...firstPart,
+        ...secondPart,
+        state[nIndex],
+        ...thirdPart
+      ]
   }
   return state;
 }

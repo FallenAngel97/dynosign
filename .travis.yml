@@ -3,6 +3,13 @@ node_js:
   - 11.6.0
 cache: npm
 
+matrix:
+  include:
+    - os: linux
+      env: DEPLOY_FILE=dist/dynosign*.AppImage
+    # - os: windows
+    #   env: DEPLOY_FILE=dist/dynosign*.AppImage
+
 before_install:
   - rvm install 2.6.0
   - rvm use 2.6.0
@@ -24,7 +31,7 @@ notifications:
 deploy:
   - provider: releases
     skip-cleanup: true
-    file: dist/dynosign*.AppImage
+    file: $DEPLOY_FILE
     github-token: $GITHUB_TOKEN
     api_key: $GITHUB_TOKEN
     on:
