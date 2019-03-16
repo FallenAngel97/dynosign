@@ -11,8 +11,8 @@ matrix:
       env: DEPLOY_FILE=dist/dynosign Setup*.exe
 
 before_install:
-  - rvm install 2.6.0
-  - rvm use 2.6.0
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rvm install 2.6.0 ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rvm use 2.6.0 ; fi
   - gem update --system && gem install bundler -v 2.0.1 --no-document
   #if gems are missing this script will get the missing gems.
   - cp output*.gif gh-pages/assets/images && cp javascripts/LeftBar/*.svg gh-pages/assets/images
