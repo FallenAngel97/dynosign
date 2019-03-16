@@ -100,8 +100,7 @@
       "category": "Graphics"
     },
     "win": {
-      "title": "Dynosign",
-      "msi": true
+      "target": "msi"
     },
     "files": [
       "index.html",
