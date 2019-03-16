@@ -7,8 +7,8 @@ matrix:
   include:
     - os: linux
       env: DEPLOY_FILE=dist/dynosign*.AppImage
-    # - os: windows
-    #   env: DEPLOY_FILE=dist/dynosign*.AppImage
+    - os: windows
+      env: DEPLOY_FILE=dist/dynosign Setup*.exe
 
 before_install:
   - rvm install 2.6.0
