@@ -14,7 +14,7 @@
     "build": "webpack --config webpack.prod.js",
     "pack": "electron-rebuild && electron-builder --dir",
     "dist": "electron-builder",
-    "doc": "documentation build javascripts/** -f md -o gh-pages/docs/global.md"
+    "doc": "documentation build javascripts/** -f md -o gh-pages/docs/global.md --github"
   },
   "jest": {
     "setupFiles": [
@@ -45,6 +45,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
     "babel-loader": "8.0.4",
+    "closure-webpack-plugin": "^2.0.1",
     "css-loader": "1.0.1",
     "documentation": "^9.3.1",
     "electron": "^4.0.8",
@@ -62,6 +63,7 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-standard": "^4.0.0",
     "file-loader": "^2.0.0",
+    "google-closure-compiler": "^20190301.0.0",
     "jest": "^24.3.1",
     "jest-canvas-mock": "^2.0.0-beta.1",
     "mini-css-extract-plugin": "^0.5.0",

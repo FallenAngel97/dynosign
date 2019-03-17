@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { ipcRenderer } from 'electron'
 
 export const defaultLayer = {
   opacity: 100,
@@ -25,6 +26,8 @@ export function changeActiveLayer (
     case 'DELETE_LAYER':
       let layerNumber = (action.layerId - 1 < 0) ? 0 : action.layerId - 1;
       return Object.assign({}, state, { layerNumber })
+    case 'REORDER_LAYERS':
+      return Object.assign({}, state, { layerNumber: action.newIndex })
   }
   return state;
 }
@@ -119,23 +122,33 @@ export function toggleMenuBar (state = { type: 'TOGGLE_MENU_BAR', menuBarVisible
 }
 
 export const color = {
-    r: '241',
-    g: '112',
-    b: '19',
-    a: '1',
+  r: '241',
+  g: '112',
+  b: '19',
+  a: '1'
 }
 
-export function changeColor(state={type: 'CHANGE_COLOR', color}, action){
-    if(action.type == 'CHANGE_COLOR') {
-        return Object.assign({}, state, { color: action.color })
-    }
-    return state;
+export function changeColor (state = { type: 'CHANGE_COLOR', color }, action) {
+  if (action.type === 'CHANGE_COLOR') {
+    return Object.assign({}, state, { color: action.color })
+  }
+  return state;
+}
+
+const fonts = ipcRenderer.sendSync('getfonts', 'ping');
+
+export function changeFont (state = { type: 'CHANGE_FONT', font: { value: fonts[0], label: fonts[0].family } }, action) {
+  if (action.type === 'CHANGE_FONT') {
+    return Object.assign({}, state, { font: action.font })
+  }
+  return state;
 }
 
 export default combineReducers({
-    changeActiveLayer, 
-    layersCRUD,
-    changeMouseType,
-    toggleMenuBar,
-    changeColor
+  changeActiveLayer,
+  layersCRUD,
+  changeMouseType,
+  toggleMenuBar,
+  changeColor,
+  changeFont
 })

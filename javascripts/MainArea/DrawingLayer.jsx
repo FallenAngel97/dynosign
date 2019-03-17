@@ -118,6 +118,8 @@ export class DrawingLayer extends React.Component {
   }
   /**
    * Obtains coordinates of mouse over canvas and type of interaction of mouse
+   * Hold ctrl to draw straight line
+   * Hold shift and click points to connect points with straight line
    * @param {string} res - Type of event
    * @param {object} e - mouse object
    */

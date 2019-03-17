@@ -58,3 +58,7 @@ export function addShape (shape, layerNumber) {
 export function reorderLayers (oldIndex, newIndex) {
   return { type: 'REORDER_LAYERS', oldIndex, newIndex }
 }
+
+export function changeFonts (font) {
+  return { type: 'CHANGE_FONT', font };
+}

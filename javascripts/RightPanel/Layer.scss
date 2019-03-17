@@ -4,6 +4,14 @@
         width: 159px;
     }
 }
-.singleLayer img {
-    height: 11px;
+.singleLayer{
+    transition: .2s ease-in-out padding;
+    img {
+        height: 11px;
+    }
+}
+.drag_under {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: red;
 }

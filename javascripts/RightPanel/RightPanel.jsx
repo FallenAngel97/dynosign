@@ -29,6 +29,7 @@ export class RightPanel extends React.Component {
   }
   layerDrop (e) {
     if (this.selectedLayer === e.target) return;
+    e.target.className = 'singleLayer';
     const newIndex = [...e.target.parentNode.children].indexOf(e.target);
     const oldIndex = [...this.selectedLayer.parentNode.children].indexOf(this.selectedLayer);
     this.props.reorderLayers(oldIndex, newIndex);
@@ -37,8 +38,13 @@ export class RightPanel extends React.Component {
     if (e.preventDefault) {
       e.preventDefault(); // Necessary. Allows us to drop.
     }
+    if (this.selectedLayer === e.target) return;
+    e.target.className += ' drag_under';
     e.dataTransfer.dropEffect = 'move'; // See the section on the DataTransfer object.
     return false;
+  }
+  layerDragLeave (e) {
+    e.target.className = 'singleLayer';
   }
   changeLayerOpacity (ev) {
     let layer = this.props.changeActiveLayer.layer;
@@ -56,6 +62,7 @@ export class RightPanel extends React.Component {
           {this.props.layersCRUD.map((layer, index) => {
             return <Layer
               key={index} layerId={index}
+              layerDragLeave={this.layerDragLeave}
               layerDragStart={this.layerDragStart}
               layerDragEnd={this.layerDragEnd}
               layerDrop={this.layerDrop}

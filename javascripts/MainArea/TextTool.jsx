@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './TextTool.scss';
+import PropTypes from 'prop-types';
 
 export class TextTool extends React.Component {
   constructor (props) {
@@ -21,10 +22,14 @@ export class TextTool extends React.Component {
   render () {
     return (
       <div ref={textWrapper => { this.textWrapper = textWrapper }} onClick={this.addText} id='text_tool_drawing_area'>
-        <input id='text_tool_input' type='text' />
+        <input style={{ fontFamily: this.props.changeFont.font.label }} id='text_tool_input' type='text' />
       </div>
     )
   };
+}
+
+TextTool.propTypes = {
+  changeFont: PropTypes.object
 }
 
 const mapStateToProps = state => state;
