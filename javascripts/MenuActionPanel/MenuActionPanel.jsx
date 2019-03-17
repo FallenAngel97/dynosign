@@ -6,11 +6,19 @@ import PropTypes from 'prop-types';
 const { dialog } = require('electron').remote;
 const { ipcRenderer } = require('electron');
 
+/**
+ * Block, which shows after click in menu. Modal window, in short
+ * @module MenuActionPanel
+ */
+
 class MenuActionPanel extends React.Component {
   constructor (props) {
     super(props);
     this.saveFile = this.saveFile.bind(this);
   }
+  /**
+   * Calls node.js backend api to save JSON-converted state of program
+   */
   saveFile () {
     const options = {
       defaultPath: 'file.dsign',
@@ -28,7 +36,9 @@ class MenuActionPanel extends React.Component {
     const fileName = dialog.showSaveDialog(null, options);
     const fileContents = {
       fileName,
-      layers: this.props.layersCRUD
+      layers: this.props.layersCRUD,
+      lastUsedFont: this.props.changeFont,
+      lastUsedColor: this.props.changeColor
     };
     if (fileName !== undefined)
       ipcRenderer.send('save-message', fileContents);
@@ -45,7 +55,9 @@ class MenuActionPanel extends React.Component {
 
 MenuActionPanel.propTypes = {
   layersCRUD: PropTypes.array,
-  toggleMenuBar: PropTypes.object
+  toggleMenuBar: PropTypes.object,
+  changeFont: PropTypes.object,
+  changeColor: PropTypes.object
 }
 
 const mapStateToProps = state => state;

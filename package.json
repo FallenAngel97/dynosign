@@ -12,7 +12,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "webpack --config webpack.prod.js",
-    "pack": "electron-rebuild && electron-builder --dir",
+    "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "doc": "documentation build javascripts/** -f md -o gh-pages/docs/global.md --github"
   },
