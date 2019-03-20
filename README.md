@@ -13,20 +13,6 @@ Cross-platfrom UI graphical editor. Written with React and Redux. Currently in d
 - (still concept) Both UI constructing and animations features
 - Layered interface, similar to all modern UI tools
 
-## Why another Electron app?
-
-This project is meant to be dead simple both to end users and developers. A lot of developers know JavaScript. Also, there exist a lot of libraries, which can help to develop application. Based on these facts, Electron is the best way to establish quick and working prototype
-
-## How to build on local machine?
-
-First of all, you will need a Node.JS and NPM. I'm using Arch Linux distro, but you can try on any supported by Node. 
-
-| Build          | Develop       |
-|----------------|---------------|
-|`npm i`         |`npm i`        |
-|`npm run build` |`npm run watch`|
-|`npx electron .`|`npm start`    |
-
 ## Working now
 
 |Feature            |Demo                   |
@@ -38,6 +24,21 @@ First of all, you will need a Node.JS and NPM. I'm using Arch Linux distro, but 
 |Moving objects     |!["video"](output5.gif)|
 |Fonts (text tool)  |!["video"](output6.gif)|
 |Layer manipulation |!["video"](output7.gif)|
+
+## Why another Electron app?
+
+This project is meant to be dead simple both to end users and developers. A lot of developers know JavaScript. Also, there exist a lot of libraries, which can help to develop application. Based on these facts, Electron is the best way to establish quick and working prototype
+
+## How to build on local machine?
+
+First of all, you will need a Node.JS and NPM. I'm using Arch Linux distro, but you can try on any supported by Node. 
+
+| Build          | Develop              |
+|----------------|----------------------|
+|`npm i`         |`npm i`               |
+|`npm run build` |`npm run watch`       |
+|                |`npx electron-rebuild`|
+|`npx electron .`|`npm start`           |
 
  # Join the team 
  Do you want to collaborate? Join the project at https://crowdforge.io/projects/552

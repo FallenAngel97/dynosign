@@ -14,6 +14,10 @@ const FileOptions = (props) => (
   </div>
 );
 
+FileOptions.propTypes = {
+  saveFile: PropTypes.func
+}
+
 const EditOptions = (props) => (
   <div className='menuActionPanel'>
     <span className="menuBarActionButton">Undo</span>

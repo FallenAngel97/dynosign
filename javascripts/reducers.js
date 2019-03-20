@@ -137,6 +137,8 @@ export function changeColor (state = { type: 'CHANGE_COLOR', color }, action) {
 
 const fonts = ipcRenderer.sendSync('getfonts', 'ping');
 
+console.log(fonts);
+
 export function changeFont (state = { type: 'CHANGE_FONT', font: { value: fonts[0], label: fonts[0].family } }, action) {
   if (action.type === 'CHANGE_FONT') {
     return Object.assign({}, state, { font: action.font })

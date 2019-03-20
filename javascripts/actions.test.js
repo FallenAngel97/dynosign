@@ -84,4 +84,19 @@ describe('Redux actions testing', () => {
     const expectedAction = { type: 'REORDER_LAYERS', oldIndex, newIndex };
     expect(actions.reorderLayers(oldIndex, newIndex)).toEqual(expectedAction);
   })
+  it('should add shape', () => {
+    const shape = {
+      type: 'rectangle'
+    }
+    const layerNumber = 1;
+    const expectedAction = { type: 'ADD_SHAPE', shape, layerNumber };
+    expect(actions.addShape(shape, layerNumber)).toEqual(expectedAction);
+  });
+  it('should change font', () => {
+    const font = {
+      type: 'Helvetica'
+    }
+    const expectedAction = { type: 'CHANGE_FONT', font };
+    expect(actions.changeFonts(font)).toEqual(expectedAction);
+  })
 });
