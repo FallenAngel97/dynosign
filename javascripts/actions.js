@@ -27,8 +27,8 @@ export function changeLayer (layer, layerId) {
   return { type: 'CHANGE_LAYER', layer, layerId }
 }
 
-export function toggleMenuBar (menuBarVisible) {
-  return { type: 'TOGGLE_MENU_BAR', menuBarVisible }
+export function toggleMenuBar (menuBarNumber) {
+  return { type: 'TOGGLE_MENU_BAR', menuBarNumber }
 }
 
 export function changeLayerVisibility (hidden, layerNumber) {

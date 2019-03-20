@@ -3,11 +3,13 @@
     z-index: 1;
     top: 30px;
     left: 10px;
-    background: #f5e9d4;
-    visibility: hidden;
+    background: #e6e6e6;
+    box-shadow: 2px 2px 1px 0px rgba(0,0,0,.15);
 }
 .menuBarActionButton {
     cursor: pointer;
     padding: 2px;
     display:block;
+    padding-left: 14px;
+    padding-right: 14px;
 }

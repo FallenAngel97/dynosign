@@ -14,17 +14,22 @@ header {
 nav {
     display:inline-block;
     margin-left: 10px;
-    margin-top: 7px;
     user-select: none;
-    span {
+    div {
         cursor: pointer;
         padding: 0 6px; 
+        display: inline-block;
         -webkit-app-region: no-drag;
         transition: .2s ease-in-out color;
+        padding-top: 7px;
+        padding-bottom: 7px;
         &:hover {
-            color: brown;
+            color: #fff;
         }
     }
+}
+.activeMenuBar {
+    background: rgba(0,0,0,.1);
 }
 #title {
     display: inline-block;

@@ -6,6 +6,22 @@ import PropTypes from 'prop-types';
 const { dialog } = require('electron').remote;
 const { ipcRenderer } = require('electron');
 
+const FileOptions = (props) => (
+  <div className='menuActionPanel'>
+    <span onClick={props.saveFile} className="menuBarActionButton">Save</span>
+    <span className="menuBarActionButton">Open</span>
+    <span className='menuBarActionButton'>Quit</span>
+  </div>
+);
+
+const EditOptions = (props) => (
+  <div className='menuActionPanel'>
+    <span className="menuBarActionButton">Undo</span>
+    <span className='menuBarActionButton'>Redo</span>
+    <span className="menuBarActionButton">Preferences</span>
+  </div>
+);
+
 /**
  * Block, which shows after click in menu. Modal window, in short
  * @module MenuActionPanel
@@ -44,12 +60,14 @@ class MenuActionPanel extends React.Component {
       ipcRenderer.send('save-message', fileContents);
   }
   render () {
-    return (
-      <div style={{ visibility: this.props.toggleMenuBar.menuBarVisible ? 'visible' : 'hidden' }} className='menuActionPanel'>
-        <span className="menuBarActionButton" onClick={this.saveFile}>Save</span>
-        <span className="menuBarActionButton">Open</span>
-      </div>
-    )
+    switch (this.props.toggleMenuBar.menuBarNumber) {
+      case 1:
+        return <FileOptions saveFile={this.saveFile} />
+      case 2:
+        return <EditOptions />
+      default:
+        return '';
+    }
   }
 }
 

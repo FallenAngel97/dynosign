@@ -25,8 +25,9 @@ class TopBar extends React.Component {
     document.removeEventListener('mousedown', this.handleClick, false);
   }
   handleClick (ev) {
+    if (document.getElementsByClassName('menuActionPanel').length === 0) return;
     if (!document.getElementsByClassName('menuActionPanel')[0].contains(ev.target)) {
-      this.props._toggleMenuBar(false)
+      this.props._toggleMenuBar(-1)
     }
   }
   minimizeWindow () {
@@ -42,9 +43,9 @@ class TopBar extends React.Component {
     return (
       <header>
         <nav>
-          <span onClick={() => this.props._toggleMenuBar(true)}>File</span>
-          <span onClick={() => this.props._toggleMenuBar(true)}>Edit</span>
-          <span>Help</span>
+          <div className={this.props.toggleMenuBar.menuBarNumber === 1 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(1)}>File</div>
+          <div className={this.props.toggleMenuBar.menuBarNumber === 2 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(2)}>Edit</div>
+          <div>Help</div>
         </nav>
         <div id='title'>DynoSign</div>
         <div id='controlButtons'>
@@ -58,14 +59,15 @@ class TopBar extends React.Component {
 }
 
 TopBar.propTypes = {
-  _toggleMenuBar: PropTypes.func
+  _toggleMenuBar: PropTypes.func,
+  toggleMenuBar: PropTypes.object
 }
 
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => {
   return {
-    _toggleMenuBar: (visible) => dispatch(toggleMenuBar(visible))
+    _toggleMenuBar: (menuBarNumber) => dispatch(toggleMenuBar(menuBarNumber))
   }
 }
 

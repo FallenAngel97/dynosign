@@ -40,6 +40,10 @@ module.exports = {
   target: 'electron-renderer',
   // Need to implement this somehow :(
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      minify: {
+        collapseWhitespace: true
+      }
+    })
   ]
 }

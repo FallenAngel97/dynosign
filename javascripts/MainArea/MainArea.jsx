@@ -7,6 +7,7 @@ import SelectTool from './SelectTool';
 import TextTool from './TextTool';
 import PropTypes from 'prop-types';
 import FontSettings from './FontSettings';
+import RectangleSettings from './RectangleSettings';
 // import ReactDOM from 'react-dom';
 
 /**
@@ -112,6 +113,7 @@ export class MainArea extends React.Component {
         <button className="drawAnimateSelector">Draw</button>
         <button className="drawAnimateSelector">Animate</button>
         {mouseType === 'text' && <FontSettings />}
+        {mouseType === 'rectangle' && <RectangleSettings />}
         <div ref={this.layerContainer} style={{ cursor: iconType }} id='drawingArea' >
           {this.props.layersCRUD.map((layer, index) => {
             return <DrawingLayer key={index}

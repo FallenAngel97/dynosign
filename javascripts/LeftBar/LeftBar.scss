@@ -8,9 +8,9 @@
 }
 
 #leftBar {
-    background: #f3cfaf;
+    background: #e0e0e0;
     border-radius: 0 5px 5px 0;
-    box-shadow: 1px 1px 2px 1px rgba(darken(#f3cfaf, 50%),.3);
+    box-shadow: 1px 1px 2px 1px rgba(darken(#e0e0e0, 50%),.3);
     height: calc(100% - (var(--height-of-top-bar) + 5px) * 2);
     margin-top: 50%;
     grid-column: 1;
@@ -23,11 +23,11 @@
     margin-left: auto;
     margin-right: auto;
     &:hover {
-        background: rgba(206, 68, 15, 0.2);
+        background: rgba(119, 119, 119, 0.2);
     }
 }
 .activeLeftButton {
-    outline: 1px solid #ce8c3b;
+    outline: 1px solid #8a8a8a;
 }
 .color_small_indicator {
     height: 26px;

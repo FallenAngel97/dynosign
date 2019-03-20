@@ -62,7 +62,7 @@ export function layersCRUD (state = [defaultLayer], action) {
         }
       })
     case 'ADD_LINE':
-      return state.map((item, index)=>{
+      return state.map((item, index) => {
         if (index !== action.layerNumber) {
           return item;
         }
@@ -114,9 +114,9 @@ export function changeMouseType (state = { type: 'CHANGE_MOUSE_TYPE', mouseType:
   return state;
 }
 
-export function toggleMenuBar (state = { type: 'TOGGLE_MENU_BAR', menuBarVisible: false }, action) {
+export function toggleMenuBar (state = { type: 'TOGGLE_MENU_BAR', menuBarNumber: -1 }, action) {
   if (action.type === 'TOGGLE_MENU_BAR') {
-    return Object.assign({}, state, { menuBarVisible: action.menuBarVisible })
+    return Object.assign({}, state, { menuBarNumber: action.menuBarNumber })
   }
   return state;
 }

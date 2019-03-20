@@ -31,9 +31,9 @@ describe('Redux actions testing', () => {
     expect(actions.changeLayer(layer, layerId)).toEqual(expectedAction);
   });
   it('should toggle Menu Bar', () => {
-    const menuBarVisible = false;
-    const expectedAction = { type: 'TOGGLE_MENU_BAR', menuBarVisible };
-    expect(actions.toggleMenuBar(menuBarVisible)).toEqual(expectedAction);
+    const menuBarNumber = 1;
+    const expectedAction = { type: 'TOGGLE_MENU_BAR', menuBarNumber };
+    expect(actions.toggleMenuBar(menuBarNumber)).toEqual(expectedAction);
   });
   it('should change Layer Visibility', () => {
     const hidden = true;

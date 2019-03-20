@@ -2,6 +2,9 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ClosurePlugin = require('closure-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// const PrepackWebpackPlugin = require('prepack-webpack-plugin').default;
 
 module.exports = merge(common, {
   mode: 'production',
@@ -12,21 +15,30 @@ module.exports = merge(common, {
     app: ['./javascripts/entry.jsx']
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       filename: '../index.html'
-    })
+    }),
+    new OptimizeCSSAssetsPlugin({})
+    // new PrepackWebpackPlugin({
+    //   mathRandomSeed: true
+    // })
   ],
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
+      }
+    ]
+  },
   optimization: {
     minimizer: [
-      new ClosurePlugin({ mode: 'STANDARD' }, {
-        // compiler flags here
-        //
-        // for debuging help, try these:
-        //
-        // formatting: 'PRETTY_PRINT'
-        // debug: true,
-        // renaming: false
-      })
+      new ClosurePlugin({ mode: 'STANDARD' }, {})
     ]
   }
 });
