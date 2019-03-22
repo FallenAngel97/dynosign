@@ -12,4 +12,8 @@
     display:block;
     padding-left: 14px;
     padding-right: 14px;
+    transition: all .2s ease-in-out;
+    &:hover {
+        background: rgba(0,0,0,.05);
+    }
 }
