@@ -25,6 +25,7 @@ export class DrawingLayer extends React.Component {
     this.dotWasDrawn = false;
     this.moveShape = this.moveShape.bind(this);
     this.shapes = this.props.layer.shapes;
+    this.onDrop = this.onDrop.bind(this);
   }
   /**
    * Draws in mousemove process
@@ -200,6 +201,28 @@ export class DrawingLayer extends React.Component {
       }
     }
   }
+
+  onDrop (e) {
+    e.preventDefault();
+    const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/svg+xml'];
+    for (let f of e.dataTransfer.files) {
+      if (validImageTypes.includes(f.type)) {
+        var reader = new FileReader();
+        reader.onload = () => {
+          var dataURL = reader.result;
+          let layerImg = new Image();
+          layerImg.src = dataURL;
+          layerImg.onload = () => {
+            let ctx = this.canvas.getContext('2d');
+            ctx.drawImage(layerImg, 0, 0);
+          }
+        };
+        reader.readAsDataURL(f);
+      }
+    }
+    return false;
+  }
+
   render () {
     return (
       <canvas className='canvaslayer'
@@ -208,6 +231,11 @@ export class DrawingLayer extends React.Component {
         style={{ width: this.props.width, height: this.props.height }}
         onMouseMove={(e) => this.findxy('move', e)}
         onMouseDown={(e) => this.findxy('down', e)}
+        onDragOver={(e) => { e.preventDefault(); return false } }
+        onDragLeave={() => false }
+        onDragStart={(ev) => ev.dataTransfer.setData('Text', ev.target.id) }
+        onDragEnd={() => false }
+        onDrop={this.onDrop}
         onMouseUp={(e) => this.findxy('up', e)}
         onMouseOut={(e) => this.findxy('out', e)}
         onPaste={(e) => this.pasteToCanvas(e)}
