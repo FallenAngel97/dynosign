@@ -113,6 +113,7 @@ export class DrawingLayer extends React.Component {
     }
   }
   pasteToCanvas (e) {
+    console.log('paste');
     var items = e.clipboardData.items;
     console.log(items)
   }
