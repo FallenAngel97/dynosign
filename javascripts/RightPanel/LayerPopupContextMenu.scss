@@ -1,0 +1,21 @@
+#layer_popup_contextmenu {
+    position: absolute;
+    width: 100px;
+    background: #e4e4e4;
+    box-shadow: 2px 2px 11px 1px rgba(0, 0, 0, 0.2);
+    padding: 3px;
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+}
+#layout_context_selector {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #bfbfbf;
+    padding-bottom: 15px;
+    padding-top: 14px;
+    img {
+        height: 20px;
+    }
+}

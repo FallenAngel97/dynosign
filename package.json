@@ -48,7 +48,6 @@
     "closure-webpack-plugin": "^2.0.1",
     "css-loader": "1.0.1",
     "documentation": "^9.3.1",
-    "electron": "^4.0.8",
     "electron-builder": "^20.39.0",
     "electron-packager": "13.0.0",
     "electron-rebuild": "1.8.2",
@@ -82,6 +81,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "electron": "^4.1.1",
     "font-manager": "^0.3.0",
     "html-webpack-plugin": "^3.2.0",
     "prop-types": "^15.7.2",

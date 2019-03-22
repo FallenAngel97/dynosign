@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { addLayer, deleteLayer, changeLayer, reorderLayers } from '../actions';
 import Layer from './Layer';
 import PropTypes from 'prop-types';
+import LayerPopupContextMenu from './LayerPopupContextMenu';
+import ReactDOM from 'react-dom';
 
 /**
  * The panel on the right side, including layers, opacity and buttons
@@ -13,12 +15,17 @@ import PropTypes from 'prop-types';
 export class RightPanel extends React.Component {
   constructor (props) {
     super(props);
+    this.state = {
+      displayContext: false
+    }
     this.changeLayerOpacity = this.changeLayerOpacity.bind(this);
     this.layerDragStart = this.layerDragStart.bind(this);
     this.layerDragEnd = this.layerDragEnd.bind(this);
     this.layerDrop = this.layerDrop.bind(this);
     this.layerDragOver = this.layerDragOver.bind(this);
     this.selectedLayer = null;
+    this.openContext = this.openContext.bind(this);
+    this.dismissPopup = this.dismissPopup.bind(this);
   }
   layerDragStart (e) {
     e.dataTransfer.effectAllowed = 'move'
@@ -51,6 +58,15 @@ export class RightPanel extends React.Component {
     layer.opacity = ev.target.value;
     this.props.changeLayer(layer, this.props.changeActiveLayer.layerNumber)
   }
+  dismissPopup () {
+    this.setState({ displayContext: false });
+  }
+  openContext (e) {
+    const elem = ReactDOM.findDOMNode(this.context);
+    elem.style.left = e.clientX + 'px';
+    elem.style.top = e.clientY + 'px';
+    this.setState({ displayContext: true });
+  }
   render () {
     return (
       <div id='rightPanel'>
@@ -62,6 +78,7 @@ export class RightPanel extends React.Component {
           {this.props.layersCRUD.map((layer, index) => {
             return <Layer
               key={index} layerId={index}
+              openContext={this.openContext}
               layerDragLeave={this.layerDragLeave}
               layerDragStart={this.layerDragStart}
               layerDragEnd={this.layerDragEnd}
@@ -70,6 +87,9 @@ export class RightPanel extends React.Component {
               layer={layer} />
           })}
         </div>
+        <LayerPopupContextMenu hidden={!this.state.displayContext}
+          ref={ (ctx) => { this.context = ctx } }
+          dismissPopup={this.dismissPopup} />
         <div id='layersButtonsBottom'>
           <button>Group</button>
           <button onClick={() => this.props.addLayer(this.props.layersCRUD.length)}>+</button>

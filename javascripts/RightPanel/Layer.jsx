@@ -21,6 +21,10 @@ export class Layer extends React.Component {
     this.ondrop = this.ondrop.bind(this);
     this.DragOver = this.DragOver.bind(this);
     this.dragLeave = this.dragLeave.bind(this);
+    this.showLayerOptions = this.showLayerOptions.bind(this);
+  }
+  showLayerOptions (e) {
+    this.props.openContext(e);
   }
   UNSAFE_componentWillMount () {
     document.addEventListener('mousedown', this.handleClick, false);
@@ -67,6 +71,7 @@ export class Layer extends React.Component {
       <div onDragStart={this.ondragStart} draggable={!this.state.editLayer} ref={node => { this.node = node }}
         onDoubleClick={this.renameLayer}
         onDrop={this.ondrop}
+        onContextMenu={this.showLayerOptions}
         onDragLeave={this.dragLeave}
         onDragOver={this.DragOver}
         onDragEnd={this.dragEnd}
@@ -89,7 +94,8 @@ Layer.propTypes = {
   layerDragEnd: PropTypes.func,
   layerDrop: PropTypes.func,
   layerDragOver: PropTypes.func,
-  layerDragLeave: PropTypes.func
+  layerDragLeave: PropTypes.func,
+  openContext: PropTypes.func
 }
 
 const mapStateToProps = state => state;
