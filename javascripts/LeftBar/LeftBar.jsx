@@ -12,6 +12,11 @@ import { SketchPicker } from 'react-color';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
+/**
+ * Left panel, which includes button to switch the tool type(move, text, rectangle, etc)
+ * @module LeftBar
+ */
+
 export class LeftBar extends Component {
   constructor (props) {
     super(props);
@@ -29,12 +34,19 @@ export class LeftBar extends Component {
   componentWillUnmount () {
     document.removeEventListener('mousedown', this.handleClick, false);
   }
+  /**
+   * Hide Color Picker if clicked outside of it
+   * @param {MouseEvent} ev - necessary to get the clicked target
+   */
   handleClick (ev) {
     const elem = ReactDOM.findDOMNode(this.colorPicker);
     if (elem && !elem.contains(ev.target)) {
       this.setState({ displayColorPicker: false })
     }
   }
+  /**
+   * This method simply open's color picker
+   */
   showColor () {
     this.setState({ displayColorPicker: true });
   }

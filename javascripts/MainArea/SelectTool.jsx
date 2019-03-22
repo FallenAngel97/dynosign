@@ -2,6 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+/**
+ * Enables the selection box (marching ants) to be shown
+ * @module SelectTool
+ */
+
 export class SelectTool extends React.Component {
   constructor (props) {
     super(props);
@@ -14,6 +19,10 @@ export class SelectTool extends React.Component {
     this.draw = this.draw.bind(this);
     this.timerMarchingAnts = undefined;
   }
+  /**
+   * Draws selection box with pixel sizes on the sides
+   * @param {number} offsetDash - the distance between ants
+   */
   draw (offsetDash) {
     if (!this.canvas) return;
     var ctx = this.canvas.getContext('2d');

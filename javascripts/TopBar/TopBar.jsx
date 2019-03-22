@@ -7,6 +7,11 @@ import { toggleMenuBar } from '../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+/**
+ * The very top bar, which conatins title, and minimize-maximize-close buttons
+ * @module TopBar
+ */
+
 const remote = require('electron').remote;
 
 class TopBar extends React.Component {
@@ -24,18 +29,31 @@ class TopBar extends React.Component {
   componentWillUnmount () {
     document.removeEventListener('mousedown', this.handleClick, false);
   }
+  /**
+   * Closes the submenu popup, if clicked outside
+   * @param {MouseEvent} ev - necessary to detect the click target
+   */
   handleClick (ev) {
     if (document.getElementsByClassName('menuActionPanel').length === 0) return;
     if (!document.getElementsByClassName('menuActionPanel')[0].contains(ev.target)) {
       this.props._toggleMenuBar(-1)
     }
   }
+  /**
+   * Minimizes window
+   */
   minimizeWindow () {
     this.window.minimize();
   }
+  /**
+   * Maximizes window
+   */
   maximizeWindow () {
     this.window.isMaximized() ? this.window.unmaximize() : this.window.maximize()
   }
+  /**
+   * Closes window
+   */
   closeWindow () {
     this.window.close();
   }

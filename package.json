@@ -14,7 +14,7 @@
     "build": "webpack --config webpack.prod.js",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "doc": "documentation build javascripts/** -f md -o gh-pages/docs/global.md --github"
+    "doc": "documentation build javascripts/** -f html -o gh-pages --github --theme gh-pages/documentationjs_theme"
   },
   "jest": {
     "setupFiles": [

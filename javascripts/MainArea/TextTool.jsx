@@ -3,11 +3,20 @@ import { connect } from 'react-redux';
 import './TextTool.scss';
 import PropTypes from 'prop-types';
 
+/**
+ * This module allows to display text box inside MainArea block
+ * @module TextTool
+ */
+
 export class TextTool extends React.Component {
   constructor (props) {
     super(props);
     this.addText = this.addText.bind(this);
   }
+  /**
+   * Shows the text box and sets it based on the mouse coordinates
+   * @param {MouseEvent} ev - necessary to detect, what is the clicked target
+   */
   addText (ev) {
     const input = document.getElementById('text_tool_input');
     if (input.contains(ev.target)) return;

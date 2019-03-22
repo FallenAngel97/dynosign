@@ -12,6 +12,11 @@ import './entry.scss';
 import reducers from './reducers';
 import MenuActionPanel from './MenuActionPanel/MenuActionPanel.jsx';
 
+/**
+ * The entry, which handles all other components. Root component, renders in body
+ * @module Dynosign
+ */
+
 const store = createStore(reducers);
 
 class DynoSign extends React.Component {

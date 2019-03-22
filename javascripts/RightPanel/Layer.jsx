@@ -6,6 +6,11 @@ import hiddenEye from './hidden_eye.svg';
 import visibleEye from './visible_eye.svg';
 import PropTypes from 'prop-types';
 
+/**
+ * Core module, which handles layer manipulation logic in the right panel
+ * @module Layer
+ */
+
 export class Layer extends React.Component {
   constructor (props) {
     super(props);
@@ -51,6 +56,11 @@ export class Layer extends React.Component {
     let layer = this.props.layer;
     this.props.changeLayerVisibility(!layer.hidden, this.props.layerId);
   }
+  /**
+   * Hides the text rename box, if clicked outside. If clicked on the layer single time,
+   * changes the active layer to the clicked one
+   * @param {MouseEvent} ev - neccessary to check, what is the clicked target
+   */
   handleClick (ev) {
     if (!this.node.contains(ev.target)) {
       this.setState({ editLayer: false })
@@ -58,6 +68,9 @@ export class Layer extends React.Component {
       this.props._changeActiveLayer(this.props.layer, this.props.layerId);
     }
   }
+  /**
+   * Opens the rename text box
+   */
   renameLayer () {
     this.setState({ editLayer: true });
   }

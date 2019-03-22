@@ -11,6 +11,7 @@ import RectangleSettings from './RectangleSettings';
 // import ReactDOM from 'react-dom';
 
 /**
+ * The main area, which shows layers, selection box, text boxes, etc
  * @module MainArea
  */
 
