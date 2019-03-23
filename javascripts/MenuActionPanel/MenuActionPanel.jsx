@@ -60,6 +60,27 @@ class MenuActionPanel extends React.Component {
       lastUsedFont: this.props.changeFont,
       lastUsedColor: this.props.changeColor
     };
+    const extension = fileName.split('.')[1];
+    if (extension === 'jpg') {
+      let canvas = document.getElementsByTagName('canvas')[0].cloneNode();
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      this.props.layersCRUD.map((layer) => {
+        let linesArray = layer.linesArray;
+        let layerImg = new Image();
+        layerImg.src = linesArray[linesArray.length - 1];
+        if (layer.shapes)
+          layer.shapes.map((shape) => {
+            shape.draw(ctx);
+          })
+        layerImg.onload = () => {
+          ctx.drawImage(layerImg, 0, 0);
+        }
+      });
+      const image = ctx.canvas.toDataURL('image/jpeg', 1)
+        .replace(/^data:image\/\w+;base64,/, '');
+      fileContents.image = image;
+    }
     if (fileName !== undefined)
       ipcRenderer.send('save-message', fileContents);
   }

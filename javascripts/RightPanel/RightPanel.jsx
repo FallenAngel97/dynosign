@@ -65,6 +65,12 @@ export class RightPanel extends React.Component {
     const elem = ReactDOM.findDOMNode(this.context);
     elem.style.left = e.clientX + 'px';
     elem.style.top = e.clientY + 'px';
+    if (window.innerHeight - e.clientY < 145) {
+      elem.style.top = e.clientY - 145 + 'px';
+    }
+    if (window.innerWidth - e.clientX < 106) {
+      elem.style.left = e.clientX - 106 + 'px';
+    }
     this.setState({ displayContext: true });
   }
   render () {

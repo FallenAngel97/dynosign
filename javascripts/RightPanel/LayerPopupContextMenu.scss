@@ -8,6 +8,13 @@
         list-style: none;
         padding-left: 0;
     }
+    li {
+        transition: .2s ease-in-out background;
+        cursor: pointer;
+        &:hover {
+            background: rgba(#000,.05);
+        }
+    }
 }
 #layout_context_selector {
     display: flex;
@@ -16,6 +23,7 @@
     padding-bottom: 15px;
     padding-top: 14px;
     img {
+        cursor: pointer;
         height: 20px;
     }
 }

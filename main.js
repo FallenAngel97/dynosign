@@ -36,9 +36,25 @@ app.on('activate', () => {
 })
 
 ipcMain.on('save-message', (event, payload) => {
-  fs.writeFile(payload.fileName, JSON.stringify(payload.layers), (err) => {
-    console.log(err);
-  })
+  const extension = payload.fileName.split('.')[1];
+  console.log(extension);
+  switch (extension) {
+    case 'jpg':
+    case 'jpeg':
+      fs.writeFile(payload.fileName, payload.image, 'base64', (err) => {
+        console.log(err);
+      });
+      break;
+    default:
+      fs.writeFile(payload.fileName, JSON.stringify({
+        layers: payload.layers,
+        lastUsedFont: payload.lastUsedFont,
+        lastUsedColor: payload.lastUsedColor
+      }), (err) => {
+        console.log(err);
+      })
+      break;
+  }
 })
 
 ipcMain.on('getfonts', (event, arg) => {
