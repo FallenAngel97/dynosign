@@ -139,8 +139,8 @@ export class DrawingLayer extends React.Component {
       this.prevX = this.currX;
       this.prevY = this.currY;
 
-      this.currX = e.clientX - this.canvas.offsetLeft;
-      this.currY = e.clientY - this.canvas.offsetTop;
+      this.currX = (e.clientX - this.canvas.offsetLeft) * window.devicePixelRatio;
+      this.currY = (e.clientY - this.canvas.offsetTop) * window.devicePixelRatio;
 
       if (/rectangle|circle/.test(this.props.changeMouseType.mouseType) || this.ctrlPressed) {
         this.prevX = this.currX;
@@ -195,8 +195,8 @@ export class DrawingLayer extends React.Component {
             this.prevX = this.currX;
           this.prevY = this.currY;
         }
-        this.currX = e.clientX - this.canvas.offsetLeft;
-        this.currY = e.clientY - this.canvas.offsetTop;
+        this.currX = (e.clientX - this.canvas.offsetLeft) * window.devicePixelRatio;
+        this.currY = (e.clientY - this.canvas.offsetTop) * window.devicePixelRatio;
         this.draw();
       }
     }

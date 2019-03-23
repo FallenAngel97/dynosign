@@ -46,8 +46,8 @@ export class SelectTool extends React.Component {
   findxy (res, e) {
     if (this.props.changeMouseType.mouseType !== 'select') return;
     if (res === 'down') {
-      this.currX = e.clientX - this.canvas.offsetLeft;
-      this.currY = e.clientY - this.canvas.offsetTop;
+      this.currX = (e.clientX - this.canvas.offsetLeft) * window.devicePixelRatio;
+      this.currY = (e.clientY - this.canvas.offsetTop) * window.devicePixelRatio;
       this.prevX = this.currX;
       this.prevY = this.currY;
       this.flag = true;
@@ -57,8 +57,8 @@ export class SelectTool extends React.Component {
     }
     if (res === 'move') {
       if (this.flag) {
-        this.currX = e.clientX - this.canvas.offsetLeft;
-        this.currY = e.clientY - this.canvas.offsetTop;
+        this.currX = (e.clientX - this.canvas.offsetLeft) * window.devicePixelRatio;
+        this.currY = (e.clientY - this.canvas.offsetTop) * window.devicePixelRatio;
         this.draw(0);
       }
     }
