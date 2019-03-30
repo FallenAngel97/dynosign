@@ -112,7 +112,8 @@
       "dist/*.svg",
       "dist/*.png",
       "dist/bundle.js",
-      "dist/*.otf"
+      "dist/*.otf",
+      "dist/*.css"
     ]
   }
 }

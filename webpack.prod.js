@@ -36,9 +36,9 @@ module.exports = merge(common, {
       }
     ]
   },
-  optimization: {
-    minimizer: [
-      new ClosurePlugin({ mode: 'STANDARD' }, {})
-    ]
-  }
+  // optimization: {
+  //   minimizer: [
+  //     new ClosurePlugin({ mode: 'STANDARD' }, {})
+  //   ]
+  // }
 });
