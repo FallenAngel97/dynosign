@@ -50,9 +50,10 @@ export class DrawingLayer extends React.Component {
         break;
       case 'rectangle':
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.shapes.map((shape) => {
-          shape.draw(ctx);
-        });
+        if (this.shapes)
+          this.shapes.map((shape) => {
+            shape.draw(ctx);
+          });
         ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
         let diffX = this.currX - this.prevX;
         let diffY = this.currY - this.prevY;
@@ -214,7 +215,13 @@ export class DrawingLayer extends React.Component {
           layerImg.src = dataURL;
           layerImg.onload = () => {
             let ctx = this.canvas.getContext('2d');
-            ctx.drawImage(layerImg, 0, 0);
+            let cropRatio = Math.max(
+              layerImg.width / (this.canvas.width - 20),
+              layerImg.height / (this.canvas.height - 20)
+            );
+            const imgWidth = layerImg.width / cropRatio;
+            const imgHeight = layerImg.height / cropRatio;
+            ctx.drawImage(layerImg, (this.canvas.width / 2 - imgWidth / 2), (this.canvas.height / 2 - imgHeight / 2), imgWidth, imgHeight);
           }
         };
         reader.readAsDataURL(f);

@@ -27,6 +27,12 @@ export class Layer extends React.Component {
     this.DragOver = this.DragOver.bind(this);
     this.dragLeave = this.dragLeave.bind(this);
     this.showLayerOptions = this.showLayerOptions.bind(this);
+    this._onKeyPress = this._onKeyPress.bind(this);
+  }
+  _onKeyPress (e) {
+    if (e.key === 'Enter') {
+      this.setState({ editLayer: false });
+    }
   }
   showLayerOptions (e) {
     this.props.openContext(e);
@@ -84,6 +90,7 @@ export class Layer extends React.Component {
       <div onDragStart={this.ondragStart} draggable={!this.state.editLayer} ref={node => { this.node = node }}
         onDoubleClick={this.renameLayer}
         onDrop={this.ondrop}
+        onKeyPress={this._onKeyPress}
         onContextMenu={this.showLayerOptions}
         onDragLeave={this.dragLeave}
         onDragOver={this.DragOver}
