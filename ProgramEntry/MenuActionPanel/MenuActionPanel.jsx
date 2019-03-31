@@ -9,22 +9,27 @@ const { ipcRenderer } = require('electron');
 const FileOptions = (props) => (
   <div className='menuActionPanel'>
     <span onClick={props.saveFile} className="menuBarActionButton">Save</span>
-    <span className="menuBarActionButton">Open</span>
+    <span onClick={props.openFile} className="menuBarActionButton">Open</span>
     <span className='menuBarActionButton'>Quit</span>
   </div>
 );
 
 FileOptions.propTypes = {
-  saveFile: PropTypes.func
+  saveFile: PropTypes.func,
+  openFile: PropTypes.func
 }
 
 const EditOptions = (props) => (
   <div className='menuActionPanel'>
     <span className="menuBarActionButton">Undo</span>
     <span className='menuBarActionButton'>Redo</span>
-    <span className="menuBarActionButton">Preferences</span>
+    <span onClick={props.openSettings} className="menuBarActionButton">Settings</span>
   </div>
 );
+
+EditOptions.propTypes = {
+  openSettings: PropTypes.func
+}
 
 /**
  * Block, which shows after click in menu. Modal window, in short
@@ -36,6 +41,29 @@ class MenuActionPanel extends React.Component {
     super(props);
     this.saveFile = this.saveFile.bind(this);
   }
+
+  /**
+   * Open previously saved file
+   */
+
+  openFile () {
+    const options = {
+      defaultPath: 'file.dsign',
+      filters: [{
+        name: 'DynoSign files',
+        extensions: ['dsign']
+      }, {
+        name: 'PNG image',
+        extensions: ['png']
+      }, {
+        name: 'JPEG image',
+        extensions: ['jpeg', 'jpg']
+      }],
+      properties: ['openFile']
+    };
+    const fileName = dialog.showOpenDialog(options);
+  }
+
   /**
    * Calls node.js backend api to save JSON-converted state of program
    */
@@ -84,12 +112,21 @@ class MenuActionPanel extends React.Component {
     if (fileName !== undefined)
       ipcRenderer.send('save-message', fileContents);
   }
+
+  /**
+   * Display settings page
+   */
+  openSettings () {
+    const appUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/dist/' : '';
+    window.open(appUrl + 'settings.html', '_blank', 'nodeIntegration=yes');
+  }
+
   render () {
     switch (this.props.toggleMenuBar.menuBarNumber) {
       case 1:
-        return <FileOptions saveFile={this.saveFile} />
+        return <FileOptions openFile={this.openFile} saveFile={this.saveFile} />
       case 2:
-        return <EditOptions />
+        return <EditOptions openSettings={this.openSettings} />
       default:
         return '';
     }

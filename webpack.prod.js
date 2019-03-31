@@ -9,15 +9,31 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = merge(common, {
   mode: 'production',
   output: {
-    publicPath: 'dist/'
-  },
-  entry: {
-    app: ['./javascripts/entry.jsx']
+    publicPath: 'dist/',
+    filename: '[name].js'
   },
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      filename: '../index.html'
+      chunks: ['main'],
+      filename: '../index.html',
+      minify: {
+        collapseWhitespace: true
+      }
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['settings'],
+      filename: '../settings.html',
+      minify: {
+        collapseWhitespace: true
+      }
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['help'],
+      filename: '../help.html',
+      minify: {
+        collapseWhitespace: true
+      }
     }),
     new OptimizeCSSAssetsPlugin({})
     // new PrepackWebpackPlugin({
@@ -36,9 +52,10 @@ module.exports = merge(common, {
       }
     ]
   },
-  // optimization: {
-  //   minimizer: [
-  //     new ClosurePlugin({ mode: 'STANDARD' }, {})
-  //   ]
-  // }
+  optimization: {
+    // minimizer: [
+    //   new ClosurePlugin({ mode: 'STANDARD' }, {})
+    // ]
+    usedExports: true
+  }
 });

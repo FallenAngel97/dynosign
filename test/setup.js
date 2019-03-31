@@ -1,6 +1,6 @@
 import { configure, shallow, mount, render } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16';
-import { defaultLayer } from '../javascripts/reducers';
+import { defaultLayer } from '../ProgramEntry/reducers';
 
 configure({ adapter: new Adapter() })
 

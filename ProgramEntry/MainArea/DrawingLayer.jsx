@@ -119,6 +119,7 @@ export class DrawingLayer extends React.Component {
     var items = e.clipboardData.items;
     console.log(items)
   }
+
   /**
    * Obtains coordinates of mouse over canvas and type of interaction of mouse
    * Hold ctrl to draw straight line
@@ -202,6 +203,11 @@ export class DrawingLayer extends React.Component {
       }
     }
   }
+
+  /**
+   * Allows to drop the image from the folder
+   * @param {MouseEvent} e - necessary to disable the default drop behaviour
+   */
 
   onDrop (e) {
     e.preventDefault();

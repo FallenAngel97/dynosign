@@ -57,13 +57,22 @@ class TopBar extends React.Component {
   closeWindow () {
     this.window.close();
   }
+
+  /**
+   * Open Help
+   */
+  openHelp () {
+    const appUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/dist/' : '';
+    window.open(appUrl + 'help.html', '_blank', 'nodeIntegration=yes');
+  }
+
   render () {
     return (
       <header>
         <nav>
           <div className={this.props.toggleMenuBar.menuBarNumber === 1 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(1)}>File</div>
           <div className={this.props.toggleMenuBar.menuBarNumber === 2 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(2)}>Edit</div>
-          <div>Help</div>
+          <div onClick={this.openHelp}>Help</div>
         </nav>
         <div id='title'>DynoSign</div>
         <div id='controlButtons'>

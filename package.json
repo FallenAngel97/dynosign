@@ -14,7 +14,7 @@
     "build": "webpack --config webpack.prod.js",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "doc": "documentation build javascripts/** -f html -o gh-pages --github --theme gh-pages/documentationjs_theme"
+    "doc": "documentation build ProgramEntry/** SettingsPage/** -f html -o gh-pages --github --theme gh-pages/documentationjs_theme"
   },
   "jest": {
     "setupFiles": [
@@ -111,7 +111,7 @@
       "package-lock.json",
       "dist/*.svg",
       "dist/*.png",
-      "dist/bundle.js",
+      "dist/*.js",
       "dist/*.otf",
       "dist/*.css"
     ]

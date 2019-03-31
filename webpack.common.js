@@ -2,9 +2,14 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  entry: {
+    'main': './ProgramEntry/entry.jsx',
+    'settings': './SettingsPage/SettingsPage.jsx',
+    'help': './HelpPage/HelpPage.jsx'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath: 'http://localhost:8080/dist'
   },
   resolve: {
@@ -41,9 +46,16 @@ module.exports = {
   // Need to implement this somehow :(
   plugins: [
     new HtmlWebpackPlugin({
-      minify: {
-        collapseWhitespace: true
-      }
+      chunks: ['main'],
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['settings'],
+      filename: 'settings.html'
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['help'],
+      filename: 'help.html'
     })
   ]
 }
