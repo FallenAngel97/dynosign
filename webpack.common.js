@@ -13,7 +13,7 @@ module.exports = {
     publicPath: 'http://localhost:8080/dist'
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx', '.json']
   },
   module: {
     rules: [
@@ -35,7 +35,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.js|.jsx$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
           'babel-loader'

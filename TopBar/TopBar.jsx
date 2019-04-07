@@ -3,9 +3,12 @@ import './TopBar.scss';
 import collapse from './collapse.svg';
 import expand from './expand.svg';
 import close from './close.svg';
-import { toggleMenuBar } from '../actions';
+import { toggleMenuBar } from '../ProgramEntry/actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withLocalize } from 'react-localize-redux';
+import globalTranslations from '../languagepacks/global.json';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 /**
  * The very top bar, which conatins title, and minimize-maximize-close buttons
@@ -22,6 +25,16 @@ class TopBar extends React.Component {
     this.maximizeWindow = this.maximizeWindow.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.closeWindow = this.closeWindow.bind(this);
+    this.props.initialize({
+      languages: [
+        { name: 'English', code: 'en' },
+        { name: 'Russian', code: 'ru' },
+        { name: 'Ukrainian', code: 'ua' }
+      ],
+      translation: globalTranslations,
+      options: { renderToStaticMarkup }
+    })
+    this.props.setActiveLanguage(window.language);
   }
   UNSAFE_componentWillMount () {
     document.addEventListener('mousedown', this.handleClick, false);
@@ -69,12 +82,12 @@ class TopBar extends React.Component {
   render () {
     return (
       <header>
-        <nav>
+        {this.props.showMenu && <nav>
           <div className={this.props.toggleMenuBar.menuBarNumber === 1 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(1)}>File</div>
           <div className={this.props.toggleMenuBar.menuBarNumber === 2 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(2)}>Edit</div>
           <div onClick={this.openHelp}>Help</div>
-        </nav>
-        <div id='title'>DynoSign</div>
+        </nav>}
+        <div id='title'>{this.props.header}</div>
         <div id='controlButtons'>
           <img onClick={this.minimizeWindow} style={{ verticalAlign: 'bottom' }} src={collapse} />
           <img src={expand} onClick={this.maximizeWindow} />
@@ -87,7 +100,9 @@ class TopBar extends React.Component {
 
 TopBar.propTypes = {
   _toggleMenuBar: PropTypes.func,
-  toggleMenuBar: PropTypes.object
+  toggleMenuBar: PropTypes.object,
+  header: PropTypes.string,
+  showMenu: PropTypes.bool
 }
 
 const mapStateToProps = state => state;
@@ -98,4 +113,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopBar);
+export default connect(mapStateToProps, mapDispatchToProps)(withLocalize(TopBar));

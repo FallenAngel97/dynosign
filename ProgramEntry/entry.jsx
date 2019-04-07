@@ -7,10 +7,11 @@ import { Provider } from 'react-redux';
 import LeftBar from './LeftBar/LeftBar.jsx';
 import MainArea from './MainArea/MainArea.jsx';
 import RightPanel from './RightPanel/RightPanel.jsx';
-import TopBar from './TopBar/TopBar.jsx'
+import TopBar from '../TopBar/TopBar.jsx'
 import './entry.scss';
 import reducers from './reducers';
 import MenuActionPanel from './MenuActionPanel/MenuActionPanel.jsx';
+import { LocalizeProvider } from 'react-localize-redux';
 
 /**
  * The entry, which handles all other components. Root component, renders in body
@@ -27,15 +28,18 @@ class DynoSign extends React.Component {
     }
   }
   render () {
+    console.log(window.language);
     return (
       <Provider store={store}>
-        <TopBar openedTabNumber={this.state.openedTabNumber} />
-        <MenuActionPanel openedTabNumber={this.state.openedTabNumber} />
-        <div id='programContainer'>
-          <LeftBar />
-          <MainArea />
-          <RightPanel />
-        </div>
+        <LocalizeProvider store={store}>
+          <TopBar showMenu={true} header={'Dynosign'} openedTabNumber={this.state.openedTabNumber} />
+          <MenuActionPanel openedTabNumber={this.state.openedTabNumber} />
+          <div id='programContainer'>
+            <LeftBar />
+            <MainArea />
+            <RightPanel />
+          </div>
+        </LocalizeProvider>
       </Provider>)
   }
 }

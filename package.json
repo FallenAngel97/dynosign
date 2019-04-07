@@ -82,12 +82,14 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "electron-store": "^3.1.0",
     "font-manager": "^0.3.0",
     "html-webpack-plugin": "^3.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-color": "^2.17.0",
     "react-dom": "^16.8.4",
+    "react-localize-redux": "^3.5.2",
     "react-select": "^2.4.2",
     "redux": "^4.0.1"
   },

@@ -2,16 +2,19 @@
 const { ipcMain, app, BrowserWindow } = require('electron');
 const fs = require('fs');
 var fontManager = require('font-manager');
+const Store = require('electron-store');
+const store = new Store();
 
 let win;
 
 function createWindow () {
   win = new BrowserWindow({ width: 800, height: 600, frame: false });
+  let language = store.get('language', 'en');
   if (process.env.NODE_ENV === 'development') {
-    win.loadURL('http://localhost:8080/dist/index.html');
+    win.loadURL('http://localhost:8080/dist/index.html?language=' + language);
     win.webContents.openDevTools();
   } else
-    win.loadFile('index.html');
+    win.loadFile('index.html?language' + language);
   win.on('closed', () => {
     win = null
   })

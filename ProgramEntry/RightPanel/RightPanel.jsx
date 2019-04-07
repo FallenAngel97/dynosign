@@ -6,6 +6,7 @@ import Layer from './Layer';
 import PropTypes from 'prop-types';
 import LayerPopupContextMenu from './LayerPopupContextMenu';
 import ReactDOM from 'react-dom';
+import { Translate } from 'react-localize-redux';
 
 /**
  * The panel on the right side, including layers, opacity and buttons
@@ -77,7 +78,7 @@ export class RightPanel extends React.Component {
     return (
       <div id='rightPanel'>
         <div id='topRightPanelIndicators'>
-          <h3>Layers</h3>
+          <h3><Translate id='layers'>Layers</Translate></h3>
           <input onChange={this.changeLayerOpacity} value={this.props.changeActiveLayer.layer.opacity} type="range" min="0" max="100" />
         </div>
         <div id='stackingLayers'>

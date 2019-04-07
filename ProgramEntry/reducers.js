@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { ipcRenderer } from 'electron'
+import { localizeReducer } from 'react-localize-redux';
 
 export const defaultLayer = {
   opacity: 100,
@@ -150,5 +151,9 @@ export default combineReducers({
   changeMouseType,
   toggleMenuBar,
   changeColor,
-  changeFont
+  changeFont,
+  localize: localizeReducer
 })
+
+var searchParams = new URLSearchParams(window.location.search);
+window.language = searchParams.get('language');
