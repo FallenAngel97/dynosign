@@ -15,7 +15,7 @@ class SettingsSection extends React.Component {
     return (
       <div id='settings_section'>
         {(() => {
-          switch (this.props.page) {
+          switch (this.props.settingsPage.page) {
             case 1:
               return <LanguageChangePage />
             case 2:
@@ -30,7 +30,7 @@ class SettingsSection extends React.Component {
 }
 
 SettingsSection.propTypes = {
-  page: PropTypes.number
+  settingsPage: PropTypes.object
 }
 
 const mapStateToProps = state => state;

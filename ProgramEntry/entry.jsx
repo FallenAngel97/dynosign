@@ -28,7 +28,6 @@ class DynoSign extends React.Component {
     }
   }
   render () {
-    console.log(window.language);
     return (
       <Provider store={store}>
         <LocalizeProvider store={store}>

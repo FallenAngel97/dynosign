@@ -6,11 +6,12 @@ import TopBar from '../TopBar/TopBar.jsx'
 import LeftPane from './LeftPane';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { settingsPage } from './reducers';
+import reducers from './reducers';
 import './SettingsPage.scss';
 import SettingsSection from './SettingsSection.jsx';
+import { LocalizeProvider } from 'react-localize-redux';
 
-const store = createStore(settingsPage);
+const store = createStore(reducers);
 
 /**
  * Settings popup, which allows to control the current language/theme
@@ -21,11 +22,13 @@ class SettingsPage extends React.Component {
   render () {
     return (
       <Provider store={store}>
-        <TopBar showMenu={false} header={'Settings'} />
-        <div id='settingsContainer'>
-          <LeftPane />
-          <SettingsSection />
-        </div>
+        <LocalizeProvider store={store}>
+          <TopBar showMenu={false} header={'Settings'} />
+          <div id='settingsContainer'>
+            <LeftPane />
+            <SettingsSection />
+          </div>
+        </LocalizeProvider>
       </Provider>
     )
   }

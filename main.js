@@ -60,6 +60,12 @@ ipcMain.on('save-message', (event, payload) => {
   }
 })
 
+ipcMain.on('change-language', (event, language) => {
+  console.log(language.value);
+  store.set('language', language.value);
+  win.webContents.send('change-language', language.value);
+});
+
 ipcMain.on('getfonts', (event, arg) => {
   var fonts = fontManager.getAvailableFontsSync();
   event.returnValue = fonts;

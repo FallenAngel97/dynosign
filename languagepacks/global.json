@@ -1,7 +1,22 @@
 {
   "layers": [
-    "Layers",
-    "Слои",
-    "Шари"
+      "Layers",
+      "Слои",
+      "Шари"
+  ],
+  "change_language": [
+    "Change language",
+    "Сменить язык",
+    "Змінити мову"
+  ],
+  "change_theme": [
+    "Change theme",
+    "Сменить тему",
+    "Змінити тему"
+  ],
+  "settings_for_graphical_editor": [
+    "Settings for your graphical editor",
+    "Настройки для твоего графического редактора",
+    "Налаштування для твого графічного редактора"
   ]
 }

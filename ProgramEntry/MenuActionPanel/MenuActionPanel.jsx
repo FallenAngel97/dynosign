@@ -118,7 +118,7 @@ class MenuActionPanel extends React.Component {
    */
   openSettings () {
     const appUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/dist/' : '';
-    window.open(appUrl + 'settings.html', '_blank', 'nodeIntegration=yes');
+    window.open(appUrl + 'settings.html?language=' + window.language, '_blank', 'nodeIntegration=yes');
   }
 
   render () {

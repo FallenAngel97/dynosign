@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { withLocalize } from 'react-localize-redux';
 import globalTranslations from '../languagepacks/global.json';
 import { renderToStaticMarkup } from 'react-dom/server';
+const { ipcRenderer } = require('electron');
 
 /**
  * The very top bar, which conatins title, and minimize-maximize-close buttons
@@ -38,9 +39,14 @@ class TopBar extends React.Component {
   }
   UNSAFE_componentWillMount () {
     document.addEventListener('mousedown', this.handleClick, false);
+    ipcRenderer.on('change-language', (event, lang) => {
+      this.props.setActiveLanguage(lang);
+      window.language = lang;
+    });
   }
   componentWillUnmount () {
     document.removeEventListener('mousedown', this.handleClick, false);
+    ipcRenderer.removeAllListeners('change-language');
   }
   /**
    * Closes the submenu popup, if clicked outside

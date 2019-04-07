@@ -3,6 +3,7 @@ import './LeftPane.scss';
 import { connect } from 'react-redux';
 import { changeSettingsPage } from './actions';
 import PropTypes from 'prop-types';
+import { withLocalize, Translate } from 'react-localize-redux';
 
 /**
  * Left pane, which shows the buttons to select the necessary settings entry
@@ -14,11 +15,11 @@ class LeftPane extends React.Component {
     return (
       <div id='leftpane'>
         <div onClick={() => this.props._changeSettingsPage(1)}
-          className={ (this.props.page === 1 ? 'active_settings_entry ' : '') + 'settings_entry'}
-          id='langChoose'>Change Language</div>
+          className={ (this.props.settingsPage.page === 1 ? 'active_settings_entry ' : '') + 'settings_entry'}
+          id='langChoose'><Translate id='change_language'/></div>
         <div onClick={() => this.props._changeSettingsPage(2)}
-          className={ (this.props.page === 2 ? 'active_settings_entry ' : '') + 'settings_entry'}
-          id='themeSelect'>Change theme</div>
+          className={ (this.props.settingsPage.page === 2 ? 'active_settings_entry ' : '') + 'settings_entry'}
+          id='themeSelect'><Translate id='change_theme'/></div>
       </div>
     )
   }
@@ -26,7 +27,7 @@ class LeftPane extends React.Component {
 
 LeftPane.propTypes = {
   _changeSettingsPage: PropTypes.func,
-  page: PropTypes.number
+  settingsPage: PropTypes.object
 }
 
 const mapStateToProps = state => state;
@@ -37,4 +38,4 @@ const mapDispathToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispathToProps)(LeftPane);
+export default connect(mapStateToProps, mapDispathToProps)(withLocalize(LeftPane));
