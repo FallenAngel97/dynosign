@@ -98,5 +98,15 @@ describe('Redux actions testing', () => {
     }
     const expectedAction = { type: 'CHANGE_FONT', font };
     expect(actions.changeFonts(font)).toEqual(expectedAction);
-  })
+  });
+  it('should add text to layer', () => {
+    const text = {
+      text: 'Should save',
+      posX: '124px',
+      posY: '124px'
+    }
+    const layerNumber = 1;
+    const expectedAction = { type: 'ADD_TEXT', text, layerNumber };
+    expect(actions.addTextToLayer(text, layerNumber)).toEqual(expectedAction);
+  });
 });

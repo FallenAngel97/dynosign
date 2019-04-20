@@ -106,6 +106,25 @@ describe('Redux reducers tests. Layers CRUD', () => {
       defaultLayer, defaultLayer
     ])
   });
+  it('should handle ADD_TEXT', () => {
+    const state = [defaultLayer, defaultLayer];
+    const text = {
+      text: 'Should save',
+      posX: '124px',
+      posY: '124px'
+    }
+    const layerNumber = 0;
+    const action = { type: 'ADD_TEXT', text, layerNumber };
+    expect(layersCRUD(state, action)).toEqual([
+      { ...defaultLayer, text: [text] },
+      defaultLayer
+    ])
+    const action2 = { type: 'ADD_TEXT', text, layerNumber: 2 };
+    expect(layersCRUD(state, action2)).toEqual([
+      defaultLayer,
+      defaultLayer
+    ])
+  });
 });
 
 describe('Redux reducers test. Mouse interactions on canvas', () => {
