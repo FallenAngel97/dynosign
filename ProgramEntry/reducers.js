@@ -7,7 +7,7 @@ export const defaultLayer = {
   name: 'New layer',
   hidden: false,
   linesArray: [],
-  text: '',
+  text: [],
   shapes: []
 }
 
@@ -104,6 +104,16 @@ export function layersCRUD (state = [defaultLayer], action) {
         state[nIndex],
         ...thirdPart
       ]
+    case 'ADD_TEXT':
+      return state.map((item, index) => {
+        if (index !== action.layerNumber) {
+          return item;
+        }
+        return {
+          ...item,
+          text: [...item.text, action.text]
+        }
+      });
   }
   return state;
 }

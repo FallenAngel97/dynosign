@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { addTextToLayer } from '../actions';
 import './TextTool.scss';
 import PropTypes from 'prop-types';
 
@@ -26,7 +27,15 @@ export class TextTool extends React.Component {
     input.focus()
   }
   componentWillUnmount () {
-    // Save text logic
+    var textElement = this.textWrapper.getElementsByTagName('input')[0];
+    if (textElement.value !== '') {
+      this.props.addTextToLayer(
+        textElement.value,
+        textElement.style.left,
+        textElement.style.top,
+        this.props.changeActiveLayer.layerNumber
+      );
+    }
   }
   render () {
     return (
@@ -38,9 +47,17 @@ export class TextTool extends React.Component {
 }
 
 TextTool.propTypes = {
-  changeFont: PropTypes.object
+  changeFont: PropTypes.object,
+  addTextToLayer: PropTypes.func,
+  changeActiveLayer: PropTypes.object
 }
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps)(TextTool);
+const mapDispatchToProps = dispatch => {
+  return {
+    addTextToLayer: (text, posX, posY, layerIndex) => dispatch(addTextToLayer({ text, posX, posY }, layerIndex))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextTool);

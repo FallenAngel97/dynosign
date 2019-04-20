@@ -62,3 +62,7 @@ export function reorderLayers (oldIndex, newIndex) {
 export function changeFonts (font) {
   return { type: 'CHANGE_FONT', font };
 }
+
+export function addTextToLayer (text, layerNumber) {
+  return { type: 'ADD_TEXT', text, layerNumber }
+}
