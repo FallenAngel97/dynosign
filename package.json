@@ -9,7 +9,7 @@
   "scripts": {
     "start": "NODE_ENV=development electron .",
     "watch": "webpack-dev-server --hot --inline --config webpack.dev.js",
-    "test": "cross-env ELECTRON_RUN_AS_NODE=1 electron ./node_modules/.bin/jest",
+    "test": "electron-rebuild && cross-env ELECTRON_RUN_AS_NODE=1 electron ./node_modules/.bin/jest",
     "test:watch": "cross-env ELECTRON_RUN_AS_NODE=1 ./node_modules/.bin/electron ./node_modules/.bin/jest -- --watch .",
     "build": "webpack --config webpack.prod.js",
     "pack": "electron-builder --dir",
