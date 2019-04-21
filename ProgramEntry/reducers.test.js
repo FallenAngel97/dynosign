@@ -1,13 +1,10 @@
 /* global defaultLayer */
-import {
-  changeActiveLayer, layersCRUD, changeMouseType,
-  toggleMenuBar, changeColor, color, changeFont
-} from './reducers'
+import * as reducers from './reducers'
 var fontManager = require('font-manager');
 
 describe('Redux reducers tests. Change Active Layer', () => {
   it('should return default state of active layers', () => {
-    expect(changeActiveLayer(undefined, {})).toEqual({
+    expect(reducers.changeActiveLayer(undefined, {})).toEqual({
       type: 'CHANGE_ACTIVE_LAYER',
       layer: defaultLayer,
       layerNumber: 0
@@ -16,7 +13,7 @@ describe('Redux reducers tests. Change Active Layer', () => {
 
   it('should handle CHANGE_ACTIVE_LAYER', () => {
     expect(
-      changeActiveLayer([], { type: 'CHANGE_ACTIVE_LAYER', layer: defaultLayer, layerNumber: 2 })
+      reducers.changeActiveLayer([], { type: 'CHANGE_ACTIVE_LAYER', layer: defaultLayer, layerNumber: 2 })
     ).toEqual(
       { layer: defaultLayer, layerNumber: 2 }
     );
@@ -24,10 +21,10 @@ describe('Redux reducers tests. Change Active Layer', () => {
 
   it('should handle ADD_LAYER', () => {
     const action = { type: 'ADD_LAYER', layer: defaultLayer, layerNumber: 2 };
-    expect(changeActiveLayer([], action)).toEqual(
+    expect(reducers.changeActiveLayer([], action)).toEqual(
       { layer: defaultLayer, layerNumber: 2 }
     );
-    expect(layersCRUD([], action)).toEqual(
+    expect(reducers.layersCRUD([], action)).toEqual(
       [action.layer]
     )
   });
@@ -37,10 +34,10 @@ describe('Redux reducers tests. Change Active Layer', () => {
       defaultLayer, defaultLayer, defaultLayer
     ];
     const action = { type: 'DELETE_LAYER', layer: defaultLayer, layerId: 2 };
-    expect(changeActiveLayer({}, action)).toEqual(
+    expect(reducers.changeActiveLayer({}, action)).toEqual(
       { layerNumber: 1 }
     );
-    expect(layersCRUD(state, action)).toEqual([
+    expect(reducers.layersCRUD(state, action)).toEqual([
       defaultLayer, defaultLayer
     ])
   });
@@ -52,11 +49,11 @@ describe('Redux reducers tests. Layers CRUD', () => {
     const hidden = true;
     const layerNumber = 0;
     const action = { type: 'CHANGE_LAYER_VISIBILITY', hidden, layerNumber }
-    expect(layersCRUD(state, action)).toEqual([{
+    expect(reducers.layersCRUD(state, action)).toEqual([{
       ...defaultLayer, hidden
     }, defaultLayer])
     const action2 = { type: 'CHANGE_LAYER_VISIBILITY', hidden, layerNumber: 1 }
-    expect(layersCRUD(state, action2)).not.toEqual([{
+    expect(reducers.layersCRUD(state, action2)).not.toEqual([{
       ...defaultLayer, hidden
     }, defaultLayer])
   });
@@ -65,11 +62,11 @@ describe('Redux reducers tests. Layers CRUD', () => {
     const layer = defaultLayer;
     const layerId = 0;
     const action = { type: 'CHANGE_LAYER', layer, layerId };
-    expect(layersCRUD(state, action)).toEqual([
+    expect(reducers.layersCRUD(state, action)).toEqual([
       defaultLayer, defaultLayer
     ])
     const action2 = { type: 'CHANGE_LAYER', layer, layerId: 1 };
-    expect(layersCRUD(state, action2)).toEqual([
+    expect(reducers.layersCRUD(state, action2)).toEqual([
       defaultLayer, defaultLayer
     ])
   });
@@ -80,13 +77,13 @@ describe('Redux reducers tests. Layers CRUD', () => {
     const action = {
       type: 'ADD_LINE', lineData: canvas.toDataURL(), layerNumber
     };
-    expect(layersCRUD(state, action)).toEqual([
+    expect(reducers.layersCRUD(state, action)).toEqual([
       defaultLayer, defaultLayer
     ])
     const action2 = {
       type: 'ADD_LINE', lineData: canvas.toDataURL(), layerNumber: 1
     };
-    expect(layersCRUD(state, action2)).not.toEqual([
+    expect(reducers.layersCRUD(state, action2)).not.toEqual([
       defaultLayer, defaultLayer
     ])
   });
@@ -96,13 +93,13 @@ describe('Redux reducers tests. Layers CRUD', () => {
     const action = {
       type: 'REDO_LINE', layerNumber
     };
-    expect(layersCRUD(state, action)).toEqual([
+    expect(reducers.layersCRUD(state, action)).toEqual([
       defaultLayer, defaultLayer
     ])
     const action2 = {
       type: 'REDO_LINE', layerNumber: 0
     };
-    expect(layersCRUD(state, action2)).toEqual([
+    expect(reducers.layersCRUD(state, action2)).toEqual([
       defaultLayer, defaultLayer
     ])
   });
@@ -115,12 +112,12 @@ describe('Redux reducers tests. Layers CRUD', () => {
     }
     const layerNumber = 0;
     const action = { type: 'ADD_TEXT', text, layerNumber };
-    expect(layersCRUD(state, action)).toEqual([
+    expect(reducers.layersCRUD(state, action)).toEqual([
       { ...defaultLayer, text: [text] },
       defaultLayer
     ])
     const action2 = { type: 'ADD_TEXT', text, layerNumber: 2 };
-    expect(layersCRUD(state, action2)).toEqual([
+    expect(reducers.layersCRUD(state, action2)).toEqual([
       defaultLayer,
       defaultLayer
     ])
@@ -130,7 +127,7 @@ describe('Redux reducers tests. Layers CRUD', () => {
 describe('Redux reducers test. Mouse interactions on canvas', () => {
   it('should handle CHANGE_MOUSE_TYPE', () => {
     const mouseType = 'cursor';
-    expect(changeMouseType({}, { type: 'CHANGE_MOUSE_TYPE', mouseType })).toEqual({
+    expect(reducers.changeMouseType({}, { type: 'CHANGE_MOUSE_TYPE', mouseType })).toEqual({
       mouseType
     })
   });
@@ -139,7 +136,7 @@ describe('Redux reducers test. Mouse interactions on canvas', () => {
 describe("Redux reducers test. Changing of action menu's", () => {
   it('should handle TOGGLE_MENU_BAR', () => {
     const menuBarNumber = 1;
-    expect(toggleMenuBar({}, { type: 'TOGGLE_MENU_BAR', menuBarNumber })).toEqual({
+    expect(reducers.toggleMenuBar({}, { type: 'TOGGLE_MENU_BAR', menuBarNumber })).toEqual({
       menuBarNumber
     });
   });
@@ -153,11 +150,11 @@ describe('Redux reducers test. Changing of colors', () => {
       b: '200',
       a: 1
     }
-    const state = { type: 'CHANGE_COLOR', color };
+    const state = { type: 'CHANGE_COLOR', color: reducers.color };
     const action = {
       type: 'CHANGE_COLOR', color: custColor
     };
-    expect(changeColor(state, action)).toEqual(action)
+    expect(reducers.changeColor(state, action)).toEqual(action)
   })
 });
 
@@ -169,6 +166,6 @@ describe('Redux reducers test. Changing fonts', () => {
     const action = {
       type: 'CHANGE_FONT', font: selectedFont
     };
-    expect(changeFont(state, action)).toEqual(action)
+    expect(reducers.changeFont(state, action)).toEqual(action)
   });
 });
