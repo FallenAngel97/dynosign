@@ -9,12 +9,13 @@
   "scripts": {
     "start": "NODE_ENV=development electron .",
     "watch": "webpack-dev-server --hot --inline --config webpack.dev.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "cross-env ELECTRON_RUN_AS_NODE=1 electron ./node_modules/.bin/jest",
+    "test:watch": "cross-env ELECTRON_RUN_AS_NODE=1 ./node_modules/.bin/electron ./node_modules/.bin/jest -- --watch .",
     "build": "webpack --config webpack.prod.js",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "doc": "documentation build ProgramEntry/** SettingsPage/** -f html -o gh-pages --github --theme gh-pages/documentationjs_theme"
+    "doc": "documentation build ProgramEntry/** SettingsPage/** -f html -o gh-pages --github --theme gh-pages/documentationjs_theme",
+    "get-coverage": "cross-env ELECTRON_RUN_AS_NODE=1 ./node_modules/.bin/electron ./node_modules/.bin/jest  --coverage"
   },
   "jest": {
     "setupFiles": [
@@ -46,6 +47,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "8.0.4",
     "closure-webpack-plugin": "^2.0.1",
+    "cross-env": "^5.2.0",
     "css-loader": "1.0.1",
     "documentation": "^9.3.1",
     "electron": "^4.1.1",

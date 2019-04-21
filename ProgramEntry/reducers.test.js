@@ -3,7 +3,7 @@ import {
   changeActiveLayer, layersCRUD, changeMouseType,
   toggleMenuBar, changeColor, color, changeFont
 } from './reducers'
-// var fontManager = require('font-manager');
+var fontManager = require('font-manager');
 
 describe('Redux reducers tests. Change Active Layer', () => {
   it('should return default state of active layers', () => {
@@ -161,17 +161,14 @@ describe('Redux reducers test. Changing of colors', () => {
   })
 });
 
-// **TODO**
-// This one not works with electron-rebuild
-
-// describe('Redux reducers test. Changing fonts', () => {
-//   it('should change font', () => {
-//     const fonts = fontManager.getAvailableFontsSync();
-//     const selectedFont = { value: fonts[1], label: fonts[1].family };
-//     const state = { type: 'CHANGE_FONT', font: { value: fonts[0], label: fonts[0].family } };
-//     const action = {
-//       type: 'CHANGE_FONT', font: selectedFont
-//     };
-//     expect(changeFont(state, action)).toEqual(action)
-//   });
-// });
+describe('Redux reducers test. Changing fonts', () => {
+  it('should change font', () => {
+    const fonts = fontManager.getAvailableFontsSync();
+    const selectedFont = { value: fonts[1], label: fonts[1].family };
+    const state = { type: 'CHANGE_FONT', font: { value: fonts[0], label: fonts[0].family } };
+    const action = {
+      type: 'CHANGE_FONT', font: selectedFont
+    };
+    expect(changeFont(state, action)).toEqual(action)
+  });
+});
