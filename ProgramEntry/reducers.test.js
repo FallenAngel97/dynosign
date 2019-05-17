@@ -103,6 +103,35 @@ describe('Redux reducers tests. Layers CRUD', () => {
       defaultLayer, defaultLayer
     ])
   });
+  it('should handle REORDER_LAYERS', () => {
+    const state = [defaultLayer, defaultLayer, defaultLayer];
+    const oldIndex = 0;
+    const newIndex = 1;
+    const action = {
+      type: 'REORDER_LAYERS', oldIndex, newIndex
+    };
+    expect(reducers.layersCRUD(state, action)).toEqual([
+      defaultLayer, defaultLayer, defaultLayer
+    ])
+    const state2 = {
+      type: 'CHANGE_ACTIVE_LAYER',
+      layer: defaultLayer,
+      layerNumber: 0
+    };
+    expect(reducers.changeActiveLayer(state2, action)).toEqual({
+      type: 'CHANGE_ACTIVE_LAYER',
+      layer: defaultLayer,
+      layerNumber: newIndex
+    })
+  });
+  // it('should handle ADD_SHAPE', () => {
+  //   const state = [defaultLayer]
+  //   const layerNumber = 0;
+  //   const shape 
+  //   const action = {
+  //     type: 'REORDER_LAYERS', layerNumber, newIndex
+  //   };
+  // })
   it('should handle ADD_TEXT', () => {
     const state = [defaultLayer, defaultLayer];
     const text = {
@@ -167,5 +196,9 @@ describe('Redux reducers test. Changing fonts', () => {
       type: 'CHANGE_FONT', font: selectedFont
     };
     expect(reducers.changeFont(state, action)).toEqual(action)
+    const action2= {
+      type: 'DIFFERENT_ACTION'
+    }
+    expect(reducers.changeFont(state, action2)).toEqual(state)
   });
 });

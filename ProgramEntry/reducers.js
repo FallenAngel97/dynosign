@@ -33,6 +33,12 @@ export function changeActiveLayer (
   return state;
 }
 
+/**
+ * Allows adding, deletion, reordering of layers. Changing layer visibility
+ * @param {Object} state - beginning point of layersCRUD inner state
+ * @param {Object} action - new state for layer CRUD
+ */
+
 export function layersCRUD (state = [defaultLayer], action) {
   switch (action.type) {
     case 'ADD_LAYER':
