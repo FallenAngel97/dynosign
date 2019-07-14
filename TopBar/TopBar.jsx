@@ -12,7 +12,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 const { ipcRenderer } = require('electron');
 
 /**
- * The very top bar, which conatins title, and minimize-maximize-close buttons
+ * The very top bar, which contains title, and minimize-maximize-close buttons
  * @module TopBar
  */
 

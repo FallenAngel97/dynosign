@@ -8,7 +8,14 @@ const store = new Store();
 let win;
 
 function createWindow () {
-  win = new BrowserWindow({ width: 800, height: 600, frame: false });
+  win = new BrowserWindow({ 
+    width: 800,
+    height: 600,
+    frame: false,
+    webPreferences: {
+      nodeIntegration: process.env.NODE_ENV === 'development'
+    }
+  });
   let language = store.get('language', 'en');
   if (process.env.NODE_ENV === 'development') {
     win.loadURL('http://localhost:8080/dist/index.html?language=' + language);
