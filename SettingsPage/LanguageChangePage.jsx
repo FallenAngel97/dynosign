@@ -41,4 +41,4 @@ class LanguageChangePage extends React.Component {
   }
 }
 
-export default  withLocalize(LanguageChangePage);
+export default withLocalize(LanguageChangePage);

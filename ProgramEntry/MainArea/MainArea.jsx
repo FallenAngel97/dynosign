@@ -8,6 +8,7 @@ import TextTool from './TextTool';
 import PropTypes from 'prop-types';
 import FontSettings from './FontSettings';
 import RectangleSettings from './RectangleSettings';
+import { Translate, withLocalize } from 'react-localize-redux';
 // import ReactDOM from 'react-dom';
 
 /**
@@ -116,8 +117,8 @@ export class MainArea extends React.Component {
 
     return (
       <div id='mainArea'>
-        <button className="drawAnimateSelector">Draw</button>
-        <button className="drawAnimateSelector">Animate</button>
+        <button className="drawAnimateSelector"><Translate id='main.label.draw'/></button>
+        <button className="drawAnimateSelector"><Translate id='main.label.animate'/></button>
         {mouseType === 'text' && <FontSettings />}
         {mouseType === 'rectangle' && <RectangleSettings />}
         <div ref={this.layerContainer} style={{ cursor: iconType }} id='drawingArea' >

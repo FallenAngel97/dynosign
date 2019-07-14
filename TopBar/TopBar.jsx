@@ -6,7 +6,7 @@ import close from './close.svg';
 import { toggleMenuBar } from '../ProgramEntry/actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withLocalize } from 'react-localize-redux';
+import { withLocalize, Translate } from 'react-localize-redux';
 import globalTranslations from '../languagepacks/global.json';
 import { renderToStaticMarkup } from 'react-dom/server';
 const { ipcRenderer } = require('electron');
@@ -86,12 +86,13 @@ class TopBar extends React.Component {
   }
 
   render () {
+    const { menuBarNumber } = this.props.toggleMenuBar;
     return (
       <header>
         {this.props.showMenu && <nav>
-          <div className={this.props.toggleMenuBar.menuBarNumber === 1 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(1)}>File</div>
-          <div className={this.props.toggleMenuBar.menuBarNumber === 2 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(2)}>Edit</div>
-          <div onClick={this.openHelp}>Help</div>
+          <div className={ menuBarNumber === 1 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(1)}><Translate id="topbar.file" /></div>
+          <div className={ menuBarNumber === 2 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(2)}><Translate id="topbar.edit" /></div>
+          <div onClick={this.openHelp}><Translate id="topbar.help" /></div>
         </nav>}
         <div id='title'>{this.props.header}</div>
         <div id='controlButtons'>

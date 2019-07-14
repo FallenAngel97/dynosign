@@ -9,6 +9,36 @@
     "Сменить язык",
     "Змінити мову"
   ],
+  "main.label.animate": [
+    "Animate",
+    "Анимировать",
+    "Аніміровати"
+  ],
+  "main.label.draw": [
+    "Draw",
+    "Рисовать",
+    "Малювати"
+  ],
+  "layers.new_layer": [
+    "New layer",
+    "Новый слой",
+    "Новий шар"
+  ],
+  "topbar.file": [
+    "File",
+    "Файл",
+    "Файл"
+  ],
+  "topbar.edit": [
+    "Edit",
+    "Правка",
+    "Правка"
+  ],
+  "topbar.help": [
+    "Help",
+    "Помощь",
+    "Допомога"
+  ],
   "change_theme": [
     "Change theme",
     "Сменить тему",

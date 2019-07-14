@@ -15,7 +15,11 @@ export class FontSettings extends React.Component {
     this.options = fonts.map((font) => {
       return { value: font, label: font.family };
     });
-    this.fontChange = this.fontChange.bind(this)
+    this.state = {
+      fontSize: 10
+    }
+    this.fontChange = this.fontChange.bind(this);
+    this.changeFontSize = this.changeFontSize.bind(this);
   }
   /**
    * Change the font for text
@@ -24,13 +28,18 @@ export class FontSettings extends React.Component {
   fontChange (font) {
     this.props.changeFonts(font);
   }
+  changeFontSize (event) {
+    this.setState({
+      fontSize: event.target.value
+    })
+  }
   render () {
     return (
       <>
         <div id='fontSelector'>
           <Select onChange={this.fontChange} options={this.options} value={this.props.changeFont.font}/>
         </div>
-        <input id='fontSize_picker' defaultValue={10} />
+        <input id='fontSize_picker' onChange={this.changeFontSize} value={this.state.fontSize} />
       </>
     )
   }
