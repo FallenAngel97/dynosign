@@ -86,7 +86,7 @@ class TopBar extends React.Component {
   }
 
   render () {
-    const { menuBarNumber } = this.props.toggleMenuBar;
+    const { menuBarNumber } = this.props._toggleMenuBar;
     return (
       <header>
         {this.props.showMenu && <nav>
@@ -107,7 +107,6 @@ class TopBar extends React.Component {
 
 TopBar.propTypes = {
   _toggleMenuBar: PropTypes.func,
-  toggleMenuBar: PropTypes.object,
   header: PropTypes.string,
   showMenu: PropTypes.bool
 }

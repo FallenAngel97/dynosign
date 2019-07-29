@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { draw } from './drawMarchingAnts';
 
 /**
  * Enables the selection box (marching ants) to be shown
@@ -14,34 +15,8 @@ export class SelectTool extends React.Component {
     this.currX = 0;
     this.prevX = 0;
     this.prevY = 0;
-    this.flag = false;
+    this.displaySizes = false;
     this.findxy = this.findxy.bind(this);
-    this.draw = this.draw.bind(this);
-    this.timerMarchingAnts = undefined;
-  }
-  /**
-   * Draws selection box with pixel sizes on the sides
-   * @param {number} offsetDash - the distance between ants
-   */
-  draw (offsetDash) {
-    if (!this.canvas) return;
-    var ctx = this.canvas.getContext('2d');
-    ctx.beginPath();
-    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.setLineDash([6]);
-    ctx.lineDashOffset = offsetDash;
-    const diffX = this.currX - this.prevX;
-    const diffY = this.currY - this.prevY;
-    ctx.strokeRect(this.currX - diffX, this.currY - diffY, diffX, diffY);
-    if (this.flag) {
-      ctx.fillText(Math.abs(diffX) + 'px', this.prevX + diffX / 2, this.prevY - 10)
-      ctx.fillText(Math.abs(diffY) + 'px', this.prevX - 40, this.prevY + diffY / 2)
-    }
-    clearTimeout(this.timerMarchingAnts)
-    this.timerMarchingAnts = setTimeout(() => {
-      offsetDash++;
-      this.draw(offsetDash);
-    }, 100);
   }
   findxy (res, e) {
     if (this.props.changeMouseType.mouseType !== 'select') return;
@@ -50,17 +25,18 @@ export class SelectTool extends React.Component {
       this.currY = (e.clientY - this.canvas.offsetTop) * window.devicePixelRatio;
       this.prevX = this.currX;
       this.prevY = this.currY;
-      this.flag = true;
+      this.displaySizes = true;
     }
-    if (res === 'up' || res === 'out') {
-      this.flag = false;
+    if (res === 'up' || res === 'out') { // hide size tooltip on mouse release
+      this.displaySizes = false;
+      draw(0, this.canvas, this.displaySizes);
     }
-    if (res === 'move') {
-      if (this.flag) {
-        this.currX = (e.clientX - this.canvas.offsetLeft) * window.devicePixelRatio;
-        this.currY = (e.clientY - this.canvas.offsetTop) * window.devicePixelRatio;
-        this.draw(0);
-      }
+    if (res === 'move' && this.displaySizes) {
+      this.currX = (e.clientX - this.canvas.offsetLeft) * window.devicePixelRatio;
+      this.currY = (e.clientY - this.canvas.offsetTop) * window.devicePixelRatio;
+      const currrentCoordinate = { x: this.currX, y: this.currY };
+      const prevCoordinate = { x: this.prevX, y: this.prevY };
+      draw(0, this.canvas, this.displaySizes, currrentCoordinate, prevCoordinate);
     }
   }
   render () {
