@@ -5,7 +5,7 @@ import { addLayer, deleteLayer, changeLayer, reorderLayers } from '../actions';
 import Layer from './Layer';
 import PropTypes from 'prop-types';
 import LayerPopupContextMenu from './LayerPopupContextMenu';
-import ReactDOM from 'react-dom';
+import { findDOMNode } from 'react-dom';
 import { Translate } from 'react-localize-redux';
 
 /**
@@ -63,7 +63,7 @@ export class RightPanel extends React.Component {
     this.setState({ displayContext: false });
   }
   openContext (e) {
-    const elem = ReactDOM.findDOMNode(this.context);
+    const elem = findDOMNode(this.context);
     elem.style.left = e.clientX + 'px';
     elem.style.top = e.clientY + 'px';
     if (window.innerHeight - e.clientY < 145) {

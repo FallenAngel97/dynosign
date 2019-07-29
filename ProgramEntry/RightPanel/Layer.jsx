@@ -81,13 +81,17 @@ export class Layer extends React.Component {
     this.setState({ editLayer: true });
   }
   layerNameChange (ev) {
-    let layer = this.props.changeActiveLayer.layer;
+    let { layer } = this.props.changeActiveLayer;
     layer.name = ev.target.value;
     this.props.changeLayer(layer, this.props.changeActiveLayer.layerId)
   }
   render () {
+    const { editLayer } = this.state;
+    const { changeActiveLayer, layerId, layer } = this.props;
+
     return (
-      <div onDragStart={this.ondragStart} draggable={!this.state.editLayer} ref={node => { this.node = node }}
+      <div onDragStart={this.ondragStart} draggable={!editLayer}
+        ref={node => { this.node = node }}
         onDoubleClick={this.renameLayer}
         onDrop={this.ondrop}
         onKeyPress={this._onKeyPress}
@@ -95,9 +99,9 @@ export class Layer extends React.Component {
         onDragLeave={this.dragLeave}
         onDragOver={this.DragOver}
         onDragEnd={this.dragEnd}
-        className={'singleLayer' + ((this.props.changeActiveLayer.layerNumber === this.props.layerId) ? ' activeLayer' : '')}>
-        <img onClick={this.changeVisibility} src={this.props.layer.hidden ? hiddenEye : visibleEye}/>
-        {this.state.editLayer ? <input onChange={this.layerNameChange} type='text' className='singleLayerEdit' value={this.props.layer.name} /> : this.props.layer.name}
+        className={'singleLayer' + ((changeActiveLayer.layerNumber === layerId) ? ' activeLayer' : '')}>
+        <img onClick={this.changeVisibility} src={layer.hidden ? hiddenEye : visibleEye}/>
+        {editLayer ? <input onChange={this.layerNameChange} type='text' className='singleLayerEdit' value={layer.name} /> : layer.name}
       </div>
     )
   }
