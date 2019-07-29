@@ -1,6 +1,8 @@
 export const dragDroppedPicture = (canvas, event) => {
   const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/svg+xml'];
+  let filename = '';
   for (let f of event.dataTransfer.files) {
+    filename = f.name;
     if (validImageTypes.includes(f.type)) {
       var reader = new FileReader();
       reader.onload = () => {
@@ -21,4 +23,5 @@ export const dragDroppedPicture = (canvas, event) => {
       reader.readAsDataURL(f);
     }
   }
+  return filename;
 }

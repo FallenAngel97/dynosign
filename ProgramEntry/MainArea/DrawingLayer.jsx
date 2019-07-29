@@ -1,7 +1,7 @@
 /* eslint-disable curly */
 import React from 'react';
 import { connect } from 'react-redux';
-import { addLine } from '../actions';
+import { addLine, changeLayer } from '../actions';
 import PropTypes from 'prop-types';
 import { Shape } from './Shape';
 import { dragDroppedPicture } from './drawingHelpers';
@@ -212,7 +212,11 @@ export class DrawingLayer extends React.Component {
 
   onDrop (e) {
     e.preventDefault();
-    dragDroppedPicture(this.canvas, e);
+    const droppedFileName = dragDroppedPicture(this.canvas, e);
+    let { layer } = this.props.changeActiveLayer;
+    layer.name = droppedFileName;
+    this.props.changeLayer(layer, this.props.changeActiveLayer.layerNumber)
+    console.log(droppedFileName);
     return false;
   }
 
@@ -240,6 +244,7 @@ export class DrawingLayer extends React.Component {
 DrawingLayer.propTypes = {
   changeColor: PropTypes.object,
   changeMouseType: PropTypes.object,
+  changeLayer: PropTypes.func,
   height: PropTypes.number,
   width: PropTypes.number,
   addLine: PropTypes.func,
@@ -251,7 +256,8 @@ const mapStateToProps = state => state;
 
 export const mapDispatchToProps = dispatch => {
   return {
-    addLine: (elem, layerNumber) => dispatch(addLine(elem, layerNumber))
+    addLine: (elem, layerNumber) => dispatch(addLine(elem, layerNumber)),
+    changeLayer: (layer, layerId) => dispatch(changeLayer(layer, layerId))
   }
 }
 
