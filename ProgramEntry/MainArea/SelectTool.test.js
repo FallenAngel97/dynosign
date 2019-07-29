@@ -23,20 +23,4 @@ describe('SelectTool test set', () => {
     selectTool.simulate('mouseout', { preventDefault: () => true })
     expect(spy).toBeCalled();
   });
-  test('findxy can handle move', () => {
-    const selectTool = mount(<SelectTool width={1} height={1} changeMouseType={{ mouseType: 'select' }} />);
-    const ev = {
-      clientX: 200,
-      clientY: 200
-    };
-    selectTool.instance().flag = true;
-    selectTool.instance().findxy('move', ev);
-    expect(selectTool.instance().currY).toEqual(200);
-  });
-  test('drawing invoke marching ants', () => {
-    const selectTool = mount(<SelectTool width={1} height={1} changeMouseType={{ mouseType: 'select' }} />);
-    selectTool.instance().draw(6);
-    expect(setTimeout).toHaveBeenCalledTimes(2);
-    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 100);
-  });
 });
