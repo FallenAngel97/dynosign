@@ -8,7 +8,7 @@ const store = new Store();
 let win;
 
 function createWindow () {
-  win = new BrowserWindow({ 
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     frame: false,
@@ -25,6 +25,7 @@ function createWindow () {
   win.on('closed', () => {
     win = null
   })
+  win.maximize();
 }
 
 app.on('ready', createWindow);
