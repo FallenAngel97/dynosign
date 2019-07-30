@@ -2,7 +2,28 @@
   height: 100%;
   position: relative;
 }
+
+:root {
+  --border-color: #27abea;;
+  
+}
+
+.text_handler {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  height: 4px;
+  width: 4px;
+  border-radius: 100%;
+  position: absolute;
+}
+
 #text_tool_input {
   position: absolute;
   display: none;
+  padding: 2px;
+  border: 1px solid var(--border-color);
+  
+  &:focus {
+    outline: none;
+  }
 }

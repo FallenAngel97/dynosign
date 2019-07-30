@@ -13,6 +13,7 @@ export class TextTool extends React.Component {
   constructor (props) {
     super(props);
     this.addText = this.addText.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
   }
   /**
    * Shows the text box and sets it based on the mouse coordinates
@@ -37,10 +38,25 @@ export class TextTool extends React.Component {
       );
     }
   }
+  onTextChange (ev) {
+    const leftMargin = parseInt(document.getElementById('text_tool_input').style.left) - 2; // half size of resize circle
+    const topMargin = parseInt(document.getElementById('text_tool_input').style.top) - 2;
+    
+    const bottomMargin = parseInt(getComputedStyle(document.getElementById('text_tool_input')).bottom) - 2;
+    const rightMargin = parseInt(getComputedStyle(document.getElementById('text_tool_input')).right) - 2;
+    document.getElementById('handler_top_left').style.cssText = `left: ${leftMargin}px; top: ${topMargin}px`;
+    document.getElementById('handler_bottom_left').style.cssText = `left: ${leftMargin}px; bottom: ${bottomMargin}px`;
+    document.getElementById('handler_top_right').style.cssText = `right: ${rightMargin}px; top: ${topMargin}px`;
+    document.getElementById('handler_bottom_right').style.cssText = `right: ${rightMargin}px; bottom: ${bottomMargin}px`;
+  }
   render () {
     return (
       <div ref={textWrapper => { this.textWrapper = textWrapper }} onClick={this.addText} id='text_tool_drawing_area'>
-        <input style={{ fontFamily: this.props.changeFont.font.label }} id='text_tool_input' type='text' />
+        <div onInput={this.onTextChange} style={{ fontFamily: this.props.changeFont.font.label }} contentEditable={true} id='text_tool_input' />
+        <div className='text_handler' id='handler_top_left' />
+        <div className='text_handler' id='handler_top_right' />
+        <div className='text_handler' id='handler_bottom_left' />
+        <div className='text_handler' id='handler_bottom_right' />
       </div>
     )
   };
