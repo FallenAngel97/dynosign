@@ -12,8 +12,16 @@ import PropTypes from 'prop-types';
 export class TextTool extends React.Component {
   constructor (props) {
     super(props);
+
+    this.prevX = 0;
+    this.prevY = 0;
+    this.currY = 0;
+    this.currX = 0;
+    this.mousePressed = false;
+
     this.addText = this.addText.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
+    this.onTextResize = this.onTextResize.bind(this);
   }
   /**
    * Shows the text box and sets it based on the mouse coordinates
@@ -26,6 +34,7 @@ export class TextTool extends React.Component {
     const y = ev.clientY - this.textWrapper.offsetTop;
     input.style.cssText = `display: block; left: ${x}px; top: ${y}px`;
     input.focus()
+    this.onTextChange();
   }
   componentWillUnmount () {
     var textElement = this.textWrapper.getElementsByTagName('input')[0];
@@ -38,10 +47,15 @@ export class TextTool extends React.Component {
       );
     }
   }
-  onTextChange (ev) {
+  onTextResize (ev) {
+    console.log(ev.clientX);
+    console.log(ev.clienY);
+    ev.stopPropagation();
+  }
+  onTextChange () {
     const leftMargin = parseInt(document.getElementById('text_tool_input').style.left) - 2; // half size of resize circle
     const topMargin = parseInt(document.getElementById('text_tool_input').style.top) - 2;
-    
+
     const bottomMargin = parseInt(getComputedStyle(document.getElementById('text_tool_input')).bottom) - 2;
     const rightMargin = parseInt(getComputedStyle(document.getElementById('text_tool_input')).right) - 2;
     document.getElementById('handler_top_left').style.cssText = `left: ${leftMargin}px; top: ${topMargin}px`;
@@ -53,10 +67,22 @@ export class TextTool extends React.Component {
     return (
       <div ref={textWrapper => { this.textWrapper = textWrapper }} onClick={this.addText} id='text_tool_drawing_area'>
         <div onInput={this.onTextChange} style={{ fontFamily: this.props.changeFont.font.label }} contentEditable={true} id='text_tool_input' />
-        <div className='text_handler' id='handler_top_left' />
-        <div className='text_handler' id='handler_top_right' />
-        <div className='text_handler' id='handler_bottom_left' />
-        <div className='text_handler' id='handler_bottom_right' />
+        <div onMouseMove={this.onTextResize}
+             onMouseUp={this.onTextResize}
+             onMouseDown={this.onTextResize}
+             className='text_handler' id='handler_top_left' />
+        <div onMouseMove={this.onTextResize}
+             onMouseUp={this.onTextResize}
+             onMouseDown={this.onTextResize}
+             className='text_handler' id='handler_top_right' />
+        <div onMouseMove={this.onTextResize}
+             onMouseUp={this.onTextResize}
+             onMouseDown={this.onTextResize}
+             className='text_handler' id='handler_bottom_left' />
+        <div onMouseMove={this.onTextResize}
+             onMouseUp={this.onTextResize}
+             onMouseDown={this.onTextResize}
+             className='text_handler' id='handler_bottom_right' />
       </div>
     )
   };
