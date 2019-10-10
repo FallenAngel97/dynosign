@@ -134,6 +134,9 @@ export class MainArea extends React.Component {
             height={this.getParentSize().height} />}
           {mouseType === 'text' && <TextTool />}
         </div>
+        <div>
+          Zoom <input type='text' defaultValue='100%' />
+        </div>
       </div>
     )
   }

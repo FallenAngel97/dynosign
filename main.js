@@ -1,7 +1,7 @@
 /* eslint-disable curly */
 const { ipcMain, app, BrowserWindow } = require('electron');
 const fs = require('fs');
-var fontManager = require('font-manager');
+const fontManager = require('fontmanager-redux');
 const Store = require('electron-store');
 const store = new Store();
 

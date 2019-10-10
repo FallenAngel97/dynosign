@@ -37,14 +37,15 @@ export class TextTool extends React.Component {
     this.onTextChange();
   }
   componentWillUnmount () {
-    var textElement = this.textWrapper.getElementsByTagName('input')[0];
-    if (textElement.value !== '') {
-      this.props.addTextToLayer(
-        textElement.value,
-        textElement.style.left,
-        textElement.style.top,
-        this.props.changeActiveLayer.layerNumber
-      );
+    var textElement = document.getElementById('text_tool_input');
+    if (textElement && textElement.innerHTML !== '') {
+      console.log(textElement.innerHTML);
+      // this.props.addTextToLayer(
+      //   textElement.value,
+      //   textElement.style.left,
+      //   textElement.style.top,
+      //   this.props.changeActiveLayer.layerNumber
+      // );
     }
   }
   onTextResize (ev) {
@@ -52,6 +53,9 @@ export class TextTool extends React.Component {
     console.log(ev.clienY);
     ev.stopPropagation();
   }
+  /**
+   * Changes the handlers position as user types
+   */
   onTextChange () {
     const leftMargin = parseInt(document.getElementById('text_tool_input').style.left) - 2; // half size of resize circle
     const topMargin = parseInt(document.getElementById('text_tool_input').style.top) - 2;

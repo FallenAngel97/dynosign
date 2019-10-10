@@ -1,10 +1,5 @@
-export function changeMouseType (mouseType) {
-  return { type: 'CHANGE_MOUSE_TYPE', mouseType }
-}
-
-export function deleteLayer (layerId) {
-  return { type: 'DELETE_LAYER', layerId }
-}
+export { default as changeMouseType } from './changeMouseType';
+export { default as deleteLayer } from './deleteLayer';
 
 export function changeActiveLayer (layer, layerNumber) {
   return { type: 'CHANGE_ACTIVE_LAYER', layer, layerNumber }

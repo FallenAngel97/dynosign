@@ -7,7 +7,7 @@ export const defaultLayer = {
   name: 'New layer',
   hidden: false,
   linesArray: [],
-  text: [],
+  text: {},
   shapes: []
 }
 
@@ -117,7 +117,7 @@ export function layersCRUD (state = [defaultLayer], action) {
         }
         return {
           ...item,
-          text: [...item.text, action.text]
+          text: { ...item.text, ...action.text }
         }
       });
   }

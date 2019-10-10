@@ -1,5 +1,5 @@
 /* global describe expect defaultLayer it */
-import * as actions from './actions';
+import * as actions from './index';
 
 describe('Redux actions testing', () => {
   it('should change mouse type', () => {

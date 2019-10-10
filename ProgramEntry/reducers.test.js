@@ -1,6 +1,6 @@
 /* global defaultLayer */
 import * as reducers from './reducers'
-var fontManager = require('font-manager');
+var fontManager = require('fontmanager-redux');
 
 describe('Redux reducers tests. Change Active Layer', () => {
   it('should return default state of active layers', () => {
@@ -142,7 +142,7 @@ describe('Redux reducers tests. Layers CRUD', () => {
     const layerNumber = 0;
     const action = { type: 'ADD_TEXT', text, layerNumber };
     expect(reducers.layersCRUD(state, action)).toEqual([
-      { ...defaultLayer, text: [text] },
+      { ...defaultLayer, text },
       defaultLayer
     ])
     const action2 = { type: 'ADD_TEXT', text, layerNumber: 2 };
