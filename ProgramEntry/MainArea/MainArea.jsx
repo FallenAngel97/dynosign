@@ -67,11 +67,12 @@ export class MainArea extends React.Component {
 
       layersCRUD.map((layer, index) => {
         let ctx = this.layers[layerIndex].canvas.getContext('2d');
-        layer.text.map((text) => {
-          console.log(text);
+        const { text, hidden } = layer;
+        const emptyTextObject = Object.entries(text).length === 0 && text.constructor === Object;
+        if (!emptyTextObject) {
           ctx.fillText(text.text, parseInt(text.posX), parseInt(text.posY))
-        })
-        if (layer.hidden === true) {
+        }
+        if (hidden === true) {
           let ctx = this.layers[index].canvas.getContext('2d');
           ctx.clearRect(0, 0, this.layers[index].canvas.width, this.layers[index].canvas.height);
         }

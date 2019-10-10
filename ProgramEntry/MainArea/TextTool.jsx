@@ -40,17 +40,17 @@ export class TextTool extends React.Component {
     var textElement = document.getElementById('text_tool_input');
     if (textElement && textElement.innerHTML !== '') {
       console.log(textElement.innerHTML);
-      // this.props.addTextToLayer(
-      //   textElement.value,
-      //   textElement.style.left,
-      //   textElement.style.top,
-      //   this.props.changeActiveLayer.layerNumber
-      // );
+      this.props.addTextToLayer(
+        textElement.innerHTML,
+        textElement.style.left,
+        textElement.style.top,
+        this.props.changeActiveLayer.layerNumber
+      );
     }
   }
   onTextResize (ev) {
     console.log(ev.clientX);
-    console.log(ev.clienY);
+    console.log(ev.clientY);
     ev.stopPropagation();
   }
   /**
