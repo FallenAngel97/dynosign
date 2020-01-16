@@ -14,6 +14,10 @@ export function draw (offsetDash, canvas, flag, coordinate = _currentCoordinate,
   var ctx = canvas.getContext('2d');
   ctx.beginPath();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if(flag == undefined) {
+    clearTimeout(timerMarchingAnts);
+    return;
+  }
   ctx.setLineDash([6]);
   ctx.lineDashOffset = offsetDash;
   const diffX = coordinate.x - prevCoordinate.x;

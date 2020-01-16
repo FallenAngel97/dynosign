@@ -29,14 +29,22 @@ export class SelectTool extends React.Component {
     }
     if (res === 'up' || res === 'out') { // hide size tooltip on mouse release
       this.displaySizes = false;
-      draw(0, this.canvas, this.displaySizes);
+      if(this.currX == this.prevX && this.currY == this.prevY) {
+        // if clicked just on the screen without dragging - then don't display marching ants
+        let ctx = this.canvas.getContext('2d');
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        draw(0, this.canvas);
+        return;
+      } else {
+        draw(0, this.canvas, this.displaySizes);
+      }
     }
     if (res === 'move' && this.displaySizes) {
       this.currX = (e.clientX - this.canvas.offsetLeft) * window.devicePixelRatio;
       this.currY = (e.clientY - this.canvas.offsetTop) * window.devicePixelRatio;
-      const currrentCoordinate = { x: this.currX, y: this.currY };
+      const currentCoordinate = { x: this.currX, y: this.currY };
       const prevCoordinate = { x: this.prevX, y: this.prevY };
-      draw(0, this.canvas, this.displaySizes, currrentCoordinate, prevCoordinate);
+      draw(0, this.canvas, this.displaySizes, currentCoordinate, prevCoordinate);
     }
   }
   render () {

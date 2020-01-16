@@ -42,7 +42,6 @@ function simpleLineDraw(ctx, ctrlPressed, prevX, prevY, currX, currY, color) {
 }
 
 function rectangleDraw(ctx, shapes, currX, currY, prevX, prevY, color) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (shapes)
     shapes.map((shape) => {
       shape.draw(ctx);
@@ -54,7 +53,6 @@ function rectangleDraw(ctx, shapes, currX, currY, prevX, prevY, color) {
 }
 
 function circleDraw(ctx, shapes, currX, currY, prevX, prevY, color) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (shapes) {
     shapes.map((shape) => {
       shape.draw(ctx);
@@ -62,8 +60,8 @@ function circleDraw(ctx, shapes, currX, currY, prevX, prevY, color) {
   }
   ctx.beginPath();
   ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-  diffX = currX - prevX;
-  diffY = currY - prevY;
+  let diffX = currX - prevX;
+  let diffY = currY - prevY;
   ctx.arc(currX - diffX, currY - diffY, Math.abs(diffX), 0, 2 * Math.PI)
   ctx.fill()
 }
@@ -79,10 +77,12 @@ export const draw  = (canvas, color, mouseType, ctrlPressed,
 
       break;
     case 'rectangle':
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       rectangleDraw(ctx, shapes, currX, currY, prevX, prevY, color);
 
       break;
     case 'circle':
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       circleDraw(ctx, shapes, currX, currY, prevX, prevY, color);
 
       break;
