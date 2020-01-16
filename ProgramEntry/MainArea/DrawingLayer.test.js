@@ -32,11 +32,14 @@ describe('DrawingLayer test set', () => {
   test('Mouse events working correctly', () => {
     const spy = jest.spyOn(DrawingLayer.prototype, 'findxy');
     const addLine = jest.fn();
+    const _changeActiveLayer = jest.fn();
     const drawingLayer = mount(<DrawingLayer
       layer={defaultLayer}
       width={1} height={1}
       changeColor={{ color }}
       addLine={ addLine }
+      _changeActiveLayer = {_changeActiveLayer}
+      layersCRUD = { [defaultLayer] }
       changeActiveLayer={{ layerNumber: 0 }}
       changeMouseType={{ mouseType: 'draw' }} />);
     drawingLayer.simulate('mousemove', { preventDefault: () => true })

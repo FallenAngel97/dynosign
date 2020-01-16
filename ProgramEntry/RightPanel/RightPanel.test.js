@@ -22,10 +22,8 @@ describe('RightPanel test', () => {
         type: 'ADD_LAYER',
         layer:
         {
-          opacity: 100,
-          linesArray: [],
-          name: 'New layer ' + 1,
-          hidden: false
+          ...defaultLayer,
+          name: 'New layer ' + 1
         },
         layerNumber: 1
       }

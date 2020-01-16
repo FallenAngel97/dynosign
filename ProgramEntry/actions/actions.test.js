@@ -46,10 +46,8 @@ describe('Redux actions testing', () => {
     const expectedAction = {
       type: 'ADD_LAYER',
       layer: {
-        opacity: 100,
-        linesArray: [],
-        name: 'New layer ' + layersCount,
-        hidden: false
+        ...defaultLayer,
+        name: 'New layer ' + layersCount
       },
       layerNumber: layersCount
     };
