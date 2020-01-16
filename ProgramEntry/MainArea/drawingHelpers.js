@@ -26,6 +26,48 @@ export const dragDroppedPicture = (canvas, event) => {
   return filename;
 }
 
+function simpleLineDraw(ctx, ctrlPressed, prevX, prevY, currX, currY, color) {
+  ctx.beginPath();
+  if (ctrlPressed) { // draw orthogonal line
+    ctx.moveTo(prevX, prevY);
+    ctx.lineTo(prevX, currY);
+  } else {
+    ctx.moveTo(prevX, prevY);
+    ctx.lineTo(currX, currY);
+  }
+  var y = 2;
+  ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+  ctx.lineWidth = y;
+  ctx.stroke();
+}
+
+function rectangleDraw(ctx, shapes, currX, currY, prevX, prevY, color) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (shapes)
+    shapes.map((shape) => {
+      shape.draw(ctx);
+    });
+  ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+  let diffX = currX - prevX;
+  let diffY = currY - prevY;
+  ctx.fillRect(currX - diffX, currY - diffY, diffX, diffY)
+}
+
+function circleDraw(ctx, shapes, currX, currY, prevX, prevY, color) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (shapes) {
+    shapes.map((shape) => {
+      shape.draw(ctx);
+    });
+  }
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+  diffX = currX - prevX;
+  diffY = currY - prevY;
+  ctx.arc(currX - diffX, currY - diffY, Math.abs(diffX), 0, 2 * Math.PI)
+  ctx.fill()
+}
+
 export const draw  = (canvas, color, mouseType, ctrlPressed, 
   { prevX, prevY, currX, currY }, shapes) => {
 
@@ -33,41 +75,16 @@ export const draw  = (canvas, color, mouseType, ctrlPressed,
 
   switch (mouseType) {
     case 'draw':
-      ctx.beginPath();
-      if (ctrlPressed) {
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(prevX, currY);
-      } else {
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(currX, currY);
-      }
-      var y = 2;
-      ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-      ctx.lineWidth = y;
-      ctx.stroke();
+      simpleLineDraw(ctx, ctrlPressed, prevX, prevY, currX, currY, color);
+
       break;
     case 'rectangle':
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (shapes)
-        shapes.map((shape) => {
-          shape.draw(ctx);
-        });
-      ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-      let diffX = currX - prevX;
-      let diffY = currY - prevY;
-      ctx.fillRect(currX - diffX, currY - diffY, diffX, diffY)
+      rectangleDraw(ctx, shapes, currX, currY, prevX, prevY, color);
+
       break;
     case 'circle':
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      shapes.map((shape) => {
-        shape.draw(ctx);
-      });
-      ctx.beginPath();
-      ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-      diffX = currX - prevX;
-      diffY = currY - prevY;
-      ctx.arc(currX - diffX, currY - diffY, Math.abs(diffX), 0, 2 * Math.PI)
-      ctx.fill()
+      circleDraw(ctx, shapes, currX, currY, prevX, prevY, color);
+
       break;
     case 'default':
       ctx.clearRect(0, 0, canvas.width, canvas.height);
