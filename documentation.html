@@ -1,0 +1,3103 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>dynosign 1.0.1 | Documentation</title>
+  <meta name='description' content='Crossplatform UI/UX tool'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets_theme/bass.css' rel='stylesheet' />
+  <link href='assets_theme/style.css' rel='stylesheet' />
+  <link href='assets_theme/github.css' rel='stylesheet' />
+  <link href='assets_theme/split.css' rel='stylesheet' />
+  <link rel="stylesheet" type="text/css" href="/dynosign/assets/css/index.css" />
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <aside>
+          <img id='logo_left' src="/dynosign/assets/images/templogo.png">
+          <div id='logo_name'>Dynosign</div><br />
+          <div id='tooltip_main'>FOSS UI/UX tool</div>
+          <div id='gh-stars-block'>
+              <iframe src="https://ghbtns.com/github-btn.html?user=FallenAngel97&repo=dynosign&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+          </div>
+          <ul class="navigation_menu">
+              <li class="navigation_link"><a href="index.html">Overview</a></li>
+              <li class="navigation_link"><a href="features.html">Features</a></li>
+              <li class="navigation_link active_link"><a href="documentation.html">Documentation</a></li>
+          </ul>
+      </aside>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>dynosign</h3>
+          <div class='mb1'><code>1.0.1</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#dynosign'
+                  class="">
+                  Dynosign
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#topbar'
+                  class=" toggle-sibling">
+                  TopBar
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#topbarhandleclick'
+                        class='regular pre-open'>
+                        #handleClick
+                      </a></li>
+                      
+                      <li><a
+                        href='#topbarminimizewindow'
+                        class='regular pre-open'>
+                        #minimizeWindow
+                      </a></li>
+                      
+                      <li><a
+                        href='#topbarmaximizewindow'
+                        class='regular pre-open'>
+                        #maximizeWindow
+                      </a></li>
+                      
+                      <li><a
+                        href='#topbarclosewindow'
+                        class='regular pre-open'>
+                        #closeWindow
+                      </a></li>
+                      
+                      <li><a
+                        href='#topbaropenhelp'
+                        class='regular pre-open'>
+                        #openHelp
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#leftbar'
+                  class=" toggle-sibling">
+                  LeftBar
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#leftbarhandleclick'
+                        class='regular pre-open'>
+                        #handleClick
+                      </a></li>
+                      
+                      <li><a
+                        href='#leftbarshowcolor'
+                        class='regular pre-open'>
+                        #showColor
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#drawinglayer'
+                  class=" toggle-sibling">
+                  DrawingLayer
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#drawinglayerdraw'
+                        class='regular pre-open'>
+                        #draw
+                      </a></li>
+                      
+                      <li><a
+                        href='#drawinglayermoveshape'
+                        class='regular pre-open'>
+                        #moveShape
+                      </a></li>
+                      
+                      <li><a
+                        href='#drawinglayerfindxy'
+                        class='regular pre-open'>
+                        #findxy
+                      </a></li>
+                      
+                      <li><a
+                        href='#drawinglayerondrop'
+                        class='regular pre-open'>
+                        #onDrop
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#_currentcoordinate'
+                  class="">
+                  _currentCoordinate
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#fontsettings'
+                  class=" toggle-sibling">
+                  FontSettings
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#fontsettingsfontchange'
+                        class='regular pre-open'>
+                        #fontChange
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#mainarea'
+                  class=" toggle-sibling">
+                  MainArea
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#mainareagetparentsize'
+                        class='regular pre-open'>
+                        #getParentSize
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#rectanglesettings'
+                  class="">
+                  RectangleSettings
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#selecttool'
+                  class="">
+                  SelectTool
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#shape'
+                  class=" toggle-sibling">
+                  Shape
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#shapesetshape'
+                        class='regular pre-open'>
+                        #setShape
+                      </a></li>
+                      
+                      <li><a
+                        href='#shapecontains'
+                        class='regular pre-open'>
+                        #contains
+                      </a></li>
+                      
+                      <li><a
+                        href='#shapedraw'
+                        class='regular pre-open'>
+                        #draw
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#texttool'
+                  class=" toggle-sibling">
+                  TextTool
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#texttooladdtext'
+                        class='regular pre-open'>
+                        #addText
+                      </a></li>
+                      
+                      <li><a
+                        href='#texttoolontextchange'
+                        class='regular pre-open'>
+                        #onTextChange
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#menuactionpanel'
+                  class=" toggle-sibling">
+                  MenuActionPanel
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#menuactionpanelsavefile'
+                        class='regular pre-open'>
+                        #saveFile
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#remote'
+                  class="">
+                  remote
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#opensettings'
+                  class="">
+                  openSettings
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#layerscrud'
+                  class="">
+                  layersCRUD
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#layer'
+                  class=" toggle-sibling">
+                  Layer
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#layerhandleclick'
+                        class='regular pre-open'>
+                        #handleClick
+                      </a></li>
+                      
+                      <li><a
+                        href='#layerrenamelayer'
+                        class='regular pre-open'>
+                        #renameLayer
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#rightpanel'
+                  class="">
+                  RightPanel
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#leftpane'
+                  class="">
+                  LeftPane
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#placeholdersettings'
+                  class="">
+                  PlaceHolderSettings
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#settingspage'
+                  class="">
+                  SettingsPage
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#settingssection'
+                  class="">
+                  SettingsSection
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#themechangepage'
+                  class="">
+                  ThemeChangePage
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='dynosign'>
+      Dynosign
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/entry.jsx#L21-L21'>
+      <span>ProgramEntry/entry.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>The entry, which handles all other components. Root component, renders in body</p>
+
+    <div class='pre p1 fill-light mt0'>Dynosign</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='topbar'>
+      TopBar
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/TopBar/TopBar.jsx#L19-L19'>
+      <span>TopBar/TopBar.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>The very top bar, which contains title, and minimize-maximize-close buttons</p>
+
+    <div class='pre p1 fill-light mt0'>TopBar</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='topbarhandleclick'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>handleClick(ev)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/TopBar/TopBar.jsx#L55-L60'>
+      <span>TopBar/TopBar.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Closes the submenu popup, if clicked outside</p>
+
+    <div class='pre p1 fill-light mt0'>handleClick(ev: <a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>ev</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</code>
+	    necessary to detect the click target
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='topbarminimizewindow'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>minimizeWindow()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/TopBar/TopBar.jsx#L64-L66'>
+      <span>TopBar/TopBar.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Minimizes window</p>
+
+    <div class='pre p1 fill-light mt0'>minimizeWindow()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='topbarmaximizewindow'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>maximizeWindow()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/TopBar/TopBar.jsx#L70-L72'>
+      <span>TopBar/TopBar.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Maximizes window</p>
+
+    <div class='pre p1 fill-light mt0'>maximizeWindow()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='topbarclosewindow'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>closeWindow()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/TopBar/TopBar.jsx#L76-L78'>
+      <span>TopBar/TopBar.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Closes window</p>
+
+    <div class='pre p1 fill-light mt0'>closeWindow()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='topbaropenhelp'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>openHelp()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/TopBar/TopBar.jsx#L83-L86'>
+      <span>TopBar/TopBar.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Open Help</p>
+
+    <div class='pre p1 fill-light mt0'>openHelp()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='leftbar'>
+      LeftBar
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/LeftBar/LeftBar.jsx#L20-L106'>
+      <span>ProgramEntry/LeftBar/LeftBar.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Left panel, which includes button to switch the tool type(move, text, rectangle, etc)</p>
+
+    <div class='pre p1 fill-light mt0'>LeftBar</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='leftbarhandleclick'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>handleClick(ev)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/LeftBar/LeftBar.jsx#L41-L46'>
+      <span>ProgramEntry/LeftBar/LeftBar.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Hide Color Picker if clicked outside of it</p>
+
+    <div class='pre p1 fill-light mt0'>handleClick(ev: <a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>ev</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</code>
+	    necessary to get the clicked target
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='leftbarshowcolor'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>showColor()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/LeftBar/LeftBar.jsx#L50-L52'>
+      <span>ProgramEntry/LeftBar/LeftBar.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>This method simply open's color picker</p>
+
+    <div class='pre p1 fill-light mt0'>showColor()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='drawinglayer'>
+      DrawingLayer
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/DrawingLayer.jsx#L13-L203'>
+      <span>ProgramEntry/MainArea/DrawingLayer.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  
+    <div class='pre p1 fill-light mt0'>DrawingLayer</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='drawinglayerdraw'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>draw()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/DrawingLayer.jsx#L34-L40'>
+      <span>ProgramEntry/MainArea/DrawingLayer.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Draws in mousemove process</p>
+
+    <div class='pre p1 fill-light mt0'>draw()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='drawinglayermoveshape'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>moveShape(res, e)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/DrawingLayer.jsx#L46-L74'>
+      <span>ProgramEntry/MainArea/DrawingLayer.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Moves shapes when moveTool is selected in LeftBar</p>
+
+    <div class='pre p1 fill-light mt0'>moveShape(res: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, e: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    Type of event
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>e</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    mouse object
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='drawinglayerfindxy'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>findxy(res, e)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/DrawingLayer.jsx#L88-L165'>
+      <span>ProgramEntry/MainArea/DrawingLayer.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Obtains coordinates of mouse over canvas and type of interaction of mouse
+Hold ctrl to draw straight line
+Hold shift and click points to connect points with straight line</p>
+
+    <div class='pre p1 fill-light mt0'>findxy(res: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, e: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    Type of event
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>e</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    mouse object
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='drawinglayerondrop'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>onDrop(e)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/DrawingLayer.jsx#L172-L180'>
+      <span>ProgramEntry/MainArea/DrawingLayer.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Allows to drop the image from the folder</p>
+
+    <div class='pre p1 fill-light mt0'>onDrop(e: <a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>e</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</code>
+	    necessary to disable the default drop behaviour
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='_currentcoordinate'>
+      _currentCoordinate
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/drawMarchingAnts.js#L7-L7'>
+      <span>ProgramEntry/MainArea/drawMarchingAnts.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Draws selection box with pixel sizes on the sides</p>
+
+    <div class='pre p1 fill-light mt0'>_currentCoordinate</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>offsetDash</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    the distance between ants
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='fontsettings'>
+      FontSettings
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/FontSettings.jsx#L11-L46'>
+      <span>ProgramEntry/MainArea/FontSettings.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  
+    <div class='pre p1 fill-light mt0'>FontSettings</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='fontsettingsfontchange'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fontChange(font)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/FontSettings.jsx#L28-L30'>
+      <span>ProgramEntry/MainArea/FontSettings.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Change the font for text</p>
+
+    <div class='pre p1 fill-light mt0'>fontChange(font: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>font</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    Font object from OS
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='mainarea'>
+      MainArea
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/MainArea.jsx#L19-L144'>
+      <span>ProgramEntry/MainArea/MainArea.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>The main area, which shows layers, selection box, text boxes, etc</p>
+
+    <div class='pre p1 fill-light mt0'>MainArea</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='mainareagetparentsize'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getParentSize()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/MainArea.jsx#L43-L48'>
+      <span>ProgramEntry/MainArea/MainArea.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Sets the canvas size to div size</p>
+
+    <div class='pre p1 fill-light mt0'>getParentSize()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='rectanglesettings'>
+      RectangleSettings
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/RectangleSettings.jsx#L9-L20'>
+      <span>ProgramEntry/MainArea/RectangleSettings.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>defines the common figures propertis. Offset, height, width.</p>
+
+    <div class='pre p1 fill-light mt0'>RectangleSettings</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='selecttool'>
+      SelectTool
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/SelectTool.jsx#L11-L61'>
+      <span>ProgramEntry/MainArea/SelectTool.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Enables the selection box (marching ants) to be shown</p>
+
+    <div class='pre p1 fill-light mt0'>SelectTool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='shape'>
+      Shape
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/Shape.js#L5-L49'>
+      <span>ProgramEntry/MainArea/Shape.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+    <div class='pre p1 fill-light mt0'>Shape</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='shapesetshape'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>setShape(shape)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/Shape.js#L18-L20'>
+      <span>ProgramEntry/MainArea/Shape.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Changes shape type to new one</p>
+
+    <div class='pre p1 fill-light mt0'>setShape(shape: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>shape</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    type of shape (rectangle, circle)
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='shapecontains'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>contains(clientX, clientY)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/Shape.js#L26-L29'>
+      <span>ProgramEntry/MainArea/Shape.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks if shape contains mouse position</p>
+
+    <div class='pre p1 fill-light mt0'>contains(clientX: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, clientY: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>clientX</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    mouse x coordintae
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>clientY</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    mouse y coordinate
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='shapedraw'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>draw(ctx)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/Shape.js#L34-L48'>
+      <span>ProgramEntry/MainArea/Shape.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Draws current shape on specified canvas</p>
+
+    <div class='pre p1 fill-light mt0'>draw(ctx: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>ctx</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    Canvas context
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='texttool'>
+      TextTool
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/TextTool.jsx#L12-L93'>
+      <span>ProgramEntry/MainArea/TextTool.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>This module allows to display text box inside MainArea block</p>
+
+    <div class='pre p1 fill-light mt0'>TextTool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='texttooladdtext'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>addText(ev)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/TextTool.jsx#L30-L38'>
+      <span>ProgramEntry/MainArea/TextTool.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Shows the text box and sets it based on the mouse coordinates</p>
+
+    <div class='pre p1 fill-light mt0'>addText(ev: <a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>ev</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</code>
+	    necessary to detect, what is the clicked target
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='texttoolontextchange'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>onTextChange()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MainArea/TextTool.jsx#L59-L69'>
+      <span>ProgramEntry/MainArea/TextTool.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Changes the handlers position as user types</p>
+
+    <div class='pre p1 fill-light mt0'>onTextChange()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='menuactionpanel'>
+      MenuActionPanel
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MenuActionPanel/MenuActionPanel.jsx#L17-L82'>
+      <span>ProgramEntry/MenuActionPanel/MenuActionPanel.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Block, which shows after click in menu. Modal window, in short</p>
+
+    <div class='pre p1 fill-light mt0'>MenuActionPanel</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='menuactionpanelsavefile'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>saveFile()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MenuActionPanel/MenuActionPanel.jsx#L26-L70'>
+      <span>ProgramEntry/MenuActionPanel/MenuActionPanel.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Calls node.js backend api to save JSON-converted state of program</p>
+
+    <div class='pre p1 fill-light mt0'>saveFile()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='remote'>
+      remote
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MenuActionPanel/optionsHelpers.js#L4-L4'>
+      <span>ProgramEntry/MenuActionPanel/optionsHelpers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Open previously saved file</p>
+
+    <div class='pre p1 fill-light mt0'>remote</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='opensettings'>
+      openSettings
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/MenuActionPanel/optionsHelpers.js#L27-L30'>
+      <span>ProgramEntry/MenuActionPanel/optionsHelpers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Display settings page</p>
+
+    <div class='pre p1 fill-light mt0'>openSettings</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='layerscrud'>
+      layersCRUD
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/reducers.js#L42-L125'>
+      <span>ProgramEntry/reducers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Allows adding, deletion, reordering of layers. Changing layer visibility</p>
+
+    <div class='pre p1 fill-light mt0'>layersCRUD(state: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, action: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>state</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            = <code>[defaultLayer]</code>)</code>
+	    beginning point of layersCRUD inner state
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>action</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    new state for layer CRUD
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='layer'>
+      Layer
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/RightPanel/Layer.jsx#L14-L108'>
+      <span>ProgramEntry/RightPanel/Layer.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Core module, which handles layer manipulation logic in the right panel</p>
+
+    <div class='pre p1 fill-light mt0'>Layer</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='layerhandleclick'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>handleClick(ev)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/RightPanel/Layer.jsx#L70-L76'>
+      <span>ProgramEntry/RightPanel/Layer.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Hides the text rename box, if clicked outside. If clicked on the layer single time,
+changes the active layer to the clicked one</p>
+
+    <div class='pre p1 fill-light mt0'>handleClick(ev: <a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>ev</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/API/MouseEvent">MouseEvent</a>)</code>
+	    neccessary to check, what is the clicked target
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='layerrenamelayer'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>renameLayer()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/RightPanel/Layer.jsx#L80-L82'>
+      <span>ProgramEntry/RightPanel/Layer.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Opens the rename text box</p>
+
+    <div class='pre p1 fill-light mt0'>renameLayer()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='rightpanel'>
+      RightPanel
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/ProgramEntry/RightPanel/RightPanel.jsx#L16-L109'>
+      <span>ProgramEntry/RightPanel/RightPanel.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>The panel on the right side, including layers, opacity and buttons</p>
+
+    <div class='pre p1 fill-light mt0'>RightPanel</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='leftpane'>
+      LeftPane
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/SettingsPage/LeftPane.jsx#L13-L26'>
+      <span>SettingsPage/LeftPane.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Left pane, which shows the buttons to select the necessary settings entry</p>
+
+    <div class='pre p1 fill-light mt0'>LeftPane</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='placeholdersettings'>
+      PlaceHolderSettings
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/SettingsPage/PlaceHolderSettings.jsx#L11-L20'>
+      <span>SettingsPage/PlaceHolderSettings.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>This is the greeting screen on the right in settings window</p>
+
+    <div class='pre p1 fill-light mt0'>PlaceHolderSettings</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='settingspage'>
+      SettingsPage
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/SettingsPage/SettingsPage.jsx#L21-L35'>
+      <span>SettingsPage/SettingsPage.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Settings popup, which allows to control the current language/theme</p>
+
+    <div class='pre p1 fill-light mt0'>SettingsPage</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='settingssection'>
+      SettingsSection
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/SettingsPage/SettingsSection.jsx#L13-L30'>
+      <span>SettingsPage/SettingsSection.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Wrapper to display the settings entries</p>
+
+    <div class='pre p1 fill-light mt0'>SettingsSection</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='themechangepage'>
+      ThemeChangePage
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/FallenAngel97/dynosign/blob/f5862fc08bcfdec81a7fb1658422d4b88809077e/SettingsPage/ThemeChangePage.jsx#L8-L15'>
+      <span>SettingsPage/ThemeChangePage.jsx</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Settings section, where you can select preferrable theming</p>
+
+    <div class='pre p1 fill-light mt0'>ThemeChangePage</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets_theme/anchor.js'></script>
+  <script src='assets_theme/split.js'></script>
+  <script src='assets_theme/site.js'></script>
+</body>
+</html>
