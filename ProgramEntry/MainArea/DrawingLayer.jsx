@@ -223,11 +223,13 @@ export class DrawingLayer extends React.Component {
   }
 
   render () {
+    const { width, height, layer } = this.props;
+
     return (
       <canvas className='canvaslayer'
-        width={this.props.width * window.devicePixelRatio}
-        height={this.props.height * window.devicePixelRatio}
-        style={{ width: this.props.width, height: this.props.height }}
+        width={width * window.devicePixelRatio}
+        height={height * window.devicePixelRatio}
+        style={{ width, height, opacity: parseInt(this.props.layer.opacity) / 100 }}
         onMouseMove={(e) => this.findxy('move', e)}
         onMouseDown={(e) => this.findxy('down', e)}
         onDragOver={(e) => { e.preventDefault(); return false } }

@@ -34,8 +34,8 @@ describe('DrawingLayer test set', () => {
     const addLine = jest.fn();
     const _changeActiveLayer = jest.fn();
     const drawingLayer = mount(<DrawingLayer
-      layer={defaultLayer}
-      width={1} height={1}
+      layer={ defaultLayer }
+      width={ 1 } height={ 1 }
       changeColor={{ color }}
       addLine={ addLine }
       _changeActiveLayer = {_changeActiveLayer}
