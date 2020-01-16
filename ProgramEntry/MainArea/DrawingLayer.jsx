@@ -1,7 +1,7 @@
 /* eslint-disable curly */
 import React from 'react';
 import { connect } from 'react-redux';
-import { addLine, changeLayer } from '../actions';
+import { addLine, changeLayer, changeActiveLayer } from '../actions';
 import PropTypes from 'prop-types';
 import { Shape } from './Shape';
 import { dragDroppedPicture } from './drawingHelpers';
@@ -177,7 +177,9 @@ export class DrawingLayer extends React.Component {
     }
 
     if (res === 'up') {
-      this.props.addLine(this.canvas, this.props.changeActiveLayer.layerNumber);
+      const { layerNumber } = this.props.changeActiveLayer;
+      this.props.addLine(this.canvas, layerNumber);
+      this.props._changeActiveLayer(this.props.layersCRUD[layerNumber], layerNumber);
       const ctx = this.canvas.getContext('2d');
       const diffX = this.currX - this.prevX;
       const diffY = this.currY - this.prevY;
@@ -257,7 +259,8 @@ const mapStateToProps = state => state;
 export const mapDispatchToProps = dispatch => {
   return {
     addLine: (elem, layerNumber) => dispatch(addLine(elem, layerNumber)),
-    changeLayer: (layer, layerId) => dispatch(changeLayer(layer, layerId))
+    changeLayer: (layer, layerId) => dispatch(changeLayer(layer, layerId)),
+    _changeActiveLayer :(layer, layerNumber) => dispatch(changeActiveLayer(layer, layerNumber))
   }
 }
 

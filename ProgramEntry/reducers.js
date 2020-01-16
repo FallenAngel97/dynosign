@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ipcRenderer } from 'electron'
+import { ipcRenderer, systemPreferences } from 'electron'
 import { localizeReducer } from 'react-localize-redux';
 
 export const defaultLayer = {

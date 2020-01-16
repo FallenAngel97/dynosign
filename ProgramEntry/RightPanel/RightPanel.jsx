@@ -55,7 +55,7 @@ export class RightPanel extends React.Component {
     e.target.className = 'singleLayer';
   }
   changeLayerOpacity (ev) {
-    let layer = this.props.changeActiveLayer.layer;
+    let { layer } = this.props.changeActiveLayer;
     layer.opacity = ev.target.value;
     this.props.changeLayer(layer, this.props.changeActiveLayer.layerNumber)
   }
@@ -79,7 +79,8 @@ export class RightPanel extends React.Component {
       <div id='rightPanel'>
         <div id='topRightPanelIndicators'>
           <h3><Translate id='layers'/></h3>
-          <input onChange={this.changeLayerOpacity} value={this.props.changeActiveLayer.layer.opacity} type="range" min="0" max="100" />
+          <input onChange={this.changeLayerOpacity} value={this.props.changeActiveLayer.layer.opacity} 
+              type="range" min="0" max="100" />
         </div>
         <div id='stackingLayers'>
           {this.props.layersCRUD.map((layer, index) => {

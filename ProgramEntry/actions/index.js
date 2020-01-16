@@ -1,5 +1,6 @@
 export { default as changeMouseType } from './changeMouseType';
 export { default as deleteLayer } from './deleteLayer';
+import { defaultLayer } from '../reducers';
 
 export function changeActiveLayer (layer, layerNumber) {
   return { type: 'CHANGE_ACTIVE_LAYER', layer, layerNumber }
@@ -9,10 +10,8 @@ export function addLayer (layersCount) {
   return {
     type: 'ADD_LAYER',
     layer: {
-      opacity: 100,
-      linesArray: [],
+      ...defaultLayer,
       name: 'New layer ' + layersCount,
-      hidden: false
     },
     layerNumber: layersCount
   }
