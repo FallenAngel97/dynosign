@@ -25,3 +25,56 @@ export const dragDroppedPicture = (canvas, event) => {
   }
   return filename;
 }
+
+export const draw  = (canvas, color, mouseType, ctrlPressed, 
+  { prevX, prevY, currX, currY }, shapes) => {
+
+  var ctx = canvas.getContext('2d');
+
+  switch (mouseType) {
+    case 'draw':
+      ctx.beginPath();
+      if (ctrlPressed) {
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(prevX, currY);
+      } else {
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(currX, currY);
+      }
+      var y = 2;
+      ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+      ctx.lineWidth = y;
+      ctx.stroke();
+      break;
+    case 'rectangle':
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (shapes)
+        shapes.map((shape) => {
+          shape.draw(ctx);
+        });
+      ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+      let diffX = currX - prevX;
+      let diffY = currY - prevY;
+      ctx.fillRect(currX - diffX, currY - diffY, diffX, diffY)
+      break;
+    case 'circle':
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      shapes.map((shape) => {
+        shape.draw(ctx);
+      });
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+      diffX = currX - prevX;
+      diffY = currY - prevY;
+      ctx.arc(currX - diffX, currY - diffY, Math.abs(diffX), 0, 2 * Math.PI)
+      ctx.fill()
+      break;
+    case 'default':
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      shapes.map((shape) => {
+        shape.draw(ctx)
+      });
+      break;
+  }
+  ctx.closePath();
+}

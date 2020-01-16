@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { addLine, changeLayer, changeActiveLayer } from '../actions';
 import PropTypes from 'prop-types';
 import { Shape } from './Shape';
-import { dragDroppedPicture } from './drawingHelpers';
+import { dragDroppedPicture, draw } from './drawingHelpers';
 
 /**
  * @module DrawingLayer
@@ -32,54 +32,11 @@ export class DrawingLayer extends React.Component {
    * Draws in mousemove process
    */
   draw () {
-    var ctx = this.canvas.getContext('2d');
-    const color = this.props.changeColor.color;
-    switch (this.props.changeMouseType.mouseType) {
-      case 'draw':
-        ctx.beginPath();
-        if (this.ctrlPressed) {
-          ctx.moveTo(this.prevX, this.prevY);
-          ctx.lineTo(this.prevX, this.currY);
-        } else {
-          ctx.moveTo(this.prevX, this.prevY);
-          ctx.lineTo(this.currX, this.currY);
-        }
-        var y = 2;
-        ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-        ctx.lineWidth = y;
-        ctx.stroke();
-        break;
-      case 'rectangle':
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        if (this.shapes)
-          this.shapes.map((shape) => {
-            shape.draw(ctx);
-          });
-        ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-        let diffX = this.currX - this.prevX;
-        let diffY = this.currY - this.prevY;
-        ctx.fillRect(this.currX - diffX, this.currY - diffY, diffX, diffY)
-        break;
-      case 'circle':
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.shapes.map((shape) => {
-          shape.draw(ctx);
-        });
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-        diffX = this.currX - this.prevX;
-        diffY = this.currY - this.prevY;
-        ctx.arc(this.currX - diffX, this.currY - diffY, Math.abs(diffX), 0, 2 * Math.PI)
-        ctx.fill()
-        break;
-      case 'default':
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.shapes.map((shape) => {
-          shape.draw(ctx)
-        });
-        break;
-    }
-    ctx.closePath();
+    const { changeColor, changeMouseType } = this.props;
+
+    draw(this.canvas, changeColor.color, changeMouseType.mouseType, this.ctrlPressed, {
+      prevX: this.prevX, prevY: this.prevY, currX: this.currX, currY: this.currY
+    })
   }
   /**
    * Moves shapes when moveTool is selected in LeftBar
