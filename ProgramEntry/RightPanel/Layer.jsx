@@ -2,8 +2,8 @@ import React from 'react';
 import './Layer.scss';
 import { connect } from 'react-redux';
 import { changeActiveLayer, changeLayer, changeLayerVisibility } from '../actions'
-import hiddenEye from './hidden_eye.svg';
-import visibleEye from './visible_eye.svg';
+import hiddenEye from './assets/hidden_eye.svg';
+import visibleEye from './assets/visible_eye.svg';
 import PropTypes from 'prop-types';
 
 /**
@@ -22,26 +22,8 @@ export class Layer extends React.Component {
       this.setState({ editLayer: false });
     }
   }
-  showLayerOptions = (e) => {
-    this.props.openContext(e);
-  }
   UNSAFE_componentWillMount () {
     document.addEventListener('mousedown', this.handleClick, false);
-  }
-  DragOver = (e) => {
-    this.props.layerDragOver(e);
-  }
-  ondragStart = (e) => {
-    this.props.layerDragStart(e);
-  }
-  dragEnd = (e) => {
-    this.props.layerDragEnd(e);
-  }
-  ondrop = (e) => {
-    this.props.layerDrop(e);
-  }
-  dragLeave = (e) => {
-    this.props.layerDragLeave(e);
   }
   componentWillUnmount () {
     document.removeEventListener('mousedown', this.handleClick, false);
@@ -78,15 +60,15 @@ export class Layer extends React.Component {
     const { changeActiveLayer, layerId, layer } = this.props;
 
     return (
-      <div onDragStart={this.ondragStart} draggable={!editLayer}
+      <div onDragStart={this.props.layerDragStart} draggable={!editLayer}
         ref={node => { this.node = node }}
         onDoubleClick={this.renameLayer}
-        onDrop={this.ondrop}
+        onDrop={this.props.layerDrop}
         onKeyPress={this._onKeyPress}
-        onContextMenu={this.showLayerOptions}
-        onDragLeave={this.dragLeave}
-        onDragOver={this.DragOver}
-        onDragEnd={this.dragEnd}
+        onContextMenu={this.props.openContext}
+        onDragLeave={this.props.layerDragLeave}
+        onDragOver={this.props.layerDragOver}
+        onDragEnd={this.props.layerDragEnd}
         className={'singleLayer' + ((changeActiveLayer.layerNumber === layerId) ? ' activeLayer' : '')}>
         <img onClick={this.changeVisibility} src={layer.hidden ? hiddenEye : visibleEye}/>
         {editLayer ? <input onChange={this.layerNameChange} type='text' className='singleLayerEdit' value={layer.name} /> : layer.name}

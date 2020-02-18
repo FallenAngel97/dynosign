@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { draw } from './drawMarchingAnts';
+import { drawMarchingAnts } from './functions';
 
 /**
  * Enables the selection box (marching ants) to be shown
@@ -32,10 +32,10 @@ export class SelectTool extends React.Component {
         // if clicked just on the screen without dragging - then don't display marching ants
         let ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        draw(0, this.canvas);
+        drawMarchingAnts(0, this.canvas);
         return;
       } else {
-        draw(0, this.canvas, this.displaySizes);
+        drawMarchingAnts(0, this.canvas, this.displaySizes);
       }
     }
     if (res === 'move' && this.displaySizes) {
@@ -43,7 +43,7 @@ export class SelectTool extends React.Component {
       this.currY = (e.clientY - this.canvas.offsetTop) * window.devicePixelRatio;
       const currentCoordinate = { x: this.currX, y: this.currY };
       const prevCoordinate = { x: this.prevX, y: this.prevY };
-      draw(0, this.canvas, this.displaySizes, currentCoordinate, prevCoordinate);
+      drawMarchingAnts(0, this.canvas, this.displaySizes, currentCoordinate, prevCoordinate);
     }
   }
   render () {

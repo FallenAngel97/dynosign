@@ -1,6 +1,6 @@
 import React from 'react';
-import phoneLayout from '../MainArea/phone_layout.svg';
-import desktopLayout from '../MainArea/desktop_layout.svg';
+import phoneLayout from './assets/phone_layout.svg';
+import desktopLayout from './assets/desktop_layout.svg';
 import './LayerPopupContextMenu.scss';
 import PropTypes from 'prop-types';
 

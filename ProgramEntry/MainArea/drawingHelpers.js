@@ -66,7 +66,7 @@ function circleDraw(ctx, shapes, currX, currY, prevX, prevY, color) {
   ctx.fill()
 }
 
-export const draw  = (canvas, color, mouseType, ctrlPressed, 
+export const drawOnCanvas  = (canvas, color, mouseType, ctrlPressed, 
   { prevX, prevY, currX, currY }, shapes) => {
 
   var ctx = canvas.getContext('2d');

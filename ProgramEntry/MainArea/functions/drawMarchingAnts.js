@@ -7,7 +7,7 @@ let timerMarchingAnts;
 let _currentCoordinate = { x: 0, y: 0 };
 let previousCoordinate = { x: 0, y: 0 };
 
-export function draw (offsetDash, canvas, flag, coordinate = _currentCoordinate, prevCoordinate = previousCoordinate) {
+export function drawMarchingAnts (offsetDash, canvas, flag, coordinate = _currentCoordinate, prevCoordinate = previousCoordinate) {
   if (!canvas) return;
   _currentCoordinate = coordinate;
   previousCoordinate = prevCoordinate;
@@ -30,6 +30,6 @@ export function draw (offsetDash, canvas, flag, coordinate = _currentCoordinate,
   clearTimeout(timerMarchingAnts)
   timerMarchingAnts = setTimeout(() => {
     offsetDash++;
-    draw(offsetDash, canvas, flag, coordinate, prevCoordinate);
+    drawMarchingAnts(offsetDash, canvas, flag, coordinate, prevCoordinate);
   }, 100);
 }

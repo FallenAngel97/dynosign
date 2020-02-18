@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addLine, changeLayer, changeActiveLayer } from '../actions';
 import PropTypes from 'prop-types';
 import { Shape } from './Shape';
-import { dragDroppedPicture, draw } from './drawingHelpers';
+import { dragDroppedPicture, drawOnCanvas } from './drawingHelpers';
 
 /**
  * @module DrawingLayer
@@ -30,7 +30,7 @@ export class DrawingLayer extends React.Component {
   draw = () => {
     const { changeColor, changeMouseType } = this.props;
 
-    draw(this.canvas, changeColor.color, changeMouseType.mouseType, this.ctrlPressed, {
+    drawOnCanvas(this.canvas, changeColor.color, changeMouseType.mouseType, this.ctrlPressed, {
       prevX: this.prevX, prevY: this.prevY, currX: this.currX, currY: this.currY
     })
   }

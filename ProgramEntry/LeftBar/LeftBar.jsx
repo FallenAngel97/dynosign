@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import moveTool from './move_tool.svg'
-import selectTool from './select_tool.svg'
-import textTool from './text_tool.svg';
-import drawTool from './draw_tool.svg';
-import circleTool from './circle_tool.svg'
-import rectTool from './rect_tool.svg'
+import moveTool from './assets/move_tool.svg'
+import selectTool from './assets/select_tool.svg'
+import textTool from './assets/text_tool.svg';
+import drawTool from './assets/draw_tool.svg';
+import circleTool from './assets/circle_tool.svg'
+import rectTool from './assets/rect_tool.svg'
 import './LeftBar.scss';
 import { connect } from 'react-redux'
 import { changeMouseType, changeColor } from '../actions';
