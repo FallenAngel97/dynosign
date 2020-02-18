@@ -7,7 +7,9 @@ export const defaultLayer = {
   name: 'New layer',
   hidden: false,
   linesArray: [],
-  text: {},
+  text: {
+    fontSize: 11
+  },
   shapes: []
 }
 

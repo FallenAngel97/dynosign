@@ -1,5 +1,5 @@
-export { default as changeMouseType } from './changeMouseType';
-export { default as deleteLayer } from './deleteLayer';
+export { changeMouseType } from './changeMouseType';
+export { deleteLayer } from './deleteLayer';
 import { defaultLayer } from '../reducers';
 
 export function changeActiveLayer (layer, layerNumber) {

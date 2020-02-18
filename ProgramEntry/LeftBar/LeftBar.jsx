@@ -17,17 +17,34 @@ import PropTypes from 'prop-types';
  * @module LeftBar
  */
 
-export class LeftBar extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      displayColorPicker: false
-    }
-    this.changeCursor = this.changeCursor.bind(this);
-    this.showColor = this.showColor.bind(this);
-    this.colorChange = this.colorChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+function getIndexByMouseType(mouseType) {
+  let index = 0;
+  switch(mouseType) {
+    case 'select':
+      index = 1;
+      break;
+    case 'text':
+      index = 2;
+      break;
+    case 'draw':
+      index = 3;
+      break;
+    case 'circle':
+      index = 4;
+      break;
+    case 'rectangle':
+      index = 5;
+      break;
   }
+  return index;
+}
+
+export class LeftBar extends Component {
+  
+  state = {
+    displayColorPicker: false
+  }
+
   UNSAFE_componentWillMount () {
     document.addEventListener('mousedown', this.handleClick, false);
   }
@@ -38,7 +55,7 @@ export class LeftBar extends Component {
    * Hide Color Picker if clicked outside of it
    * @param {MouseEvent} ev - necessary to get the clicked target
    */
-  handleClick (ev) {
+  handleClick = (ev) => {
     const elem = ReactDOM.findDOMNode(this.colorPicker);
     if (elem && !elem.contains(ev.target)) {
       this.setState({ displayColorPicker: false })
@@ -47,35 +64,20 @@ export class LeftBar extends Component {
   /**
    * This method simply open's color picker
    */
-  showColor () {
+  showColor = () => {
     this.setState({ displayColorPicker: true });
   }
-  colorChange (color) {
+  colorChange = (color) => {
     this.props._changeColor(color.rgb)
   };
-  changeCursor (type) {
+  changeCursor = (type) => {
     this.props._changeMouseType(type);
   }
   render () {
-    let index = 0;
-    switch (this.props.changeMouseType.mouseType) {
-      case 'select':
-        index = 1;
-        break;
-      case 'text':
-        index = 2;
-        break;
-      case 'draw':
-        index = 3;
-        break;
-      case 'circle':
-        index = 4;
-        break;
-      case 'rectangle':
-        index = 5;
-        break;
-    }
-    const color = this.props.changeColor.color;
+
+    let index = getIndexByMouseType(this.props.changeMouseType.mouseType);
+
+    const { color } = this.props.changeColor;
     return (
       <div id='leftBar'>
         <div title='Selection tool' className={'buttonWrapper' + ((index === 0) ? ' activeLeftButton' : '')}>

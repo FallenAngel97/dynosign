@@ -9,16 +9,15 @@ import { draw } from './drawMarchingAnts';
  */
 
 export class SelectTool extends React.Component {
-  constructor (props) {
-    super(props);
-    this.prevX = 0;
-    this.currX = 0;
-    this.prevX = 0;
-    this.prevY = 0;
-    this.displaySizes = false;
-    this.findxy = this.findxy.bind(this);
-  }
-  findxy (res, e) {
+  
+  prevX = 0;
+  prevX = 0;
+  currX = 0;
+  prevX = 0;
+  prevY = 0;
+  displaySizes = false;
+
+  findxy = (res, e) => {
     if (this.props.changeMouseType.mouseType !== 'select') return;
     if (res === 'down') {
       this.currX = (e.clientX - this.canvas.offsetLeft) * window.devicePixelRatio;

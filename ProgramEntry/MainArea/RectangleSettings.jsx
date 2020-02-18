@@ -6,15 +6,11 @@ import './RectangleSettings.scss';
  * @module RectangleSettings
  */
 
-export default class RectangleSettings extends React.Component {
-  render () {
-    return (
-      <div id='rectangle_settings'>
-        Left: <input />
-        Top: <input />
-        Height: <input />
-        Width: <input />
-      </div>
-    )
-  }
-}
+export default () => (
+  <div id='rectangle_settings'>
+    Left: <input />
+    Top: <input />
+    Height: <input />
+    Width: <input />
+  </div>
+)

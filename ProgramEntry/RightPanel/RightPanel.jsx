@@ -14,35 +14,27 @@ import { Translate } from 'react-localize-redux';
  */
 
 export class RightPanel extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      displayContext: false
-    }
-    this.changeLayerOpacity = this.changeLayerOpacity.bind(this);
-    this.layerDragStart = this.layerDragStart.bind(this);
-    this.layerDragEnd = this.layerDragEnd.bind(this);
-    this.layerDrop = this.layerDrop.bind(this);
-    this.layerDragOver = this.layerDragOver.bind(this);
-    this.selectedLayer = null;
-    this.openContext = this.openContext.bind(this);
-    this.dismissPopup = this.dismissPopup.bind(this);
+  
+  state = {
+    displayContext: false
   }
-  layerDragStart (e) {
+  selectedLayer = null;
+
+  layerDragStart = (e) => {
     e.dataTransfer.effectAllowed = 'move'
     e.dataTransfer.setData('text/plain', null);
     this.selectedLayer = e.target;
   }
-  layerDragEnd (e) {
+  layerDragEnd = (e) => {
   }
-  layerDrop (e) {
+  layerDrop = (e) => {
     if (this.selectedLayer === e.target) return;
     e.target.className = 'singleLayer';
     const newIndex = [...e.target.parentNode.children].indexOf(e.target);
     const oldIndex = [...this.selectedLayer.parentNode.children].indexOf(this.selectedLayer);
     this.props.reorderLayers(oldIndex, newIndex);
   }
-  layerDragOver (e) {
+  layerDragOver = (e) => {
     if (e.preventDefault) {
       e.preventDefault(); // Necessary. Allows us to drop.
     }
@@ -54,15 +46,15 @@ export class RightPanel extends React.Component {
   layerDragLeave (e) {
     e.target.className = 'singleLayer';
   }
-  changeLayerOpacity (ev) {
+  changeLayerOpacity = (ev) => {
     let { layer } = this.props.changeActiveLayer;
     layer.opacity = ev.target.value;
     this.props.changeLayer(layer, this.props.changeActiveLayer.layerNumber)
   }
-  dismissPopup () {
+  dismissPopup = () => {
     this.setState({ displayContext: false });
   }
-  openContext (e) {
+  openContext = (e) => {
     const elem = findDOMNode(this.context);
     elem.style.left = e.clientX + 'px';
     elem.style.top = e.clientY + 'px';

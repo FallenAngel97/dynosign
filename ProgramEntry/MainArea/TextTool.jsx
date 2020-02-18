@@ -18,16 +18,12 @@ export class TextTool extends React.Component {
     this.currY = 0;
     this.currX = 0;
     this.mousePressed = false;
-
-    this.addText = this.addText.bind(this);
-    this.onTextChange = this.onTextChange.bind(this);
-    this.onTextResize = this.onTextResize.bind(this);
   }
   /**
    * Shows the text box and sets it based on the mouse coordinates
    * @param {MouseEvent} ev - necessary to detect, what is the clicked target
    */
-  addText (ev) {
+  addText = (ev) => {
     const input = document.getElementById('text_tool_input');
     if (input.contains(ev.target)) return;
     const x = ev.clientX - this.textWrapper.offsetLeft;
@@ -48,7 +44,16 @@ export class TextTool extends React.Component {
       );
     }
   }
-  onTextResize (ev) {
+  onTextResize = (ev, state) => {
+    switch(state) {
+      case 'record_motion_points':
+        break;
+      case 'record_end_points':
+        break;
+      case 'record_initial_points':
+        break;
+    }
+    console.log(state)
     console.log(ev.clientX);
     console.log(ev.clientY);
     ev.stopPropagation();
@@ -56,7 +61,7 @@ export class TextTool extends React.Component {
   /**
    * Changes the handlers position as user types
    */
-  onTextChange () {
+  onTextChange = () => {
     const leftMargin = parseInt(document.getElementById('text_tool_input').style.left) - 2; // half size of resize circle
     const topMargin = parseInt(document.getElementById('text_tool_input').style.top) - 2;
 
@@ -70,22 +75,23 @@ export class TextTool extends React.Component {
   render () {
     return (
       <div ref={textWrapper => { this.textWrapper = textWrapper }} onClick={this.addText} id='text_tool_drawing_area'>
-        <div onInput={this.onTextChange} style={{ fontFamily: this.props.changeFont.font.label }} contentEditable={true} id='text_tool_input' />
-        <div onMouseMove={this.onTextResize}
-             onMouseUp={this.onTextResize}
-             onMouseDown={this.onTextResize}
+        <div onInput={this.onTextChange} style={{ fontFamily: this.props.changeFont.font.label }}
+             contentEditable={true} id='text_tool_input' />
+        <div onMouseMove={(ev) => this.onTextResize(ev, 'record_motion_points')}
+             onMouseUp={(ev) => this.onTextResize(ev, 'record_end_points')}
+             onMouseDown={(ev) => this.onTextResize(ev, 'record_initial_points')}
              className='text_handler' id='handler_top_left' />
-        <div onMouseMove={this.onTextResize}
-             onMouseUp={this.onTextResize}
-             onMouseDown={this.onTextResize}
+        <div onMouseMove={(ev) => this.onTextResize(ev, 'record_motion_points')}
+             onMouseUp={(ev) => this.onTextResize(ev, 'record_end_points')}
+             onMouseDown={(ev) => this.onTextResize(ev, 'record_initial_points')}
              className='text_handler' id='handler_top_right' />
-        <div onMouseMove={this.onTextResize}
-             onMouseUp={this.onTextResize}
-             onMouseDown={this.onTextResize}
+         <div onMouseMove={(ev) => this.onTextResize(ev, 'record_motion_points')}
+             onMouseUp={(ev) => this.onTextResize(ev, 'record_end_points')}
+             onMouseDown={(ev) => this.onTextResize(ev, 'record_initial_points')}
              className='text_handler' id='handler_bottom_left' />
-        <div onMouseMove={this.onTextResize}
-             onMouseUp={this.onTextResize}
-             onMouseDown={this.onTextResize}
+        <div onMouseMove={(ev) => this.onTextResize(ev, 'record_motion_points')}
+             onMouseUp={(ev) => this.onTextResize(ev, 'record_end_points')}
+             onMouseDown={(ev) => this.onTextResize(ev, 'record_initial_points')}
              className='text_handler' id='handler_bottom_right' />
       </div>
     )

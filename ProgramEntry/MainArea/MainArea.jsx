@@ -8,7 +8,7 @@ import TextTool from './TextTool';
 import PropTypes from 'prop-types';
 import FontSettings from './FontSettings';
 import RectangleSettings from './RectangleSettings';
-import { Translate, withLocalize } from 'react-localize-redux';
+import { Translate } from 'react-localize-redux';
 // import ReactDOM from 'react-dom';
 
 /**
@@ -17,19 +17,15 @@ import { Translate, withLocalize } from 'react-localize-redux';
  */
 
 export class MainArea extends React.Component {
-  constructor (props) {
-    super(props);
 
-    this.state = {
-      width: 0,
-      height: 0,
-      defaultFont: null
-    };
+  state = {
+    width: 0,
+    height: 0,
+    defaultFont: null
+  };
+  layerContainer = React.createRef();
+  layers = [];
 
-    this.layerContainer = React.createRef();
-
-    this.layers = [];
-  }
   componentDidMount () {
     window.addEventListener('keydown', (e) => {
       if (e.keyCode === 90 && e.ctrlKey) {

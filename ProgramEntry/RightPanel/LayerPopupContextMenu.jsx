@@ -5,17 +5,13 @@ import './LayerPopupContextMenu.scss';
 import PropTypes from 'prop-types';
 
 export default class LayerPopupContextMenu extends React.Component {
-  constructor (props) {
-    super(props);
-    this.dismissPopup = this.dismissPopup.bind(this);
-  }
   componentDidMount () {
     document.addEventListener('click', this.dismissPopup, false)
   }
   componentWillUnmount () {
     document.removeEventListener('click', this.dismissPopup, false)
   }
-  dismissPopup (e) {
+  dismissPopup = (e) => {
     if (!this.node.contains(e.target)) {
       this.props.dismissPopup();
     }

@@ -1,4 +1,3 @@
-/* eslint-disable curly */
 import React from 'react';
 import { connect } from 'react-redux';
 import { addLine, changeLayer, changeActiveLayer } from '../actions';
@@ -11,27 +10,24 @@ import { dragDroppedPicture, draw } from './drawingHelpers';
  */
 
 export class DrawingLayer extends React.Component {
+
+  prevX = 0;
+  currX = 0;
+  prevX = 0;
+  prevY = 0;
+  dotFlag = false;
+  flag = false;
+  ctrlPressed = false;
+  dotWasDrawn = false;
+
   constructor (props) {
     super(props);
-    this.prevX = 0;
-    this.currX = 0;
-    this.prevX = 0;
-    this.prevY = 0;
-    this.dotFlag = false;
-    this.flag = false;
-    this.findxy = this.findxy.bind(this);
-    this.draw = this.draw.bind(this);
-    this.pasteToCanvas = this.pasteToCanvas.bind(this);
-    this.ctrlPressed = false;
-    this.dotWasDrawn = false;
-    this.moveShape = this.moveShape.bind(this);
     this.shapes = this.props.layer.shapes;
-    this.onDrop = this.onDrop.bind(this);
   }
   /**
    * Draws in mousemove process
    */
-  draw () {
+  draw = () => {
     const { changeColor, changeMouseType } = this.props;
 
     draw(this.canvas, changeColor.color, changeMouseType.mouseType, this.ctrlPressed, {
@@ -43,7 +39,7 @@ export class DrawingLayer extends React.Component {
    * @param {string} res - Type of event
    * @param {object} e - mouse object
    */
-  moveShape (res, e) {
+  moveShape = (res, e) => {
     if (res === 'down') {
       this.prevX = this.currX;
       this.prevY = this.currY;
@@ -72,7 +68,7 @@ export class DrawingLayer extends React.Component {
       }
     }
   }
-  pasteToCanvas (e) {
+  pasteToCanvas = (e) => {
     console.log('paste');
     var items = e.clipboardData.items;
     console.log(items)
@@ -85,7 +81,7 @@ export class DrawingLayer extends React.Component {
    * @param {string} res - Type of event
    * @param {object} e - mouse object
    */
-  findxy (res, e) {
+  findxy = (res, e) => {
     if (this.props.changeMouseType.mouseType === 'default') {
       this.moveShape(res, e);
       return;
@@ -169,7 +165,7 @@ export class DrawingLayer extends React.Component {
    * @param {MouseEvent} e - necessary to disable the default drop behaviour
    */
 
-  onDrop (e) {
+  onDrop = (e) => {
     e.preventDefault();
     const droppedFileName = dragDroppedPicture(this.canvas, e);
     let { layer } = this.props.changeActiveLayer;

@@ -10,20 +10,16 @@ import { withLocalize, Translate } from 'react-localize-redux';
  * @module LeftPane
  */
 
-class LeftPane extends React.Component {
-  render () {
-    return (
-      <div id='leftpane'>
-        <div onClick={() => this.props._changeSettingsPage(1)}
-          className={ (this.props.settingsPage.page === 1 ? 'active_settings_entry ' : '') + 'settings_entry'}
-          id='langChoose'><Translate id='change_language'/></div>
-        <div onClick={() => this.props._changeSettingsPage(2)}
-          className={ (this.props.settingsPage.page === 2 ? 'active_settings_entry ' : '') + 'settings_entry'}
-          id='themeSelect'><Translate id='change_theme'/></div>
-      </div>
-    )
-  }
-}
+const LeftPane = (props) => (
+  <div id='leftpane'>
+    <div onClick={() => props._changeSettingsPage(1)}
+      className={ (props.settingsPage.page === 1 ? 'active_settings_entry ' : '') + 'settings_entry'}
+      id='langChoose'><Translate id='change_language'/></div>
+    <div onClick={() => props._changeSettingsPage(2)}
+      className={ (props.settingsPage.page === 2 ? 'active_settings_entry ' : '') + 'settings_entry'}
+      id='themeSelect'><Translate id='change_theme'/></div>
+  </div>
+)
 
 LeftPane.propTypes = {
   _changeSettingsPage: PropTypes.func,

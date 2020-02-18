@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* global beforeAll describe test expect mount jest color */
 import React from 'react';
 import { mapDispatchToProps, DrawingLayer } from './DrawingLayer';
 import { defaultLayer } from '../reducers';
@@ -7,6 +5,7 @@ import { defaultLayer } from '../reducers';
 window.devicePixelRatio = 1;
 describe('DrawingLayer test set', () => {
   beforeAll(() => {
+    DrawingLayer.prototype.canvas = document.createElement('canvas');
     global.color = {
       r: '241',
       g: '112',
@@ -30,10 +29,9 @@ describe('DrawingLayer test set', () => {
     expect(layer.instance().canvas).toBeTruthy();
   });
   test('Mouse events working correctly', () => {
-    const spy = jest.spyOn(DrawingLayer.prototype, 'findxy');
     const addLine = jest.fn();
     const _changeActiveLayer = jest.fn();
-    const drawingLayer = mount(<DrawingLayer
+    const drawingLayer = shallow(<DrawingLayer
       layer={ defaultLayer }
       width={ 1 } height={ 1 }
       changeColor={{ color }}
@@ -42,6 +40,10 @@ describe('DrawingLayer test set', () => {
       layersCRUD = { [defaultLayer] }
       changeActiveLayer={{ layerNumber: 0 }}
       changeMouseType={{ mouseType: 'draw' }} />);
+
+    const spy = jest.spyOn(drawingLayer.instance(), 'findxy');
+    drawingLayer.update();
+    drawingLayer.instance().forceUpdate();
     drawingLayer.simulate('mousemove', { preventDefault: () => true })
     expect(spy).toHaveBeenCalled();
     drawingLayer.simulate('mousedown', { preventDefault: () => true })

@@ -8,27 +8,26 @@ import { changeFonts } from '../actions';
 /**
  * @module FontSettings
  */
+
+const fonts = ipcRenderer.sendSync('getfonts', 'ping');
+
 export class FontSettings extends React.Component {
-  constructor (props) {
-    super(props);
-    const fonts = ipcRenderer.sendSync('getfonts', 'ping');
-    this.options = fonts.map((font) => {
-      return { value: font, label: font.family };
-    });
-    this.state = {
-      fontSize: 10
-    }
-    this.fontChange = this.fontChange.bind(this);
-    this.changeFontSize = this.changeFontSize.bind(this);
+  state = {
+    fontSize: 10
   }
+
+  options = fonts.map((font) => {
+    return { value: font, label: font.family };
+  });
+
   /**
    * Change the font for text
    * @param {object} font - Font object from OS
    */
-  fontChange (font) {
+  fontChange = (font) => {
     this.props.changeFonts(font);
   }
-  changeFontSize (event) {
+  changeFontSize = (event) => {
     this.setState({
       fontSize: event.target.value
     })

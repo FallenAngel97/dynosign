@@ -12,15 +12,18 @@ describe('SelectTool test set', () => {
     expect(selectTool.instance().canvas).toBeTruthy();
   });
   test('Mouse events working correctly', () => {
-    const spy = jest.spyOn(SelectTool.prototype, 'findxy');
-    const selectTool = mount(<SelectTool width={1} height={1} changeMouseType={{ mouseType: 'select' }} />);
-    selectTool.simulate('mousemove', { preventDefault: () => true })
+    SelectTool.prototype.canvas = document.createElement('canvas');
+    const selectToolWrapper = shallow(<SelectTool width={1} height={1} changeMouseType={{ mouseType: 'select' }} />);
+    const spy = jest.spyOn(selectToolWrapper.instance(), 'findxy');
+    selectToolWrapper.update();
+    selectToolWrapper.instance().forceUpdate();
+    selectToolWrapper.simulate('mousemove', { preventDefault: () => true })
     expect(spy).toBeCalled();
-    selectTool.simulate('mousedown', { preventDefault: () => true })
+    selectToolWrapper.simulate('mousedown', { preventDefault: () => true })
     expect(spy).toBeCalled();
-    selectTool.simulate('mouseup', { preventDefault: () => true })
+    selectToolWrapper.simulate('mouseup', { preventDefault: () => true })
     expect(spy).toBeCalled();
-    selectTool.simulate('mouseout', { preventDefault: () => true })
+    selectToolWrapper.simulate('mouseout', { preventDefault: () => true })
     expect(spy).toBeCalled();
   });
 });

@@ -11,15 +11,11 @@ import './HelpPage.scss';
 
 const store = createStore(reducers);
 
-class HelpPage extends React.Component {
-  render () {
-    return (
-      <Provider store={store}>
-        <TopBar header={'Help'} showMenu={false} />
-        <PageContent />
-      </Provider>
-    )
-  }
-}
+const HelpPage = () => (
+  <Provider store={store}>
+    <TopBar header={'Help'} showMenu={false} />
+    <PageContent />
+  </Provider>
+)
 
 ReactDOM.render(<HelpPage />, document.getElementsByTagName('body')[0])

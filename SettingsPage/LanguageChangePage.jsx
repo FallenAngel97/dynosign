@@ -3,27 +3,23 @@ import Select from 'react-select';
 import { withLocalize } from 'react-localize-redux';
 const { ipcRenderer } = require('electron');
 
+const options = [
+  { value: 'en', label: 'English' },
+  { value: 'ru', label: 'Русский' },
+  { value: 'ua', label: 'Українська' }
+];
+let index = options.findIndex((option) => {
+  return option.value === window.language
+});
+
 class LanguageChangePage extends React.Component {
-  constructor (props) {
-    super(props);
-    this.options = [
-      { value: 'en', label: 'English' },
-      { value: 'ru', label: 'Русский' },
-      { value: 'ua', label: 'Українська' }
-    ];
-    let index = this.options.findIndex((option) => {
-      return option.value === window.language
-    });
-    this.state = {
-      selectedLanguage: this.options[index]
-    }
-    this.changeLanguage = this.changeLanguage.bind(this);
-    this.saveLanguagePreference = this.saveLanguagePreference.bind(this);
+  state = {
+    selectedLanguage: options[index]
   }
-  changeLanguage (lang) {
+  changeLanguage = (lang) => {
     this.setState({ selectedLanguage: lang });
   }
-  saveLanguagePreference () {
+  saveLanguagePreference = () => {
     ipcRenderer.send('change-language', this.state.selectedLanguage);
     this.props.setActiveLanguage(this.state.selectedLanguage.value);
     window.language = this.state.selectedLanguage.value;
@@ -34,7 +30,7 @@ class LanguageChangePage extends React.Component {
         <Select
           onChange={this.changeLanguage}
           value={this.state.selectedLanguage}
-          options={this.options} />
+          options={options} />
         <button onClick={ this.saveLanguagePreference }>Save</button>
       </div>
     )

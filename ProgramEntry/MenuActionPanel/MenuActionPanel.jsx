@@ -15,15 +15,10 @@ const { ipcRenderer } = require('electron');
  */
 
 class MenuActionPanel extends React.Component {
-  constructor (props) {
-    super(props);
-    this.saveFile = this.saveFile.bind(this);
-  }
-
   /**
    * Calls node.js backend api to save JSON-converted state of program
    */
-  saveFile () {
+  saveFile = () => {
     const options = {
       defaultPath: 'file.dsign',
       filters: [{

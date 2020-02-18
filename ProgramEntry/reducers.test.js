@@ -137,7 +137,8 @@ describe('Redux reducers tests. Layers CRUD', () => {
     const text = {
       text: 'Should save',
       posX: '124px',
-      posY: '124px'
+      posY: '124px',
+      fontSize: 11
     }
     const layerNumber = 0;
     const action = { type: 'ADD_TEXT', text, layerNumber };

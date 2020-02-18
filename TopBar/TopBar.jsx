@@ -22,10 +22,6 @@ class TopBar extends React.Component {
   constructor (props) {
     super(props);
     this.window = remote.getCurrentWindow();
-    this.minimizeWindow = this.minimizeWindow.bind(this);
-    this.maximizeWindow = this.maximizeWindow.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.closeWindow = this.closeWindow.bind(this);
     this.props.initialize({
       languages: [
         { name: 'English', code: 'en' },
@@ -52,7 +48,7 @@ class TopBar extends React.Component {
    * Closes the submenu popup, if clicked outside
    * @param {MouseEvent} ev - necessary to detect the click target
    */
-  handleClick (ev) {
+  handleClick = (ev) => {
     if (document.getElementsByClassName('menuActionPanel').length === 0) return;
     if (!document.getElementsByClassName('menuActionPanel')[0].contains(ev.target)) {
       this.props._toggleMenuBar(-1)
@@ -61,19 +57,19 @@ class TopBar extends React.Component {
   /**
    * Minimizes window
    */
-  minimizeWindow () {
+  minimizeWindow = () => {
     this.window.minimize();
   }
   /**
    * Maximizes window
    */
-  maximizeWindow () {
+  maximizeWindow = () => {
     this.window.isMaximized() ? this.window.unmaximize() : this.window.maximize()
   }
   /**
    * Closes window
    */
-  closeWindow () {
+  closeWindow = () => {
     this.window.close();
   }
 
@@ -90,15 +86,25 @@ class TopBar extends React.Component {
     return (
       <header>
         {this.props.showMenu && <nav>
-          <div className={ menuBarNumber === 1 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(1)}><Translate id="topbar.file" /></div>
-          <div className={ menuBarNumber === 2 ? 'activeMenuBar' : ''} onClick={() => this.props._toggleMenuBar(2)}><Translate id="topbar.edit" /></div>
-          <div onClick={this.openHelp}><Translate id="topbar.help" /></div>
+          <div className={ menuBarNumber === 1 ? 'activeMenuBar' : ''} 
+               onClick={() => this.props._toggleMenuBar(1)}>
+                <Translate id="topbar.file" />
+          </div>
+          <div className={ menuBarNumber === 2 ? 'activeMenuBar' : ''} 
+               onClick={() => this.props._toggleMenuBar(2)}>
+                <Translate id="topbar.edit" />
+          </div>
+          <div onClick={this.openHelp}>
+            <Translate id="topbar.help" />
+          </div>
         </nav>}
         <div id='title'>{this.props.header}</div>
         <div id='controlButtons'>
-          <img onClick={this.minimizeWindow} style={{ verticalAlign: 'bottom' }} src={collapse} />
-          <img src={expand} onClick={this.maximizeWindow} />
-          <img src={close} onClick={this.closeWindow} />
+          <img onClick={ this.minimizeWindow } 
+               style={{ verticalAlign: 'bottom' }} 
+               src={ collapse } />
+          <img src={ expand } onClick={ this.maximizeWindow } />
+          <img src={ close } onClick={ this.closeWindow } />
         </div>
       </header>
     )

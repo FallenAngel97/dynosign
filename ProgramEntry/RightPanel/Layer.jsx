@@ -12,54 +12,42 @@ import PropTypes from 'prop-types';
  */
 
 export class Layer extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      editLayer: false
-    }
-    this.renameLayer = this.renameLayer.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.layerNameChange = this.layerNameChange.bind(this);
-    this.changeVisibility = this.changeVisibility.bind(this);
-    this.ondragStart = this.ondragStart.bind(this);
-    this.dragEnd = this.dragEnd.bind(this);
-    this.ondrop = this.ondrop.bind(this);
-    this.DragOver = this.DragOver.bind(this);
-    this.dragLeave = this.dragLeave.bind(this);
-    this.showLayerOptions = this.showLayerOptions.bind(this);
-    this._onKeyPress = this._onKeyPress.bind(this);
+
+  state = {
+    editLayer: false
   }
-  _onKeyPress (e) {
+  
+  _onKeyPress = (e) => {
     if (e.key === 'Enter') {
       this.setState({ editLayer: false });
     }
   }
-  showLayerOptions (e) {
+  showLayerOptions = (e) => {
     this.props.openContext(e);
   }
   UNSAFE_componentWillMount () {
     document.addEventListener('mousedown', this.handleClick, false);
   }
-  DragOver (e) {
+  DragOver = (e) => {
     this.props.layerDragOver(e);
   }
-  ondragStart (e) {
+  ondragStart = (e) => {
     this.props.layerDragStart(e);
   }
-  dragEnd (e) {
+  dragEnd = (e) => {
     this.props.layerDragEnd(e);
   }
-  ondrop (e) {
+  ondrop = (e) => {
     this.props.layerDrop(e);
   }
-  dragLeave (e) {
+  dragLeave = (e) => {
     this.props.layerDragLeave(e);
   }
   componentWillUnmount () {
     document.removeEventListener('mousedown', this.handleClick, false);
   }
-  changeVisibility () {
-    let layer = this.props.layer;
+  changeVisibility = () => {
+    const { layer } = this.props;
     this.props.changeLayerVisibility(!layer.hidden, this.props.layerId);
   }
   /**
@@ -67,7 +55,7 @@ export class Layer extends React.Component {
    * changes the active layer to the clicked one
    * @param {MouseEvent} ev - neccessary to check, what is the clicked target
    */
-  handleClick (ev) {
+  handleClick = (ev) => {
     if (!this.node.contains(ev.target)) {
       this.setState({ editLayer: false })
     } else if (ev.target.className.indexOf('singleLayer') > -1) {
@@ -77,10 +65,10 @@ export class Layer extends React.Component {
   /**
    * Opens the rename text box
    */
-  renameLayer () {
+  renameLayer = () => {
     this.setState({ editLayer: true });
   }
-  layerNameChange (ev) {
+  layerNameChange = (ev) => {
     let { layer } = this.props.changeActiveLayer;
     layer.name = ev.target.value;
     this.props.changeLayer(layer, this.props.changeActiveLayer.layerId)
